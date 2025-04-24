@@ -1,0 +1,15 @@
+.button {
+  width: 100%;
+  border: none;
+  background: linear-gradient(#e5733f, #f95d47);
+  color: #fff;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 18px;
+}
+
+.button:hover {
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}

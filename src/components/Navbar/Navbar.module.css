@@ -1,0 +1,67 @@
+/* Navbar */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.menu {
+  border: none;
+  background-color: transparent;
+}
+
+/* Hamburger Menu */
+.menuOverlay {
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 20;
+  padding: 25px;
+}
+
+.menuList {
+  list-style: none;
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: 32px;
+  font-weight: 500;
+  transition: color 0.3s;
+  padding-left: 0;
+}
+
+.menuList li {
+  padding-bottom: 30px;
+}
+
+.menuList li:hover {
+  color: var(--primary-color);
+}
+
+.menuForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #D1D9E2;
+  padding-bottom: 25px;
+}
+
+.menuForm input,
+.menuForm select {
+  width: 100%;
+  color: var(--secondary-color);
+  border: 1px solid #D1D9E2;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+
