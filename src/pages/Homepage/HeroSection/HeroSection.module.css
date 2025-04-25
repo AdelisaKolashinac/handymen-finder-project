@@ -1,0 +1,19 @@
+.heroSection {
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heroSection h1 {
+  font-size: 40px;
+  font-weight: 400;
+  margin: 15px 0;
+}
+
+.heroSection p {
+  font-size: 18px;
+}
+
+.heroImageContainer {
+  margin: 40px 0;
+}

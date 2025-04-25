@@ -1,0 +1,23 @@
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.buttonContainer button {
+  width: 100%;
+  border: 1px solid var(--primary-color);
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 17px 0;
+}
+
+.submitRequestButton {
+  background-color: transparent;
+  transition: all 0.3 ease;
+}
+
+.submitRequestButton:hover {
+  background: linear-gradient(#e5733f, #f95d47);
+}

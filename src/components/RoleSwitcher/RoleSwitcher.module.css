@@ -1,10 +1,11 @@
-.toggleSwitch {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+.roleSwitcherContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
-.active {
-    color: var(--primary-color);
+.activeRole {
+  color: var(--primary-color);
 }

@@ -1,8 +1,16 @@
 import { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import { RoleSwitcher } from "../../components/RoleSwitcher/RoleSwitcher";
-import styles from "./Homepage.module.css";
-import { Button } from "../../components/Button/Button";
+import { HeroSection } from "./HeroSection/HeroSection";
+import { InfoSection } from "./InfoSection/InfoSection";
+import { ButtonContainer } from "./ButtonContainer/ButtonContainer";
+import { TopRated } from "./TopRatedSection/TopRated";
+import { ChatInfo } from "./ChatInfoSection/ChatInfo";
+import { NewCarpenters } from "./NewCarpentersSection/NewCarpenters";
+import BookTradesmen from "./BookTradesmenSection/BookTradesmen";
+import { Footer } from "../../components/Footer/Footer";
+import { SearchInput } from "./SearchInput/SearchInput";
+import { HomepageReviews } from "./HomepageReviews/HomepageReviews";
 
 export default function Homepage() {
   const [isClient, setIsClient] = useState(true);
@@ -15,23 +23,16 @@ export default function Homepage() {
     <>
       <Navbar />
       <RoleSwitcher isClient={isClient} handleSwitch={handleSwitch} />
-      <section className={styles.homepage}>
-        <div className="wrapper">
-          <h1>
-            Handwerker leicht <span className="fasthand-regular">gemacht</span>
-          </h1>
-          <p>Alle Dienstleistungen, die Sie brauchen, an einem Ort.</p>
-          <div className={styles.imgContainer}>
-            <img src="./homepage/Frame 427320206.png" alt="Images of workers" />
-          </div>
-          <div className={styles.btnContainer}>
-            <button type="button" className={styles.anfrageBtn}>
-              Anfrage Posten
-            </button>
-            <Button>Hausmeister Finden</Button>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
+      <ButtonContainer />
+      <SearchInput />
+      <InfoSection />
+      <TopRated />
+      <ChatInfo />
+      <NewCarpenters />
+      <HomepageReviews />
+      <BookTradesmen />
+      <Footer />
     </>
   );
 }

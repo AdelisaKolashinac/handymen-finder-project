@@ -1,0 +1,22 @@
+.reviewsSection {
+  background-color: #ffefe6;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.reviewsWrapper {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.reviewsIcon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+}
+
+.reviewsText {
+  text-align: center;
+  font-size: 19px;
+}

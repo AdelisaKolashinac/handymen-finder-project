@@ -10,20 +10,19 @@ export default function Navbar() {
   };
 
   return (
-    <>
-      <nav className={styles.nav}>
-        <div className="logo">
-          <img src="./homepage/logo.png" alt="Logo" />
-        </div>
-        <button className={styles.menu} onClick={toggleMenu}>
+    <div className="wrapper">
+      <nav className={styles.navbar}>
+        <img src="./homepage/company-logo.png" alt="Website Logo" />
+
+        <button className={styles.menuToggle} onClick={toggleMenu}>
           {isMenuOpen ? (
-            <img src="./homepage/Close.png" alt="Close Menubar" />
+            <img src="/homepage/close-icon.png" alt="Close Navigation Menu" />
           ) : (
-            <img src="./homepage/menu.png" alt="Open Menu bar" />
+            <img src="/homepage/menu-icon.png" alt="Open Navigation Menu" />
           )}
         </button>
       </nav>
       {isMenuOpen && <Hamburger />}
-    </>
+    </div>
   );
 }

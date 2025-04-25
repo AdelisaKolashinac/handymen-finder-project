@@ -1,30 +1,30 @@
 import styles from "./RoleSwitcher.module.css";
 
-type Props = {
+interface Props {
   isClient: boolean;
   handleSwitch: () => void;
-};
+}
 
 export function RoleSwitcher({ isClient, handleSwitch }: Props) {
   return (
-    <div className={styles.toggleSwitch}>
+    <div className={styles.roleSwitcherContainer}>
       {/* For Handwerker */}
-      <span className={isClient ? "" : styles.active}>Für Handwerker</span>
+      <span className={isClient ? "" : styles.activeRole}>Für Handwerker</span>
 
       {/* Toggle button */}
       <div onClick={handleSwitch} aria-label="Toggle role">
         <img
           src={
             isClient
-              ? "/homepage/Kunden-switch.svg"
-              : "/homepage/Handwerker-switch.svg"
+              ? "/homepage/client-switch.svg"
+              : "/homepage/worker-switch.svg"
           }
-          alt={isClient ? "switch to Kunden" : "switch to Handwerker"}
+          alt={isClient ? "Switch to Client Role" : "Switch to Worker Role"}
         />
       </div>
 
       {/* For Kunden */}
-      <span className={isClient ? styles.active : ""}>Für Kunden</span>
+      <span className={isClient ? styles.activeRole : ""}>Für Kunden</span>
     </div>
   );
 }

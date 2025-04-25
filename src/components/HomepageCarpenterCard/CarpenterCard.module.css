@@ -1,0 +1,23 @@
+.carpenterCard {
+  padding: 10px;
+  text-align: center;
+}
+
+.carpenterImg {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.carpenterName {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.carpenterName p {
+  font-weight: 700;
+  margin-bottom: 0;
+}

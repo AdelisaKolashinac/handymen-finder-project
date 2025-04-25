@@ -3,8 +3,8 @@ import styles from "./Navbar.module.css";
 
 export function Hamburger() {
   return (
-    <div className={styles.menuOverlay}>
-      <ul className={styles.menuList}>
+    <div className={styles.menuOverlay} aria-label="Hamburger Menu">
+      <ul className={styles.hamburgerMenuList}>
         <li>
           <a href="#">Suchen</a>
         </li>
@@ -18,7 +18,7 @@ export function Hamburger() {
           <a href="#">Registrieren</a>
         </li>
       </ul>
-      <form className={styles.menuForm}>
+      <form className={styles.hamburgerMenuForm}>
         <input type="text" placeholder="Suchen" />
         <select name="kategorie">
           <option value="" selected>

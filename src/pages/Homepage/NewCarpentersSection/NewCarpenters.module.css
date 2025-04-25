@@ -1,0 +1,30 @@
+.newCarpentersSection {
+  overflow: hidden;
+}
+
+.newCarpentersContainer {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: swipe 15s linear infinite;
+}
+
+.newCarpentersSection:hover .newCarpentersContainer {
+  animation-play-state: paused;
+}
+
+@keyframes swipe {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.33%);
+  }
+}
+
+.newCarpentersWrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 15px;
+  overflow: hidden;
+}

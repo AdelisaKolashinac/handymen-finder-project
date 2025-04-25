@@ -1,0 +1,46 @@
+.reviewCard {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.city {
+  color: #5584e5;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.rating {
+  margin: 5px 0 10px;
+}
+
+.imageGallery {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.imageGallery img {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+}

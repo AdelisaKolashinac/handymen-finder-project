@@ -1,0 +1,50 @@
+.footer {
+    text-align: center;
+}
+
+.footerLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.footerLogoText {
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.footerInfo {
+    color: var(--secondary-color);
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 45px;
+    margin: 30px 0;
+}
+
+.footerSocialMedia {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--background-color);
+}
+
+.footerSocialMediaLink {
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 10px 15px;
+}
+
+.footerSocialMediaIcon {
+    display: flex;
+    align-items: center;
+}
+
+.footerCopyright {
+    color: var(--secondary-color);
+    padding-top: 40px;
+}

@@ -1,0 +1,59 @@
+.infoSection {
+  position: relative;
+}
+
+.blueLine {
+  position: absolute;
+  top: 75px;
+  right: 100px;
+}
+
+.featureItemsList {
+  margin-top: 40px;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.featureItem p {
+  margin-bottom: 0;
+}
+
+/* Carousel */
+.carouselContainer {
+  height: 400px;
+  overflow: hidden;
+}
+
+.carouselItemContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.categoryCard {
+  text-align: center;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 15px 0;
+}
+
+.categoryCard h5 {
+  font-size: 14px;
+  margin: 5px;
+}
+
+.sliderIndicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin: 20px 0;
+}

@@ -4,7 +4,7 @@
 :root {
   --primary-color: #fa6100;
   --secondary-color: #939393;
-  /* --background-color: #f8f9fa; */
+  --background-color: #F0F0F0;
   /* --text-color: #333; */
   /* --link-color: #007bff; */
 }
@@ -21,3 +21,5 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+
