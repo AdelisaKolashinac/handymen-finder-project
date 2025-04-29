@@ -8,6 +8,10 @@
   right: 100px;
 }
 
+.infoSection h2 {
+  margin-top: 80px;
+}
+
 .featureItemsList {
   margin-top: 40px;
 }

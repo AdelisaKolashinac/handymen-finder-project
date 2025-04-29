@@ -1,4 +1,4 @@
-import { categories } from "../staticData";
+import { categories } from "../homepageData";
 import { Carousel } from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -32,7 +32,7 @@ export function InfoSection() {
       <div className="wrapper">
         <h2 className="title-h2">Warum Menschen uns mögen</h2>
         <img
-          src="/homepage/blue-line.png"
+          src="/blue-line.png"
           alt="Decorative blue line"
           className={styles.blueLine}
         />

@@ -1,11 +1,9 @@
+import { useRoleContext } from "../../context/Context";
 import styles from "./RoleSwitcher.module.css";
 
-interface Props {
-  isClient: boolean;
-  handleSwitch: () => void;
-}
+export function RoleSwitcher() {
+  const { isClient, handleSwitch } = useRoleContext();
 
-export function RoleSwitcher({ isClient, handleSwitch }: Props) {
   return (
     <div className={styles.roleSwitcherContainer}>
       {/* For Handwerker */}

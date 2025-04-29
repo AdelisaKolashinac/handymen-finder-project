@@ -1,6 +1,6 @@
 import { Button } from "../../../components/Button/Button";
 import styles from "./NewCarpenters.module.css";
-import { newCarpenters } from "../staticData";
+import { newCarpenters } from "../homepageData";
 import { CarpenterCard } from "../../../components/HomepageCarpenterCard/CarpenterCard";
 
 export function NewCarpenters() {

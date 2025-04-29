@@ -1,0 +1,12 @@
+.buttonTransparent {
+  border: 1px solid var(--primary-color);  
+  border-radius: 13px;
+  background: transparent;
+  font-weight: 600;
+  padding: 15px 0;
+  transition: all 0.3ms ease;
+}
+
+.buttonTransparent:hover {
+  background: linear-gradient(#e5733f, #f95d47);
+}

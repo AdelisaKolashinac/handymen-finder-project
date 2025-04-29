@@ -1,4 +1,4 @@
-import { TopRated } from "../../pages/Homepage/staticData";
+import { TopRated } from "../../pages/Homepage/homepageData";
 import styles from "./TopRatedCard.module.css";
 
 interface Props {

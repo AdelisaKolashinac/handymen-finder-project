@@ -1,4 +1,4 @@
-import { NewCarpenter } from "../../pages/Homepage/staticData";
+import { NewCarpenter } from "../../pages/Homepage/homepageData";
 import styles from "./CarpenterCard.module.css";
 
 interface Props {

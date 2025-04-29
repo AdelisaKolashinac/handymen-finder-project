@@ -1,6 +1,6 @@
 import { HomepageReview } from "../../../components/HomepageReview/HomepageReview";
 import styles from "./HomepageReviews.module.css";
-import { customerReviews } from "../staticData";
+import { customerReviews } from "../homepageData";
 
 export function HomepageReviews() {
   return (

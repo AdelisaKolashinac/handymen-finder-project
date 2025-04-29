@@ -14,7 +14,7 @@ export function SearchInput() {
           display: "flex",
           alignItems: "center",
           mt: "30px",
-          mb: "90px",
+          mb: "30px",
         }}
       >
         <IconButton sx={{ p: "10px" }} aria-label="menu">

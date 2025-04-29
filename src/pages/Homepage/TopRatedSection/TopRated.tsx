@@ -1,4 +1,4 @@
-import { topRated } from "../staticData";
+import { topRated } from "../homepageData";
 import styles from './TopRated.module.css';
 import { Button } from "../../../components/Button/Button";
 import { TopRatedCard } from "../../../components/HomepageTopRatedCard/TopRatedCard";

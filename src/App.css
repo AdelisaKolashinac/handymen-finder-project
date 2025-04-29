@@ -17,3 +17,13 @@
   position: relative;
   z-index: 99;
 }
+
+.title-h1 {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 20px 30px 80px;
+}
+
+.border-bottom {
+  border-bottom: 1px solid var(--background-color);
+}

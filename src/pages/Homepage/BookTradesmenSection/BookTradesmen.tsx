@@ -7,7 +7,7 @@ export default function BookTradesmen() {
       <div className="wrapper">
         <h2 className="title-h2">Finde und buche zuverlässige Handwerker</h2>
         <img
-          src="/homepage/blue-line.png"
+          src="/blue-line.png"
           alt="Decorative blue line"
           className={styles.blueLine}
         />

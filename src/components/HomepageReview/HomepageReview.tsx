@@ -1,4 +1,4 @@
-import { HomepageReview as Review } from "../../pages/Homepage/staticData";
+import { HomepageReview as Review } from "../../pages/Homepage/homepageData";
 import styles from "./HomepageReview.module.css";
 
 interface Props {
@@ -20,12 +20,7 @@ export function HomepageReview({ review }: Props) {
 
       <div className={styles.rating}>
         {Array.from({ length: rating }, (_, i) => (
-          <img
-            key={i}
-            src="/homepage/reviews/star.svg"
-            alt="star icon"
-            className="star"
-          />
+          <img key={i} src="/star.svg" alt="star icon" className="star" />
         ))}
       </div>
 
