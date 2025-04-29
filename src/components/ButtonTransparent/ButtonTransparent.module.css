@@ -1,6 +1,6 @@
 .buttonTransparent {
   border: 1px solid var(--primary-color);  
-  border-radius: 13px;
+  border-radius: 15px;
   background: transparent;
   font-weight: 600;
   padding: 15px 0;

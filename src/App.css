@@ -27,3 +27,7 @@
 .border-bottom {
   border-bottom: 1px solid var(--background-color);
 }
+
+.activeRole {
+  color: var(--primary-color);
+}

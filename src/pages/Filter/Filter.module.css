@@ -1,0 +1,86 @@
+.filter {
+  padding: 20px 0;
+}
+
+.filter__closeIcon {
+  text-align: end;
+}
+
+.filter__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.filter__title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.filter__reset {
+  border: none;
+  background-color: transparent;
+  color: var(--blue-color);
+  font-size: 14px;
+}
+
+.filter__label {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filter__buttonContainer {
+  display: flex;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 20px 0;
+}
+
+.prefixButton {
+  width: 100%;
+  border: none;
+  background-color: #fa6100;
+  border-radius: 10px;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.distanceButton {
+  width: 100%;
+  border: none;
+  background-color: var(--background-color);
+  border-radius: 10px;
+  color: var(--secondary-color);
+}
+
+.filter__input {
+  width: 100%;
+  border: 1px solid var(--background-color);
+  color: var(--secondary-color);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.filter__subtitle {
+  color: var(--secondary-color);
+  font-size: 14px;
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+.filter__checkboxContainer,
+.filter__ratingOptions {
+  margin-bottom: 25px;
+}
+
+.filter__applyButton {
+  position: sticky;
+  background-color: #fff;
+  bottom: 0; 
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}

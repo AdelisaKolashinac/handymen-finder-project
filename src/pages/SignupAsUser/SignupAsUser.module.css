@@ -1,0 +1,98 @@
+.logoWrapper {
+  height: 30vh;
+  position: relative;
+}
+
+.logoImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.registerButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px 20px;
+}
+
+.registerButton {
+  border: none;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.oauthList {
+  padding: 20px 0 60px;
+}
+
+/* OAuthButton */
+.OAuthButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: #fff;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: start;
+  padding: 10px 70px;
+  margin-bottom: 20px;
+}
+
+.OAuthButton__icon {
+  margin-right: 15px;
+}
+
+/* loginRedirect */
+.loginRedirect {
+  display: flex;
+  justify-content: center;
+  margin: 55px 0;
+}
+
+.loginText {
+  color: var(--secondary-color);
+  font-size: 14px;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+.loginLink {
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* InputWithIcon */
+.registerForm {
+  margin-bottom: 40px;
+}
+
+.inputWithIconWrapper {
+  position: relative;
+  margin-top: 15px;
+}
+
+.inputField {
+  width: 100%;
+  padding: 10px 15px;
+  padding-left: 50px; 
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+}
+
+.icon {
+  position: absolute;
+  left: 20px; 
+  top: 10px;
+}
+
+.icon_two {
+  position: absolute;
+  right: 20px; 
+  top: 10px;
+}

@@ -1,0 +1,20 @@
+.checkboxInput {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  color: #575757;
+}
+
+.checkboxInput:checked {
+  background-color: var(--primary-color);
+}

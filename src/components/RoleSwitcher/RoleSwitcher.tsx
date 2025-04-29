@@ -7,7 +7,7 @@ export function RoleSwitcher() {
   return (
     <div className={styles.roleSwitcherContainer}>
       {/* For Handwerker */}
-      <span className={isClient ? "" : styles.activeRole}>Für Handwerker</span>
+      <span className={isClient ? "" : "activeRole"}>Für Handwerker</span>
 
       {/* Toggle button */}
       <div onClick={handleSwitch} aria-label="Toggle role">
@@ -22,7 +22,7 @@ export function RoleSwitcher() {
       </div>
 
       {/* For Kunden */}
-      <span className={isClient ? styles.activeRole : ""}>Für Kunden</span>
+      <span className={isClient ? "activeRole" : ""}>Für Kunden</span>
     </div>
   );
 }

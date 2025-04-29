@@ -1,0 +1,55 @@
+.bookingCard {
+  padding: 15px;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+}
+
+.bookingCard__header {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+}
+
+.bookingCard__service {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.bookingCard__mapLink {
+  text-decoration: none;
+  color: var(--primary-color);
+  margin-left: 5px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.bookingCardBody {
+  margin: 20px 0;
+}
+
+.bookingCard__datetime {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookingCard__date,
+.bookingCard__time,
+.bookingCard__task,
+.bookingCard__worker {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bookingCard__dateText,
+.bookingCard__timeText,
+.bookingCard__taskText,
+.bookingCard__workerName {
+  font-size: 15px;
+  margin-bottom: 0;
+}
+
+.bookingCard__actions {
+  display: flex;
+  gap: 30px;
+}
