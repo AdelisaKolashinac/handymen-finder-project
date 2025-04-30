@@ -4,7 +4,18 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 
+// interface Props {
+//   onSearch: (query: string) => void;
+// }
+
 export function SearchInput() {
+  // const [searchQuery, setSearchQuery] = useState("");
+
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   onSearch(searchQuery.trim());
+  // };
+
   return (
     <div className="wrapper">
       <Paper

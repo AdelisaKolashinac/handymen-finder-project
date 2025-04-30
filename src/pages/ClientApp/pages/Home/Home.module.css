@@ -1,0 +1,32 @@
+.home {
+  padding-bottom: 75px;
+}
+
+.home__intro {
+  font-size: 14px;
+}
+
+.home__sectionTitle {
+  font-size: 14px;
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+
+.home__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.home__searchIcon {
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+}
+
+.home__searchIcon img {
+  padding: 17px;
+}
+
+.home__recommendedList {
+  margin-top: 20px;
+}

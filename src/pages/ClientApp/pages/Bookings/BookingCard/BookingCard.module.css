@@ -4,6 +4,10 @@
   border-radius: 10px;
 }
 
+.completed {
+  border: 1px solid #38830A;
+}
+
 .bookingCard__header {
   display: flex;
   justify-content: space-between;
@@ -21,6 +25,17 @@
   margin-left: 5px;
   font-size: 14px;
   font-weight: 600;
+}
+
+.bookingCard__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bookingCard__ratingText {
+  font-size: 13px;
+  margin-bottom: 0;
 }
 
 .bookingCardBody {

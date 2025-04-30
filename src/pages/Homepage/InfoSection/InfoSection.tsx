@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./InfoSection.module.css";
 import { useState } from "react";
+import { CategoryCard } from "../../../components/CategoryCard/CategoryCard";
 
 export function InfoSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -67,14 +68,11 @@ export function InfoSection() {
               <Carousel.Item key={index}>
                 <div className={styles.carouselItemContainer}>
                   {categoriesForSlide.map((category) => (
-                    <div key={category.id} className={styles.categoryCard}>
-                      <img src={category.image} alt={category.title} />
-                      <h5>{category.title}</h5>
-                    </div>
+                    <CategoryCard key={category.id} category={category} />
                   ))}
                 </div>
               </Carousel.Item>
-            ) : null; // Don't render empty slides
+            ) : null; 
           })}
         </Carousel>
 

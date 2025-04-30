@@ -1,0 +1,11 @@
+.clientApp__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.clientApp__title {
+  color: var(--primary-color);
+  margin-bottom: 0;
+}

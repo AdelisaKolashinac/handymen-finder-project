@@ -1,0 +1,22 @@
+.bookings {
+  padding-bottom: 75px;
+}
+
+.bookings__buttonContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookings__button {
+  border: none;
+  background-color: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-bottom: 25px;
+}
+
+.activeStatus {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
