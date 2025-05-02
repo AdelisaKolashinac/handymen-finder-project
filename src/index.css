@@ -4,9 +4,10 @@
 :root {
   --primary-color: #fa6100;
   --secondary-color: #939393;
-  --background-color: #F0F0F0;
-  --blue-color: #2B67F6;
-  /* --link-color: #007bff; */
+  --background-color: #f0f0f0;
+  --blue-color: #2b67f6;
+  --red-color-dark: #fe2414;
+  --red-color-light: #ffdede;
 }
 
 * {
@@ -21,5 +22,3 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-

@@ -8,6 +8,7 @@ import BottomNav from "./components/BottomNav/BottomNav";
 import { LeaveAReview } from "./pages/Bookings/LeaveAReview/LeaveAReview";
 import { bookings } from "./pages/Bookings/bookingData";
 import BookingsProvider from "./pages/Bookings/bookingsContext/BookingsProvider";
+import { EditClientProfile } from "./pages/Profile/EditClientProfile/EditClientProfile";
 
 export default function AppLayout() {
   return (
@@ -20,6 +21,7 @@ export default function AppLayout() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/leave-review/:id" element={<LeaveAReview />} />
+          <Route path="/edit-client-profile" element={<EditClientProfile />} />
         </Routes>
         <BottomNav />
       </BrowserRouter>

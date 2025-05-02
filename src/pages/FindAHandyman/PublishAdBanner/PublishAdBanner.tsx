@@ -22,50 +22,7 @@ export default function PublishAdBanner() {
         </p>
 
         {/* Ad Card */}
-        <div className={styles.publishAdBanner__card}>
-          <div className={styles.publishAdBanner__header}>
-            <div className={styles.publishAdBanner__user}>
-              <img
-                src="/findAHandyman/anna.png"
-                alt="Photo of Anna Müller"
-                className={styles.publishAdBanner__userImage}
-              />
-              <div className={styles.publishAdBanner__userInfo}>
-                <p className={styles.publishAdBanner__userName}>Anna Müller</p>
-                <p className={styles.publishAdBanner__userTrust}>Trustworthy</p>
-              </div>
-            </div>
-            <div className={styles.publishAdBanner__urgent}>
-              <span className={styles.publishAdBanner__urgentTag}>URGENT</span>
-              <img src="/findAHandyman/bookmark.png" alt="Bookmark icon" />
-            </div>
-          </div>
-          <p className={`border-bottom ${styles.publishAdBanner__title}`}>
-            Repair a leaky tube
-          </p>
-          <p className={styles.publishAdBanner__description}>
-            Localize the source of the leak, place the water supply from . . .
-          </p>
-
-          {/* Address + Map Link */}
-          <img src="/findAHandyman/location.png" alt="Location Icon" />
-          <span className={styles.publishAdBanner__location}>
-            Berlin, Germany
-          </span>
-
-          <div className={`border-bottom ${styles.publishAdBanner__address}`}>
-            <span>address</span>
-            <a href="#">Show on the map</a>
-          </div>
-
-          {/* Contact Button */}
-          <div className={styles.publishAdBanner__buttonContainer}>
-            <ButtonSmall>Contact</ButtonSmall>
-          </div>
-          <div className={styles.publishAdBanner__arrow}>
-            <img src="/findAHandyman/arrow-down.png" alt="Arrow down" />
-          </div>
-        </div>
+        
         <ButtonTransparent width="100%">Post request</ButtonTransparent>
       </div>
     </section>

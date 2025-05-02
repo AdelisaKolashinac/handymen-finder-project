@@ -1,0 +1,94 @@
+.clientAdCard {
+  position: relative;
+  z-index: 10;
+  border: 1px solid var(--secondary-color);
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.clientAdCard__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.clientAdCard__user,
+.clientAdCard__urgency {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.clientAdCard__userImage {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--primary-color);
+  object-fit: cover;
+}
+
+.clientAdCard__userName {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.clientAdCard__userTag {
+  font-size: 10px;
+  color: var(--secondary-color);
+  margin-bottom: 0;
+}
+
+.clientAdCard__urgentTag {
+  background-color: var(--red-color-light);
+  color: var(--red-color-dark);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 15px;
+  border-radius: 5px;
+}
+
+.clientAdCard__title {
+  font-weight: 700;
+  font-size: 14px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+}
+
+.clientAdCard__description {
+  font-size: 14px;
+}
+
+.clientAdCard__location {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.clientAdCard__address {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  margin-top: 7px;
+}
+
+.clientAdCard__address span {
+  font-size: 12px;
+}
+
+.clientAdCard__address a {
+  font-size: 10px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.clientAdCard__buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
+}
+
+.clientAdCard__arrow {
+  display: flex;
+  justify-content: center;
+}
