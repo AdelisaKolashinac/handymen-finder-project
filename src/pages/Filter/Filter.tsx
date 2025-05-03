@@ -4,6 +4,8 @@ import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Button } from "../../components/Button/Button";
 // import React, { useState } from "react";
 
+// Filter by location, available, or categories.
+
 export default function Filter() {
   //   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 

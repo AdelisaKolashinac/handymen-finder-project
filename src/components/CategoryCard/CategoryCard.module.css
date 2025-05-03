@@ -6,7 +6,8 @@
   padding: 15px 0;
 }
 
-.categoryCard h5 {
-  font-size: 14px;
+.categoryCard__title {
+  font-size: 12px;
+  font-weight: 600;
   margin: 5px;
 }

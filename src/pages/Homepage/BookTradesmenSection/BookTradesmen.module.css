@@ -6,10 +6,11 @@
 
 .blueLine {
   position: absolute;
-  top: 120px;
-  right: 100px;
+  top: 200px;
+  right: 70px;
 }
 
-.bookTradesmenText {
+.bookTradesmenSection__text {
+  font-size: 14px;
   margin: 30px 0;
 }

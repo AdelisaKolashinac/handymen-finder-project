@@ -1,8 +1,8 @@
-import { HomepageReview as Review } from "../../pages/Homepage/homepageData";
+import { ReviewCardType } from "../../types/types";
 import styles from "./HomepageReview.module.css";
 
 interface Props {
-  review: Review;
+  review: ReviewCardType;
 }
 
 export function HomepageReview({ review }: Props) {
@@ -30,7 +30,7 @@ export function HomepageReview({ review }: Props) {
         {images.map((img) => (
           <img
             key={img.id}
-            src={img.url}
+            src={img.src}
             alt={img.alt || "Review image"}
             className={styles.reviewImage}
           />

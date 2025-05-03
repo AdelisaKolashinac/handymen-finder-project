@@ -4,16 +4,16 @@
   text-align: center;
 }
 
-.heroSection h1 {
+.heroSection__title {
   font-size: 40px;
   font-weight: 400;
   margin: 0 0 15px;
 }
 
-.heroSection p {
+.heroSection__subtitle {
   font-size: 18px;
 }
 
-.heroImageContainer {
+.heroSection__imgContainer {
   margin: 40px 0;
 }

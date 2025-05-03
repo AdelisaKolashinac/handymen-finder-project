@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { Hamburger } from "./Hamburger";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +13,9 @@ export default function Navbar() {
   return (
     <div className="wrapper">
       <nav className={styles.navbar}>
-        <img src="./homepage/company-logo.png" alt="Website Logo" />
+        <Link to="/">
+          <img src="./homepage/company-logo.png" alt="Website Logo" />
+        </Link>
 
         <button className={styles.menuToggle} onClick={toggleMenu}>
           {isMenuOpen ? (

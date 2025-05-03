@@ -1,26 +1,30 @@
-import { SearchInput } from "../../../../components/SearchInput/SearchInput";
+// import { SearchInput } from "../../../../components/SearchInput/SearchInput";
+import { handymen } from "../../../../data/data";
+import { useUserStore } from "../../../../stores/userStore";
 import { calculateAverageRating } from "../../../../utils/calculateAverageRating";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import { RecommendedCard } from "../../components/RecommendedCard/RecommendedCard";
-import styles from "./Home.module.css";
-import { recommendedResults } from "./homeData";
+import styles from "./ClientHome.module.css";
 
-export default function Home() {
-  const averageRating = recommendedResults.map((result) => {
-    const ratings = result.reviews.map((review) => ({ rating: review.rating }));
+export default function ClientHome() {
+  const user = useUserStore((state) => state.user);
 
-    return calculateAverageRating(ratings);
-  });
+  const topRatedHandymen = handymen
+    .map((hm) => ({
+      ...hm,
+      averageRating: calculateAverageRating(hm.reviews),
+    }))
+    .sort((a, b) => b.averageRating - a.averageRating);
 
   return (
     <section className={`wrapper ${styles.home}`}>
-      <ClientAppHeader title="Hello Anna," />
+      <ClientAppHeader title={`Hello ${user?.fullname},`} />
       <p className={styles.home__intro}>
         Are you looking for help? . Find suitable craftsmen for your needs.
         Below are the latest displays of craftsmen near you .
       </p>
       <div className={styles.home__search}>
-        <SearchInput />
+        {/* <SearchInput /> */}
         <div className={styles.home__searchIcon}>
           <img src="/clientApp/home/pencil-icon.png" alt="Pencil Icon" />
         </div>
@@ -29,11 +33,11 @@ export default function Home() {
         Recommended listings
       </p>
       <div className={styles.home__recommendedList}>
-        {recommendedResults.map((res, index) => (
+        {topRatedHandymen.slice(0, 4).map((hm) => (
           <RecommendedCard
-            key={res.id}
-            card={res}
-            averageRating={averageRating[index]}
+            key={hm.id}
+            card={hm}
+            averageRating={calculateAverageRating(hm.reviews)}
           />
         ))}
       </div>

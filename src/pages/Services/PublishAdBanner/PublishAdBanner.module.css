@@ -6,7 +6,7 @@
 
 .blob {
   position: absolute;
-  bottom: 140px;
+  top: 280px;
   z-index: 1;
   width: 100%;
 }
@@ -22,12 +22,6 @@
 }
 
 .publishAdBanner__card {
-  position: relative;
-  z-index: 10;
-  border: 1px solid var(--secondary-color);
-  border-radius: 10px;
-  background-color: #fff;
-  padding: 20px;
   margin: 80px 0;
 }
 

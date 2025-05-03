@@ -2,21 +2,22 @@
   background-color: #ffefe6;
   position: relative;
   padding-bottom: 5px;
+  padding-top: 10px;
 }
 
-.reviewsWrapper {
+.reviewsSection__wrapper {
   width: 80%;
   margin: 0 auto;
 }
 
-.reviewsIcon {
+.reviewsSection__icon {
   position: absolute;
   top: 10px;
   left: 10px;
   z-index: 2;
 }
 
-.reviewsText {
+.reviewsSection__subtitle {
   text-align: center;
-  font-size: 19px;
+  font-size: 18px;
 }

@@ -1,9 +1,9 @@
-import { HandymanResultType } from "../../pages/FindAHandyman/FindAHandymanData";
+import { HandymanType } from "../../types/types";
 import { ButtonSmall } from "../ButtonSmall/ButtonSmall";
 import styles from "./HandymanResultCard.module.css";
 
 interface Props {
-  resultCard: HandymanResultType;
+  resultCard: HandymanType;
   averageRating: number;
 }
 
@@ -20,8 +20,10 @@ export function HandymanResultCard({ resultCard, averageRating }: Props) {
           <div>
             <p className={styles.handymanResultCard__name}>{resultCard.name}</p>
             <div className={styles.handymanResultCard__location}>
-              <img src="/findAHandyman/location.png" alt="Location Icon" />
-              <p>{resultCard.location}</p>
+              <img src="/arrows&location/location.png" alt="Location Icon" />
+              <p className={styles.handymanResultCard__locationText}>
+                {resultCard.location}
+              </p>
             </div>
           </div>
         </div>

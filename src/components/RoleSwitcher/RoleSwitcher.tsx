@@ -1,16 +1,16 @@
-import { useRoleContext } from "../../context/Context";
+import { useRoleStore } from "../../stores/roleStore";
 import styles from "./RoleSwitcher.module.css";
 
 export function RoleSwitcher() {
-  const { isClient, handleSwitch } = useRoleContext();
+  const { isClient, toggleRole } = useRoleStore();
 
   return (
     <div className={styles.roleSwitcherContainer}>
-      {/* For Handwerker */}
+      {/* For Handwerker/Handyman */}
       <span className={isClient ? "" : "activeRole"}>Für Handwerker</span>
 
       {/* Toggle button */}
-      <div onClick={handleSwitch} aria-label="Toggle role">
+      <div onClick={toggleRole} aria-label="Toggle role">
         <img
           src={
             isClient
@@ -21,7 +21,7 @@ export function RoleSwitcher() {
         />
       </div>
 
-      {/* For Kunden */}
+      {/* For Kunden/Client */}
       <span className={isClient ? "activeRole" : ""}>Für Kunden</span>
     </div>
   );

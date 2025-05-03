@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
 import styles from "./BottomNav.module.css";
 
+
 export default function BottomNav() {
+
   return (
     <nav className={styles.bottomNav}>
       <NavLink
@@ -23,7 +25,7 @@ export default function BottomNav() {
         <span>Categories</span>
       </NavLink>
       <NavLink
-        to="/home"
+        to="/client-home"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }
@@ -46,7 +48,7 @@ export default function BottomNav() {
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }
       >
-        <img src="/input-user-icon.png" alt="Profile" />
+        <img src="/icons/input-user-icon.png" alt="Profile" />
         <span>Profile</span>
       </NavLink>
     </nav>

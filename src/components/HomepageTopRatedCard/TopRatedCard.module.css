@@ -3,19 +3,20 @@
   border-radius: 10px;
 }
 
-.topRatedCardImage {
+.topRatedCard__image {
   width: 240px;
   height: 240px;
   object-fit: cover;
 }
 
-.topRatedCardBody {
+.topRatedCard__body {
   padding: 10px;
 }
 
-.topRatedCategory {
+.topRatedCard__category {
   color: #fff;
   font-size: 12px;
+  font-weight: 700;
   text-transform: uppercase;
   text-align: center;
   padding: 5px 0;
@@ -24,26 +25,27 @@
   border-top-left-radius: 10px;
 }
 
-.topRatedCategory.odd {
+.topRatedCard__category.odd {
   background-color: #f5ce47;
 }
 
-.topRatedCategory.even {
+.topRatedCard__category.even {
   background-color: #1461f0;
 }
 
-.topRatedName {
+.topRatedCard__name {
   font-weight: 700;
+  font-size: 14px;
   margin-bottom: 0;
   line-height: 0.6;
 }
 
-.topRatedStats {
-  font-size: 12px;
+.topRatedCard__stats {
+  font-size: 10px;
   color: var(--primary-color);
 }
 
-.topRatedLocation {
+.topRatedCard__location {
   width: 90px;
   color: #575757;
   border: 1px solid #575757;
@@ -56,7 +58,7 @@
   gap: 5px;
 }
 
-.topRatedLocation p {
+.topRatedCard__location p {
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 0;

@@ -23,7 +23,7 @@ export function ClientAdCard({ card }: Props) {
         </div>
         <div className={styles.clientAdCard__urgency}>
           <span className={styles.clientAdCard__urgentTag}>{card.urgency}</span>
-          <img src="/bookmark.png" alt="Bookmark icon" />
+          <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
       <p className={`border-bottom ${styles.clientAdCard__title}`}>
@@ -32,7 +32,7 @@ export function ClientAdCard({ card }: Props) {
       <p className={styles.clientAdCard__description}>{card.description}</p>
 
       {/* Address + Map Link */}
-      <img src="/location.png" alt="Location Icon" />
+      <img src="/arrows&location/location.png" alt="Location Icon" />
       <span className={styles.clientAdCard__location}>
         {card.city}, {card.country}
       </span>
@@ -47,7 +47,7 @@ export function ClientAdCard({ card }: Props) {
         <ButtonSmall>Contact</ButtonSmall>
       </div>
       <div className={styles.clientAdCard__arrow}>
-        <img src="/findAHandyman/arrow-down.png" alt="Arrow down" />
+        <img src="/arrows&location/arrow-down.png" alt="Arrow down" />
       </div>
     </div>
   );

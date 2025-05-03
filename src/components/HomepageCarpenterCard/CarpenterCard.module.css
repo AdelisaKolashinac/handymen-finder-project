@@ -3,21 +3,26 @@
   text-align: center;
 }
 
-.carpenterImg {
+.carpenterCard__image {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.carpenterName {
+.carpenterCard__info {
   display: flex;
   align-items: center;
   gap: 5px;
   margin-top: 10px;
 }
 
-.carpenterName p {
+.carpenterCard__name {
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 0;
+}
+
+.carpenterCard__category {
+  font-size: 14px;
 }

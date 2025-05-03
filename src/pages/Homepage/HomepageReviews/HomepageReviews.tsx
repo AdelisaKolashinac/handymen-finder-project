@@ -1,18 +1,18 @@
 import { HomepageReview } from "../../../components/HomepageReview/HomepageReview";
+import { customerReviews } from "../../../data/data";
 import styles from "./HomepageReviews.module.css";
-import { customerReviews } from "../homepageData";
 
 export function HomepageReviews() {
   return (
     <section className={styles.reviewsSection}>
-      <div className={styles.reviewsWrapper}>
+      <div className={styles.reviewsSection__wrapper}>
         <img
-          src="./homepage/reviews/vector.png"
+          src="./homepage/vector.png"
           alt="Icon"
-          className={styles.reviewsIcon}
+          className={styles.reviewsSection__icon}
         />
         <h2 className="title-h2">Echte Erfahrungen, echte Ergebnisse</h2>
-        <p className={styles.reviewsText}>
+        <p className={styles.reviewsSection__subtitle}>
           Erfahren Sie, wie unsere App Reparaturen und Verbesserungen für
           Menschen wie Sie erleichtert.
         </p>

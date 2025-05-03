@@ -2,14 +2,14 @@ import { useState } from "react";
 import BookingCard from "./BookingCard/BookingCard";
 import styles from "./Bookings.module.css";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
-import { useBookingsContext } from "./bookingsContext/BookingsContext";
+import { useBookingsStore } from "../../../../stores/bookingsStore";
 
 export type BookingStatus = "new" | "ongoing" | "completed";
 
 export default function Bookings() {
   const [filter, setFilter] = useState<BookingStatus>("new");
 
-  const { bookings } = useBookingsContext();
+  const bookings = useBookingsStore((state) => state.bookings);
 
   const filteredBookings = bookings.filter(
     (booking) => booking.status === filter

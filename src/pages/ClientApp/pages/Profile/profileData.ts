@@ -13,7 +13,7 @@ export interface ActiveAdType {
 export const activeAds: ActiveAdType[] = [
   {
     id: crypto.randomUUID(),
-    img: "/findAHandyman/anna.png",
+    img: "/anna.png",
     name: "Anna Müller",
     tag: "Vertrauenswürdig",
     urgency: "DRINGEND",
@@ -25,7 +25,7 @@ export const activeAds: ActiveAdType[] = [
   },
   {
     id: crypto.randomUUID(),
-    img: "/findAHandyman/anna.png",
+    img: "/anna.png",
     name: "Anna Müller",
     tag: "Vertrauenswürdig",
     urgency: "DRINGEND",
@@ -37,7 +37,7 @@ export const activeAds: ActiveAdType[] = [
   },
   {
     id: crypto.randomUUID(),
-    img: "/findAHandyman/anna.png",
+    img: "/anna.png",
     name: "Anna Müller",
     tag: "Vertrauenswürdig",
     urgency: "DRINGEND",

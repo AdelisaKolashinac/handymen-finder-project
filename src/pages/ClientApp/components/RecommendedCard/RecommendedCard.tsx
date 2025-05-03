@@ -1,9 +1,9 @@
 import { ButtonSmall } from "../../../../components/ButtonSmall/ButtonSmall";
-import { RecommendedCardType } from "../../pages/Home/homeData";
+import { HandymanType } from "../../../../types/types";
 import styles from "./RecommendedCard.module.css";
 
 interface Props {
-  card: RecommendedCardType;
+  card: HandymanType;
   averageRating: number;
 }
 
@@ -20,7 +20,7 @@ export function RecommendedCard({ card, averageRating }: Props) {
           <div>
             <div className={styles.recommendedCard__name}>
               <p className={styles.recommendedCard__nameText}>{card.name}</p>
-              <img src="/blue-check-icon.png" alt="Blue check icon" />
+              <img src="/icons/blue-check-icon.png" alt="Blue check icon" />
             </div>
             <div className={styles.recommendedCard__rating}>
               <div className={styles.recommendedCard__ratingText}>
@@ -39,22 +39,22 @@ export function RecommendedCard({ card, averageRating }: Props) {
           ) : (
             <span>Not available</span>
           )}
-          <img src="/bookmark.png" alt="Bookmark icon" />
+          <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
 
       <div className={`border-bottom ${styles.recommendedCard__jobInfo}`}>
-        <p>{card.jobTitle}</p>
-        <span>{card.postedAt}</span>
+        <p className={styles.recommendedCard__jobText}>{card.jobTitle}</p>
+        <p className={styles.recommendedCard__posted}>{card.postedAt}</p>
       </div>
       <p className={styles.recommendedCard__description}>{card.description}</p>
       <div className={styles.recommendedCard__location}>
-        <img src="/location.png" alt="Location Icon" />
+        <img src="/arrows&location/location.png" alt="Location Icon" />
         <p>Berlin, Germany</p>
       </div>
       <div className={styles.recommendedCard__imageGallery}>
-        {card.images.map((img) => (
-          <img key={img.id} src={img.url} alt={img.alt || "Review image"} />
+        {card.imageGallery?.map((img) => (
+          <img key={img.id} src={img.src} alt={img.alt || "Review image"} />
         ))}
       </div>
       <div className={styles.recommendedCard__actions}>

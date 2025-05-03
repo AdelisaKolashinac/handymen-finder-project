@@ -5,12 +5,10 @@
   color: #fff;
   border-radius: 15px;
   font-size: 14px;
-  padding: 18px;
+  padding: 15px 0;
   transition: all 0.3ms ease;
 }
 
 .button:hover {
-  background: transparent;
-  color: var(--primary-color);
-  outline: 1px solid var(--primary-color);
+  background: linear-gradient(#d45e36, #e34c3c);
 }

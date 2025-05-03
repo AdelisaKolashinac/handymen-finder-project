@@ -1,22 +1,32 @@
-import { topRated } from "../homepageData";
-import styles from './TopRated.module.css';
+import styles from "./TopRated.module.css";
 import { Button } from "../../../components/Button/Button";
 import { TopRatedCard } from "../../../components/HomepageTopRatedCard/TopRatedCard";
+import { useAppNavigation } from "../../../hooks/useAppNavigation";
+import { handymen } from "../../../data/data";
+import { calculateAverageRating } from "../../../utils/calculateAverageRating";
 
 export function TopRated() {
+  const { services } = useAppNavigation();
+
+  const topRatedHandymen = [...handymen]
+    .filter((h) => h.reviews.length > 0)
+    .sort(
+      (a, b) =>
+        calculateAverageRating(b.reviews) - calculateAverageRating(a.reviews)
+    )
+    .slice(0, 3);
+
   return (
-    <section className={styles.topRatedSection}>
-      <div className="wrapper">
-        <h2 className="title-h2">Top-bewertete Handwerker</h2>
-        <div className={styles.topRatedWrapper}>
-          <div className={styles.topRatedCardsContainer}>
-            {topRated.map((card, index) => (
-              <TopRatedCard key={card.id} card={card} index={index} />
-            ))}
-          </div>
+    <section className={`wrapper ${styles.topRatedSection}`}>
+      <h2 className="title-h2">Top-bewertete Handwerker</h2>
+      <div className={styles.topRatedSection_wrapper}>
+        <div className={styles.topRatedSection_cardContainer}>
+          {topRatedHandymen.map((card, index) => (
+            <TopRatedCard key={card.id} card={card} index={index} />
+          ))}
         </div>
-        <Button>Hausmeister Finden</Button>
       </div>
+      <Button onClick={services}>Hausmeister Finden</Button>
     </section>
   );
 }

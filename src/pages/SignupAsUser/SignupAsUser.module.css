@@ -67,17 +67,17 @@
   text-decoration: none;
 }
 
-/* InputWithIcon */
+/* Register/Signup Form */
 .registerForm {
   margin-bottom: 40px;
 }
 
-.inputWithIconWrapper {
+.registerForm__input {
   position: relative;
   margin-top: 15px;
 }
 
-.inputField {
+.registerForm__inputField {
   width: 100%;
   padding: 10px 15px;
   padding-left: 50px; 
@@ -85,14 +85,18 @@
   border-radius: 10px;
 }
 
-.icon {
+.registerForm__icon {
   position: absolute;
   left: 20px; 
   top: 10px;
 }
 
-.icon_two {
+.registerForm__icon__secondary {
   position: absolute;
   right: 20px; 
   top: 10px;
+}
+
+.registerForm_inputItems {
+  margin-bottom: 40px;
 }

@@ -1,6 +1,6 @@
 import { CategoryCard } from "../../../../components/CategoryCard/CategoryCard";
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
-import { categories } from "../../../Homepage/homepageData";
+import { categories } from "../../../../data/data";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import styles from "./Categories.module.css";
 
@@ -13,7 +13,7 @@ export default function Categories() {
         below
       </p>
 
-      <SearchInput />
+      {/* <SearchInput /> */}
       <div className={styles.categories__cardContainer}>
         {categories.map((category) => (
           <CategoryCard key={category.id} category={category} />

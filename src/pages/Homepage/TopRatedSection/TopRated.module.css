@@ -2,14 +2,14 @@
   overflow: hidden;
 }
 
-.topRatedCardsContainer {
+.topRatedSection_cardContainer {
   display: flex;
   gap: 20px;
   width: max-content;
   animation: swipe 15s linear infinite;
 }
 
-.topRatedSection:hover .topRatedCardsContainer {
+.topRatedSection:hover .topRatedSection_cardContainer {
   animation-play-state: paused;
 }
 
@@ -22,7 +22,7 @@
   }
 }
 
-.topRatedWrapper {
+.topRatedSection_wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 35px;

@@ -1,15 +1,16 @@
 .newCarpentersSection {
   overflow: hidden;
+  padding-bottom: 40px;
 }
 
-.newCarpentersContainer {
+.newCarpentersSection__cardContainer {
   display: flex;
   gap: 20px;
   width: max-content;
   animation: swipe 15s linear infinite;
 }
 
-.newCarpentersSection:hover .newCarpentersContainer {
+.newCarpentersSection:hover .newCarpentersSection__cardContainer {
   animation-play-state: paused;
 }
 
@@ -22,7 +23,7 @@
   }
 }
 
-.newCarpentersWrapper {
+.newCarpentersSection__wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px 15px;

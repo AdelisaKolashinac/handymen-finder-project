@@ -1,10 +1,10 @@
-import { categories } from "../homepageData";
 import { Carousel } from "react-bootstrap";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./InfoSection.module.css";
 import { useState } from "react";
 import { CategoryCard } from "../../../components/CategoryCard/CategoryCard";
+import { categories } from "../../../data/data";
 
 export function InfoSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -39,15 +39,15 @@ export function InfoSection() {
         />
         <div className={styles.featureItemsList}>
           <div className={styles.featureItem}>
-            <img src="./homepage/checkmark-icon.svg" alt="Feature check icon" />
+            <img src="./icons/checkmark-icon.svg" alt="Feature check icon" />
             <p>Kalenderbuchung und einfache Kommunikation.</p>
           </div>
           <div className={styles.featureItem}>
-            <img src="./homepage/checkmark-icon.svg" alt="Feature check icon" />
+            <img src="./icons/checkmark-icon.svg" alt="Feature check icon" />
             <p>Zertifizierte Profis für höchste Qualität.</p>
           </div>
           <div className={styles.featureItem}>
-            <img src="./homepage/checkmark-icon.svg" alt="Feature check icon" />
+            <img src="./icons/checkmark-icon.svg" alt="Feature check icon" />
             <p>Verfügbare Handwerker für dringende Reparaturen.</p>
           </div>
         </div>
@@ -72,7 +72,7 @@ export function InfoSection() {
                   ))}
                 </div>
               </Carousel.Item>
-            ) : null; 
+            ) : null;
           })}
         </Carousel>
 
@@ -85,7 +85,7 @@ export function InfoSection() {
               onClick={() => changeIndicator(index)}
             >
               <img
-                src={`./homepage/categories/carousel-indicator${
+                src={`./categories/carousel-indicator${
                   activeIndex === index ? "-active" : "-inactive"
                 }.svg`}
                 alt="Carousel Indicator"
