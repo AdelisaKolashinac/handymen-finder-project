@@ -34,11 +34,15 @@ export function RecommendedCard({ card, averageRating }: Props) {
           </div>
         </div>
         <div className={styles.recommendedCard__availability}>
-          {card.available ? (
-            <span>Now available</span>
-          ) : (
-            <span>Not available</span>
-          )}
+          <span
+            className={
+              card.available === "available"
+                ? styles.available
+                : styles.notAvailable
+            }
+          >
+            {card.available}
+          </span>
           <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
@@ -50,7 +54,7 @@ export function RecommendedCard({ card, averageRating }: Props) {
       <p className={styles.recommendedCard__description}>{card.description}</p>
       <div className={styles.recommendedCard__location}>
         <img src="/arrows&location/location.png" alt="Location Icon" />
-        <p>Berlin, Germany</p>
+        <p>{card.location}</p>
       </div>
       <div className={styles.recommendedCard__imageGallery}>
         {card.imageGallery?.map((img) => (

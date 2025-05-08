@@ -14,3 +14,7 @@
   align-items: center;
   gap: 20px;
 }
+
+.categories__searchCardContainer {
+  margin-top: 25px;
+}

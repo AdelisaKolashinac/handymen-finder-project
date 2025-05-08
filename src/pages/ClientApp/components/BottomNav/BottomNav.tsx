@@ -1,13 +1,11 @@
 import { NavLink } from "react-router-dom";
 import styles from "./BottomNav.module.css";
 
-
 export default function BottomNav() {
-
   return (
     <nav className={styles.bottomNav}>
       <NavLink
-        to="/bookings"
+        to="/client-bookings"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }
@@ -16,7 +14,7 @@ export default function BottomNav() {
         <span>Bookings</span>
       </NavLink>
       <NavLink
-        to="/categories"
+        to="/client-categories"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }
@@ -34,7 +32,7 @@ export default function BottomNav() {
         <span>Homepage</span>
       </NavLink>
       <NavLink
-        to="/chat"
+        to="/client-chat"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }
@@ -43,7 +41,7 @@ export default function BottomNav() {
         <span>Chat</span>
       </NavLink>
       <NavLink
-        to="/profile"
+        to="/client-profile"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }

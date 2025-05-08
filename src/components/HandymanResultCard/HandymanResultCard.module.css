@@ -35,13 +35,21 @@
   margin-bottom: 0;
 }
 
-.handymanResultCard__availability {
-  background-color: #c3e2b0;
-  color: #38830a;
+.handymanResultCard__availability span {
   font-size: 10px;
   font-weight: 600;
   border-radius: 8px;
   padding: 3px 7px;
+}
+
+.available {
+  color: var(--green-color-dark);
+  background-color: var(--green-color-light);
+}
+
+.notAvailable {
+  color: var(--red-color-dark);
+  background-color: var(--red-color-light);
 }
 
 .handymanResultCard__rating {

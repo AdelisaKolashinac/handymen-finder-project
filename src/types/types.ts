@@ -1,15 +1,17 @@
 export interface UserType {
+  id?: string;
   fullname: string;
   email: string;
-  password: string | undefined;
-  confirmPassword: string | undefined;
+  password?: string;
+  confirmPassword?: string;
   phone: string;
   type: "CLIENT" | "HANDYMAN";
   provider?: "GOOGLE";
+  location?: string;
 }
 
 export interface CategoryType {
-  id: number;
+  id: string;
   title: string;
   image: string;
 }
@@ -31,7 +33,7 @@ export interface HandymanType {
   img: string;
   name: string;
   location: string;
-  available: boolean;
+  available: string;
   jobTitle?: string;
   postedAt: string;
   performanceStats?: string;
@@ -53,6 +55,8 @@ export interface ReviewCardType {
 
 export interface BookingType {
   id: string;
+  clientId?: string; 
+  handymanId?: string;
   status: "new" | "ongoing" | "completed";
   service: string;
   date: string;
@@ -61,4 +65,10 @@ export interface BookingType {
   worker: string;
   locationLink: string;
   rating?: number;
+}
+
+export interface FilterValues {
+  services: string[];
+  // ratings: string[];
+  availability: string[];
 }

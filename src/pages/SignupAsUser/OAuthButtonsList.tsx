@@ -5,12 +5,15 @@ import { useUserStore } from "../../stores/userStore";
 import { UserType } from "../../types/types";
 import { OAuthButton } from "./components/OAuthButton";
 import styles from "./SignupAsUser.module.css";
+import { useRoleStore } from "../../stores/roleStore";
 
 interface Props {
   toogleSignupForm: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function OAuthButtonsList({ toogleSignupForm }: Props) {
+  const { isClient } = useRoleStore();
+
   const setUser = useUserStore((state) => state.setUser);
 
   const navigate = useNavigate();
@@ -19,20 +22,36 @@ export default function OAuthButtonsList({ toogleSignupForm }: Props) {
     try {
       const result = await signInWithGooglePopup();
 
-      // const userExist = users.find(user => user.email === result.user.email)
+      const existingUsersJSON = localStorage.getItem("users");
+      const existingUsers = existingUsersJSON
+        ? JSON.parse(existingUsersJSON)
+        : [];
 
-      const newUser: UserType = {
-        fullname: result.user.displayName ?? "",
-        email: result.user.email ?? "",
-        password: undefined,
-        confirmPassword: undefined,
-        phone: result.user.phoneNumber ?? "",
-        type: "CLIENT",
-        provider: "GOOGLE",
-      };
-      setUser(newUser);
-      localStorage.setItem("user", JSON.stringify(newUser));
-      navigate("/client-home")
+      const foundUser = existingUsers.find(
+        (user: UserType) => user.email === result.user.email
+      );
+
+      let currentUser: UserType;
+
+      if (foundUser) {
+        // User already exists
+        currentUser = foundUser;
+      } else {
+        currentUser = {
+          fullname: result.user.displayName ?? "",
+          email: result.user.email ?? "",
+          phone: result.user.phoneNumber ?? "",
+          type: isClient ? "CLIENT" : "HANDYMAN",
+          provider: "GOOGLE",
+        };
+
+        const updatedUsers = [...existingUsers, currentUser];
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
+      }
+
+      setUser(currentUser);
+      localStorage.setItem("user", JSON.stringify(currentUser));
+      navigate("/client-home");
     } catch (error) {
       console.error("Error signing in", error);
     }
@@ -66,11 +85,4 @@ export default function OAuthButtonsList({ toogleSignupForm }: Props) {
       <Button onClick={() => toogleSignupForm(true)}>Register</Button>
     </>
   );
-}
-
-{
-  /* <LogoHeader />
-SignupInputs.tsx
-SubmitButton.tsx
-AlreadyRegisteredText.tsx */
 }

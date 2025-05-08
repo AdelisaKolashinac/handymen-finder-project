@@ -13,6 +13,7 @@ export default function SignupForm() {
     confirmPassword: "",
     phone: "",
     type: "",
+    location: "",
   });
   const setUser = useUserStore((state) => state.setUser);
 
@@ -38,6 +39,7 @@ export default function SignupForm() {
       confirmPassword: formData.confirmPassword,
       phone: formData.phone,
       type: "CLIENT",
+      location: "Berlin",
     };
     setUser(newUser);
 

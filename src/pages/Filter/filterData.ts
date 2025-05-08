@@ -4,14 +4,14 @@ export interface FilterCategoryType {
 }
 
 export const filterCategories: FilterCategoryType[] = [
-  { id: "elektroinstallation", label: "Elektroinstallation" },
-  { id: "sanitärinstallation", label: "Sanitärinstallation" },
-  { id: "maler-und-lackierarbeiten", label: "Maler- und Lackierarbeiten" },
-  { id: "tischlerei-schreinerei", label: "Tischlerei/Schreinerei" },
-  { id: "dachdeckerarbeiten", label: "Dachdeckerarbeiten" },
-  { id: "heizungsinstallation", label: "Heizungsinstallation" },
-  { id: "fliesenarbeiten", label: "Fliesenarbeiten" },
-  { id: "maurerarbeiten", label: "Maurerarbeiten" },
-  { id: "garten-und-landschaftsbau", label: "Garten- und Landschaftsbau" },
-  { id: "schlosserarbeiten", label: "Schlosserarbeiten" },
+  { id: "electrical-installation", label: "Electrical installation" },
+  { id: "sanitary installation", label: "Sanitary installation" },
+  { id: "painting-painting work", label: "Painting and painting work" },
+  { id: "carpentry/carpentry", label: "Carpentry/carpentry" },
+  { id: "roofing", label: "Roofing" },
+  { id: "heating-installation", label: "Heating installation" },
+  { id: "tile-work", label: "Tile work" },
+  { id: "bricklaying", label: "Bricklaying" },
+  { id: "garden-landscaping", label: "Garden and landscaping" },
+  { id: "locksmith work", label: "Locksmith work" },
 ];

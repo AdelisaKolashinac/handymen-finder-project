@@ -10,8 +10,8 @@ export const handymen: HandymanType[] = [
     id: crypto.randomUUID(),
     img: "/handymen/handyman.jpg",
     name: "Klaus Schneider",
-    location: "Rheda-Wiedenbrück",
-    available: true,
+    location: "Berlin",
+    available: "available",
     jobTitle: "Heating specialist available for work",
     postedAt: "2025-05-01",
     reviews: [
@@ -52,14 +52,14 @@ export const handymen: HandymanType[] = [
       },
     ],
     description:
-      "10+ years of experience in the industry. Available for urgent missions. Active in the entire region around Rheda-Wiedenbrück.",
+      "10+ years of experience in the industry. Available for urgent missions. Active in the entire region around Berlin.",
   },
   {
     id: crypto.randomUUID(),
     img: "/handymen/marcus.png",
     name: "Marcus Shmidt",
     location: "Ingolstadt",
-    available: false,
+    available: "not available",
     jobTitle: "Plumber available for work",
     postedAt: "2025-04-25",
     performanceStats: "38 Abgeschlossene Aufträge",
@@ -83,8 +83,8 @@ export const handymen: HandymanType[] = [
     id: crypto.randomUUID(),
     img: "/handymen/johannes.png",
     name: "Johannes Fischer",
-    location: "Sassenberg",
-    available: true,
+    location: "Berlin",
+    available: "available",
     jobTitle: "Electrician available for smart home setup",
     postedAt: "2025-05-02",
     performanceStats: "5.0 Kundenbewertungen",
@@ -124,7 +124,7 @@ export const handymen: HandymanType[] = [
     img: "/handymen/peter.jpg",
     name: "Peter Schmidt",
     location: "Herford",
-    available: true,
+    available: "available",
     jobTitle: "Electrician available for smart home setup",
     postedAt: "2025-05-02",
     reviews: [
@@ -149,7 +149,7 @@ export const handymen: HandymanType[] = [
     img: "/handymen/jan.jpg",
     name: "Jan Fischer",
     location: "Paderborn",
-    available: false,
+    available: "not available",
     jobTitle: "Roofer and carpenter available after vacation",
     postedAt: "2025-04-20",
     reviews: [
@@ -194,8 +194,8 @@ export const handymen: HandymanType[] = [
     id: crypto.randomUUID(),
     img: "/handymen/hans.jpg",
     name: "Hans Becker",
-    location: "Bielefeld",
-    available: true,
+    location: "Berlin",
+    available: "available",
     jobTitle: "Window and door expert available",
     postedAt: "2025-05-03",
     performanceStats: "25 erfolgreich abgeschlossene Projekte",
@@ -222,43 +222,136 @@ export const handymen: HandymanType[] = [
     description:
       "Spezialist für Fenster und Türen. Maßanfertigungen und Reparaturen mit Fokus auf Energieeffizienz und Langlebigkeit.",
   },
+  {
+    id: crypto.randomUUID(),
+    img: "/handymen/elena.png",
+    name: "Elena Hoffmann",
+    location: "Munich",
+    available: "available",
+    jobTitle: "Certified Painter and Interior Designer",
+    postedAt: "2025-05-04",
+    reviews: [
+      {
+        rating: 5,
+        reviewText: "Beautiful results and very clean work!",
+        reviewer: "Katharina Müller",
+      },
+      {
+        rating: 4.6,
+        reviewText: "Great eye for detail.",
+        reviewer: "Daniel Vogel",
+      },
+    ],
+    categories: ["Painting and painting work", "Drywall", "Home Repair"],
+    description:
+      "Interior painting, wallpapering, and drywall services with over 8 years of experience. Specializes in modern design and smooth finishes.",
+  },
+  {
+    id: crypto.randomUUID(),
+    img: "/handymen/tarik.png",
+    name: "Tarik Özdemir",
+    location: "Hamburg",
+    available: "available",
+    jobTitle: "Experienced Plumber and Tiler",
+    postedAt: "2025-05-04",
+    reviews: [
+      {
+        rating: 4.8,
+        reviewText: "Very efficient and knowledgeable.",
+        reviewer: "Max Brenner",
+      },
+    ],
+    categories: ["Plumber", "Tile work", "Sanitary installation"],
+    description:
+      "Certified plumber offering sanitary installations, leak repairs, and complete bathroom tiling. Over 12 years of field experience.",
+  },
+  {
+    id: crypto.randomUUID(),
+    img: "/handymen/greta.png",
+    name: "Greta Lange",
+    location: "Dresden",
+    available: "not available",
+    jobTitle: "Landscaping and Garden Design",
+    postedAt: "2025-04-30",
+    reviews: [
+      {
+        rating: 5,
+        reviewText: "Our garden looks amazing!",
+        reviewer: "Emma Kurz",
+      },
+      {
+        rating: 4.9,
+        reviewText: "Transformed our outdoor space.",
+        reviewer: "Leon Fischer",
+      },
+    ],
+    categories: ["Garden and landscaping", "Waste disposal", "Construction"],
+    description:
+      "Design and execution of gardens and landscapes. Also handles clearing, composting, and sustainable waste solutions.",
+  },
 ];
 
 export const categories: CategoryType[] = [
   {
-    id: 1,
+    id: crypto.randomUUID(),
     title: "Home Repair",
     image: "/categories/home-repair.png",
   },
-  { id: 2, title: "Windows", image: "/categories/windows.png" },
-  { id: 3, title: "Painter", image: "/categories/painter.png" },
   {
-    id: 4,
+    id: crypto.randomUUID(),
+    title: "Windows",
+    image: "/categories/windows.png",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Painter",
+    image: "/categories/painter.png",
+  },
+  {
+    id: crypto.randomUUID(),
     title: "Electrician",
     image: "/categories/electrician.png",
   },
-  { id: 5, title: "A / C", image: "/categories/ac.png" },
-  { id: 6, title: "Cleaning", image: "/categories/cleaning.png" },
-  { id: 7, title: "Assembly", image: "/categories/assembly.png" },
-  { id: 8, title: "Carpenter", image: "/categories/carpenter.png" },
+  { id: crypto.randomUUID(), title: "A / C", image: "/categories/ac.png" },
   {
-    id: 9,
+    id: crypto.randomUUID(),
+    title: "Cleaning",
+    image: "/categories/cleaning.png",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Assembly",
+    image: "/categories/assembly.png",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Carpenter",
+    image: "/categories/carpenter.png",
+  },
+  {
+    id: crypto.randomUUID(),
     title: "Construction",
     image: "/categories/construction.png",
   },
   {
-    id: 10,
-    title: "Electrician",
-    image: "/categories/electrician.png",
+    id: crypto.randomUUID(),
+    title: "Flooring",
+    image: "/categories/flooring.png",
   },
-  { id: 11, title: "A / C", image: "/categories/ac.png" },
-  { id: 12, title: "Cleaning", image: "/categories/cleaning.png" },
-  { id: 13, title: "Assembly", image: "/categories/assembly.png" },
-  { id: 14, title: "Carpenter", image: "/categories/carpenter.png" },
   {
-    id: 15,
-    title: "Construction",
-    image: "/categories/construction.png",
+    id: crypto.randomUUID(),
+    title: "Plumber",
+    image: "/categories/plumber.png",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Waste disposal",
+    image: "/categories/waste-disposal.png",
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "Locksmith",
+    image: "/categories/locksmith.png",
   },
 ];
 

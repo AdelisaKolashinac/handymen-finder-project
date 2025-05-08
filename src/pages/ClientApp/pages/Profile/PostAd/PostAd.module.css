@@ -1,0 +1,23 @@
+.postAd {
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+  
+  .postAd__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .postAd__backButton,
+  .postAd__notificationButton {
+    border: none;
+    background-color: transparent;
+  }
+  
+  .postAd__title {
+    color: var(--primary-color);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 0;
+  }

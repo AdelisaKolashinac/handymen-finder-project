@@ -1,29 +1,45 @@
+import { useEffect } from "react";
+import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
+import { useUserStore } from "../../../../../stores/userStore";
 import styles from "./ClientProfile.module.css";
 
 export function ClientProfile() {
+  const user = useUserStore((state) => state.user);
+  const { navigate, homepage } = useAppNavigation();
+
+  useEffect(() => {
+    if (!user) {
+      homepage();
+    }
+  }, [user, homepage]);
+
+  if (!user) {
+    return null;
+  }
+  
   return (
     <div className={styles.clientProfile}>
-      <div className={styles.clientProfileContent}>
-        <div className={styles.imageSection}>
-          <img src="/findAHandyman/anna.png" alt="Picture of user" />
-          <span className={styles.userRole}>client</span>
+      <div className={styles.clientProfile__content}>
+        <div className={styles.clientProfile__imageContainer}>
+          <img src="/anna.png" alt="Picture of user" />
+          <span className={styles.clientProfile__userRole}>client</span>
         </div>
 
-        <div className={styles.detailsSection}>
-          <p className={styles.userName}>Anna Müller</p>
-          <p className={styles.userEmail}>annamuller@yahoo.com</p>
-          <div className={styles.location}>
-            <img src="/location.png" alt="Location icon" />
-            <p className={styles.city}>Ingolstadt</p>
+        <div className={styles.clientProfile__detailsSection}>
+          <p className={styles.clientProfile__userName}>{user.fullname}</p>
+          <p className={styles.clientProfile__userEmail}>{user.email}</p>
+          <div className={styles.clientProfile__location}>
+            <img src="/arrows&location/location.png" alt="Location of use" />
+            <p className={styles.city}>{user.location}</p>
           </div>
-          <div className={styles.contactInfo}>
-            <img src="/phone-icon.png" alt="Phone icon" />
-            <p className={styles.phone}>+41 987 *** ***</p>
+          <div className={styles.clientProfile__contactInfo}>
+            <img src="/icons/phone-icon.png" alt="Phone number of user" />
+            <p className={styles.clientProfile__phone}>{user.phone}</p>
           </div>
         </div>
       </div>
-      <div>
-        <img src="edit-icon.png" alt="Edit icon" />
+      <div onClick={() => navigate("/client-edit-profile")}>
+        <img src="/icons/edit-icon.png" alt="Edit profile info" />
       </div>
     </div>
   );

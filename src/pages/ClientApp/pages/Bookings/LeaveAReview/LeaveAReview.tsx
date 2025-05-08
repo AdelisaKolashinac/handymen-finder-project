@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "../../../../../components/Button/Button";
 import { Checkbox } from "../../../../../components/Checkbox/Checkbox";
 import styles from "./LeaveAReview.module.css";
-import { useBookingsContext } from "../bookingsContext/BookingsContext";
+// import { useBookingsContext } from "../bookingsContext/BookingsContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { useBookingsStore } from "../../../../../stores/bookingsStore";
 
 export function LeaveAReview() {
   const [selectedRating, setSelectedRating] = useState<number>(0);
@@ -12,16 +13,16 @@ export function LeaveAReview() {
 
   const { id: bookingId } = useParams<{ id: string }>();
 
-  const { updateRating } = useBookingsContext();
+  const bookings = useBookingsStore(state=>state.bookings);
 
   if (!bookingId) {
     return <p>Booking not found. Please go back and try again.</p>;
   }
 
-  const handleStarClick = (rating: number) => {
-    setSelectedRating(rating);
-    updateRating(bookingId, rating);
-  };
+  // const handleStarClick = (rating: number) => {
+  //   setSelectedRating(rating);
+  //   updateRating(bookingId, rating);
+  // };
 
   return (
     <div className="wrapper">
@@ -50,7 +51,7 @@ export function LeaveAReview() {
         {[1, 2, 3, 4, 5].map((star) => (
           <img
             key={star}
-            onClick={() => handleStarClick(star)}
+            // onClick={() => handleStarClick(star)}
             src={
               selectedRating >= star
                 ? "/star.svg"

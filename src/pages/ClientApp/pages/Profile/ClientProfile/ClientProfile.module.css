@@ -4,51 +4,52 @@
   align-items: flex-start;
 }
 
-.clientProfileContent {
+.clientProfile__content {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-.imageSection {
+.clientProfile__imageContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
 }
 
-.imageSection img {
+.clientProfile__imageContainer img {
   width: 67px;
   height: 67px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.userRole {
+.clientProfile__userRole {
   font-size: 10px;
   font-weight: 700;
   color: var(--blue-color);
 }
 
-.detailsSection {
-}
-
-.userName {
+.clientProfile__userName {
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 0;
 }
 
-.userEmail,
-.city,
-.phone {
+.clientProfile__userEmail,
+.clientProfile__city,
+.clientProfile__phone {
   font-size: 14px;
   margin-bottom: 0;
 }
 
-.location,
-.contactInfo {
+.clientProfile__location,
+.clientProfile__contactInfo {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.clientProfile__location p {
+  margin-bottom: 0;
 }

@@ -28,11 +28,15 @@ export function HandymanResultCard({ resultCard, averageRating }: Props) {
           </div>
         </div>
         <div className={styles.handymanResultCard__availability}>
-          {resultCard.available ? (
-            <span>Now available</span>
-          ) : (
-            <span>Not available</span>
-          )}
+          <span
+            className={
+              resultCard.available === "available"
+                ? styles.available
+                : styles.notAvailable
+            }
+          >
+            {resultCard.available}
+          </span>
         </div>
       </div>
       <div className={styles.handymanResultCard__rating}>

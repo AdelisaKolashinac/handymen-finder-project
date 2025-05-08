@@ -1,40 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HandymanResultCard } from "../../../components/HandymanResultCard/HandymanResultCard";
 import { calculateAverageRating } from "../../../utils/calculateAverageRating";
 import styles from "./HandymenResults.module.css";
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
-import { handymen } from "../../../data/data";
 import { SearchInput } from "../../../components/SearchInput/SearchInput";
-import { HandymanType } from "../../../types/types";
+import { useHandymenSearch } from "../../../hooks/useHandymenSearch";
 
 export default function HandymenResults() {
   const [visibleResults, setVisibleResults] = useState(5);
   const [expanded, setExpanded] = useState(false);
-  const [filteredHandymen, setFilteredHandymen] =
-    useState<HandymanType[]>(handymen);
   const [sortOption, setSortOption] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  if (!handymen.length) {
+  const { filteredHandymen, handleSearchSubmit } = useHandymenSearch();
+
+  useEffect(() => {
+    if (searchTerm === "") {
+      setSortOption("");
+    }
+  }, [searchTerm]);
+
+  if (!filteredHandymen.length) {
     return <p>No handymen found. Try adjusting your search.</p>;
   }
-
-  const handleSearchSubmit = (searchTerm: string) => {
-    const lowerSearch = searchTerm.toLowerCase();
-
-    if (lowerSearch.trim() === "") {
-      setFilteredHandymen(handymen);
-      return;
-    }
-
-    const filtered = handymen.filter(
-      (hm) =>
-        hm.name.toLowerCase().includes(lowerSearch) ||
-        hm.location.toLowerCase().includes(lowerSearch) ||
-        hm.description.toLowerCase().includes(lowerSearch)
-    );
-
-    setFilteredHandymen(filtered);
-  };
 
   const handymenAverageRating = filteredHandymen.map((h) => ({
     ...h,
@@ -64,7 +52,11 @@ export default function HandymenResults() {
 
   return (
     <>
-      <SearchInput handleSearch={handleSearchSubmit} />
+      <SearchInput
+        handleSearch={handleSearchSubmit}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
       <section className="wrapper">
         <div className={`border-bottom ${styles.handymanResults__header}`}>
           <p className={styles.handymanResults__text}>

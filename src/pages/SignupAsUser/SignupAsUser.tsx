@@ -18,14 +18,16 @@ export default function SignupAsUser() {
       <div className={` border-bottom ${styles.registerButtons}`}>
         <button
           className={`${styles.registerButton} ${isClient ? "activeRole" : ""}`}
-          onClick={toggleRole}
+          onClick={() => !isClient && toggleRole()}
           aria-label="Toggle role"
         >
           Register as Customer
         </button>
         <button
-          className={`${styles.registerButton} ${isClient ? "" : "activeRole"}`}
-          onClick={toggleRole}
+          className={`${styles.registerButton} ${
+            !isClient ? "activeRole" : ""
+          }`}
+          onClick={() => isClient && toggleRole()}
           aria-label="Toggle role"
         >
           Register as Craftsman
