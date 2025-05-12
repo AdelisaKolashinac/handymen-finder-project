@@ -1,0 +1,14 @@
+.OAuthButton {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+  font-size: 14px;
+  text-align: start;
+  padding: 10px 80px;
+  margin-bottom: 20px;
+}
+
+.OAuthButton__icon {
+  margin-right: 15px;
+}

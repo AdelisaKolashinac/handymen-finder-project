@@ -1,4 +1,4 @@
-import styles from "../SignupAsUser.module.css";
+import styles from "./LogoHeader.module.css";
 
 export function LogoHeader() {
   return (

@@ -5,9 +5,11 @@ export interface UserType {
   password?: string;
   confirmPassword?: string;
   phone: string;
-  type: "CLIENT" | "HANDYMAN";
+  type?: "CLIENT" | "HANDYMAN";
   provider?: "GOOGLE";
   location?: string;
+  notifyEmail?: boolean;
+  notifySMS?: boolean;
 }
 
 export interface CategoryType {

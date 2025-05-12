@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Button } from "../../../../../components/Button/Button";
 import { ButtonTransparent } from "../../../../../components/ButtonTransparent/ButtonTransparent";
 import { Checkbox } from "../../../../../components/Checkbox/Checkbox";
@@ -6,17 +7,66 @@ import { useUserStore } from "../../../../../stores/userStore";
 import styles from "./EditClientProfile.module.css";
 
 export function EditClientProfile() {
-  const { logout, user } = useUserStore();
+  const { logout, user, updateUser } = useUserStore();
+  const { navigate } = useAppNavigation();
 
-  const { navigate, homepage } = useAppNavigation();
+  const [userData, setUserData] = useState({
+    fullname: user?.fullname || "",
+    email: user?.email || "",
+    location: user?.location || "",
+    phone: user?.phone || "",
+    password: "",
+    confirmPassword: "",
+    notifyEmail: false,
+    notifySMS: false,
+  });
 
-  if (!user) {
-    return null;
-  }
+  const [editingField, setEditingField] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleEditClick = (field: string) => {
+    setEditingField(field);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserData((prev) => ({
+      ...prev,
+      [e.target.name]:
+        e.target.type === "checkbox" ? e.target.checked : e.target.value,
+    }));
+  };
+
+  const handleSave = () => {
+    if (userData.password && userData.password !== userData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    const editedUser = {
+      fullname: userData.fullname,
+      email: userData.email,
+      location: userData.location,
+      phone: userData.phone,
+      notifyEmail: userData.notifyEmail,
+      notifySMS: userData.notifySMS,
+      ...(userData.password && { password: userData.password }),
+    };
+
+    updateUser(editedUser);
+    localStorage.setItem("user", JSON.stringify(editedUser));
+
+    setEditingField(null);
+    setError("");
+  };
 
   const handleLogout = () => {
     logout();
-    homepage();
+    navigate("/");
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -54,10 +104,22 @@ export function EditClientProfile() {
             <p>
               Full Name <span>*</span>
             </p>
-            <p className={styles.editClientProfile__userInfo}>{user.fullname}</p>
+            {editingField === "fullname" ? (
+              <input
+                type="text"
+                name="fullname"
+                value={userData.fullname}
+                onChange={handleChange}
+              />
+            ) : (
+              <p className={styles.editClientProfile__userInfo}>
+                {user?.fullname}
+              </p>
+            )}
           </div>
           <button
             className={styles.editClientProfile__editButton}
+            onClick={() => handleEditClick("fullname")}
             aria-label="Edit Full Name"
           >
             Edit
@@ -68,15 +130,26 @@ export function EditClientProfile() {
             <p>
               Email Address <span>*</span>
             </p>
-            <p className={styles.editClientProfile__userInfo}>
-              {user.email}
-            </p>
+            {editingField === "email" ? (
+              <input
+                type="email"
+                name="email"
+                value={userData.email}
+                onChange={handleChange}
+                className={styles.editClientProfile__userInfo}
+              />
+            ) : (
+              <p className={styles.editClientProfile__userInfo}>
+                {user?.email}
+              </p>
+            )}
             <p className={styles.editClientProfile__verifyEmail}>
               Verify email address
             </p>
           </div>
           <button
             className={styles.editClientProfile__editButton}
+            onClick={() => handleEditClick("email")}
             aria-label="Edit Email"
           >
             Edit
@@ -85,12 +158,22 @@ export function EditClientProfile() {
         <div className={`border-bottom ${styles.editClientProfile__field}`}>
           <div className={styles.editClientProfile__info}>
             <p>Location</p>
-            <p className={styles.editClientProfile__userInfo}>
-              {user.location}
-            </p>
+            {editingField === "location" ? (
+              <input
+                type="text"
+                name="location"
+                value={userData.location}
+                onChange={handleChange}
+              />
+            ) : (
+              <p className={styles.editClientProfile__userInfo}>
+                {user?.location}
+              </p>
+            )}
           </div>
           <button
             className={styles.editClientProfile__editButton}
+            onClick={() => handleEditClick("location")}
             aria-label="Edit Location"
           >
             Edit
@@ -99,12 +182,22 @@ export function EditClientProfile() {
         <div className={`border-bottom ${styles.editClientProfile__field}`}>
           <div className={styles.editClientProfile__info}>
             <p>Phone Number</p>
-            <p className={styles.editClientProfile__userInfo}>
-              {user.phone}
-            </p>
+            {editingField === "phone" ? (
+              <input
+                type="tel"
+                name="phone"
+                value={userData.phone}
+                onChange={handleChange}
+              />
+            ) : (
+              <p className={styles.editClientProfile__userInfo}>
+                {user?.phone}
+              </p>
+            )}
           </div>
           <button
             className={styles.editClientProfile__editButton}
+            onClick={() => handleEditClick("phone")}
             aria-label="Edit Phone Number"
           >
             Edit
@@ -114,12 +207,42 @@ export function EditClientProfile() {
         <div className={`border-bottom ${styles.editClientProfile__field}`}>
           <div className={styles.editClientProfile__info}>
             <p>Password</p>
-            <p className={styles.editClientProfile__userInfo}>
-              ****************
-            </p>
+            {editingField === "password" ? (
+              <>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={userData.password}
+                  onChange={handleChange}
+                  placeholder="Enter new password"
+                />
+                <div
+                  className={styles.editClientProfile__icon}
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <i className="fa-regular fa-eye"></i>
+                  ) : (
+                    <i className="fa-regular fa-eye-slash"></i>
+                  )}
+                </div>
+
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="confirmPassword"
+                  value={userData.confirmPassword}
+                  onChange={handleChange}
+                  placeholder="Confirm password"
+                />
+              </>
+            ) : (
+              <p className={styles.editClientProfile__userInfo}>*******</p>
+            )}
           </div>
+          {error && <p className={styles.error}>{error}</p>}
           <button
             className={styles.editClientProfile__editButton}
+            onClick={() => handleEditClick("password")}
             aria-label="Change Password"
           >
             Change
@@ -129,18 +252,37 @@ export function EditClientProfile() {
 
       {/* Notifications */}
       <div className={styles.editClientProfile__notificationOption}>
-        <Checkbox id="notify-email">Notify via email</Checkbox>
+        <Checkbox
+          id="notify-email"
+          name="notifyEmail"
+          checked={userData.notifyEmail}
+          onChange={handleChange}
+        >
+          Notify via email
+        </Checkbox>
         <p>Get notified via email when something happens</p>
       </div>
       <div className={styles.editClientProfile__notificationOption}>
-        <Checkbox id="notify-sms">Notify via SMS</Checkbox>
+        <Checkbox
+          id="notify-sms"
+          name="notifySMS"
+          checked={userData.notifySMS}
+          onChange={handleChange}
+        >
+          Notify via SMS
+        </Checkbox>
         <p>Get notified via SMS when something happens</p>
       </div>
 
       {/* Buttons Container */}
       <div className={styles.editClientProfile__formActions}>
-        <ButtonTransparent width="100%">Cancel</ButtonTransparent>
-        <Button>Save Changes</Button>
+        <ButtonTransparent
+          width="100%"
+          onClick={() => navigate("/client-profile")}
+        >
+          Cancel
+        </ButtonTransparent>
+        <Button onClick={handleSave}>Save Changes</Button>
       </div>
       <div className={styles.editClientProfile__accountActions}>
         <button

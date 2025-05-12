@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../SignupAsUser.module.css";
+import styles from "./OAuthButton.module.css";
 
 interface OAuthButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

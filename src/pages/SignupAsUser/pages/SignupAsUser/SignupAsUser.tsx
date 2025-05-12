@@ -1,9 +1,10 @@
-import { useRoleStore } from "../../stores/roleStore";
-import OAuthButtonsList from "./OAuthButtonsList";
-import { LogoHeader } from "./components/LogoHeader";
-import styles from "./SignupAsUser.module.css";
-import SignupForm from "./SignupForm";
+import { useRoleStore } from "../../../../stores/roleStore";
+import OAuthButtonsList from "../../components/OAuthButtonsList/OAuthButtonsList";
+import { LogoHeader } from "../../components/LogoHeader/LogoHeader";
+import styles from './SignupAsUser.module.css';
+import SignupForm from "../../components/SignupForm/SignupForm";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SignupAsUser() {
   const [showSignupForm, setShowSignupForm] = useState(false);
@@ -44,9 +45,9 @@ export default function SignupAsUser() {
       {/* Login Redirect Link */}
       <div className={styles.loginRedirect}>
         <p className={styles.loginText}>Already an account?</p>
-        <a href="#" className={styles.loginLink}>
+        <Link to='/sign-in' className={styles.loginLink}>
           Register
-        </a>
+        </Link>
       </div>
     </section>
   );

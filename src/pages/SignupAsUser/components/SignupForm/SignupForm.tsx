@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { useUserStore } from "../../stores/userStore";
-import styles from "./SignupAsUser.module.css";
-import { Button } from "../../components/Button/Button";
-import { UserType } from "../../types/types";
-import { useNavigate } from "react-router-dom";
+import { useUserStore } from "../../../../stores/userStore";
+import styles from "./SignupForm.module.css";
+import { Button } from "../../../../components/Button/Button";
+import { UserType } from "../../../../types/types";
+import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 
 export default function SignupForm() {
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     email: "",
     password: "",
@@ -15,15 +16,19 @@ export default function SignupForm() {
     type: "",
     location: "",
   });
+
   const setUser = useUserStore((state) => state.setUser);
 
-  const navigate = useNavigate();
+  const { navigate } = useAppNavigation();
 
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // password validation
@@ -32,22 +37,50 @@ export default function SignupForm() {
       return;
     }
 
-    const newUser: UserType = {
-      fullname: formData.name,
-      email: formData.email,
-      password: formData.password,
-      confirmPassword: formData.confirmPassword,
-      phone: formData.phone,
-      type: "CLIENT",
-      location: "Berlin",
-    };
-    setUser(newUser);
+    try {
+      //  Check if user already exists by email
+      const res = await fetch(
+        `http://localhost:3001/users?email=${formData.email}`
+      );
+      const existingUsers = await res.json();
 
-    localStorage.setItem("user", JSON.stringify(newUser));
+      if (existingUsers.length > 0) {
+        alert("User already exists with this email");
+        return;
+      }
 
-    alert("Signup successful!");
+      // Add new user
+      const newUser: UserType = {
+        id: crypto.randomUUID(),
+        fullname: formData.name,
+        email: formData.email,
+        password: formData.password,
+        confirmPassword: formData.confirmPassword,
+        phone: formData.phone,
+        type: "CLIENT",
+        location: "Berlin",
+      };
 
-    navigate("/client-home");
+      const createRes = await fetch("http://localhost:3001/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!createRes.ok) throw new Error("Failed to register user");
+
+      const createdUser = await createRes.json();
+      setUser(createdUser);
+      localStorage.setItem("user", JSON.stringify(createdUser));
+
+      alert("Signup successful!");
+
+      navigate("/client-home");
+    } catch (error) {
+      console.error("An error occurred: ", error);
+    }
   };
 
   return (
@@ -63,7 +96,7 @@ export default function SignupForm() {
             name="name"
             className={styles.registerForm__inputField}
             value={formData.name}
-            onChange={(e) => handleChange("name", e.target.value)}
+            onChange={handleChange}
           />
         </div>
 
@@ -77,7 +110,7 @@ export default function SignupForm() {
             name="email"
             className={styles.registerForm__inputField}
             value={formData.email}
-            onChange={(e) => handleChange("email", e.target.value)}
+            onChange={handleChange}
           />
         </div>
 
@@ -91,7 +124,7 @@ export default function SignupForm() {
             name="password"
             className={styles.registerForm__inputField}
             value={formData.password}
-            onChange={(e) => handleChange("password", e.target.value)}
+            onChange={handleChange}
           />
 
           <div className={styles.registerForm__icon__secondary}>
@@ -106,10 +139,10 @@ export default function SignupForm() {
           <input
             type="password"
             placeholder="Confirm password"
-            name="confirm-password"
+            name="confirmPassword"
             className={styles.registerForm__inputField}
             value={formData.confirmPassword}
-            onChange={(e) => handleChange("confirmPassword", e.target.value)}
+            onChange={handleChange}
           />
           <div className={styles.registerForm__icon__secondary}>
             <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />
@@ -126,7 +159,7 @@ export default function SignupForm() {
             name="phone"
             className={styles.registerForm__inputField}
             value={formData.phone}
-            onChange={(e) => handleChange("phone", e.target.value)}
+            onChange={handleChange}
           />
         </div>
       </div>

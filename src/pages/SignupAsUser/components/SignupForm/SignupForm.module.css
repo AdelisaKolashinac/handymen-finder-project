@@ -1,0 +1,32 @@
+.registerForm {
+  margin-bottom: 40px;
+}
+
+.registerForm__input {
+  position: relative;
+  margin-top: 15px;
+}
+
+.registerForm__inputField {
+  width: 100%;
+  padding: 10px 15px;
+  padding-left: 50px;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+}
+
+.registerForm__icon {
+  position: absolute;
+  left: 20px;
+  top: 10px;
+}
+
+.registerForm__icon__secondary {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.registerForm_inputItems {
+  margin-bottom: 40px;
+}

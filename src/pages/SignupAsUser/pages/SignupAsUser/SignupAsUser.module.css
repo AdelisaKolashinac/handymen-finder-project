@@ -1,0 +1,32 @@
+.registerButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px 20px;
+}
+
+.registerButton {
+  border: none;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loginRedirect {
+  display: flex;
+  justify-content: center;
+  margin: 55px 0;
+}
+
+.loginText {
+  color: var(--secondary-color);
+  font-size: 14px;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
+
+.loginLink {
+  color: var(--primary-color);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}

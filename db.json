@@ -1,0 +1,23 @@
+{
+  "ads": [
+    {
+      "id": "94ff",
+      "service": "Plumbing Repair",
+      "description": "Need urgent repair for a leaking pipe under the kitchen sink. Looking for a professional plumber to fix it ASAP.",
+      "location": "Berlin",
+      "photos": ""
+    }
+  ],
+  "users": [
+    {
+      "id": "9e25",
+      "fullname": "John Doe",
+      "email": "john-doe@outlook.com",
+      "password": "test123",
+      "confirmPassword": "test123",
+      "phone": "123456",
+      "type": "CLIENT",
+      "location": "Berlin"
+    }
+  ]
+}

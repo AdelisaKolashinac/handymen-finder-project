@@ -1,0 +1,11 @@
+.logoWrapper {
+  height: 30vh;
+  position: relative;
+}
+
+.logoImage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

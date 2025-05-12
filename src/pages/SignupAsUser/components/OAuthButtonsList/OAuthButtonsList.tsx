@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/Button/Button";
-import { signInWithGooglePopup } from "../../lib/firebase";
-import { useUserStore } from "../../stores/userStore";
-import { UserType } from "../../types/types";
-import { OAuthButton } from "./components/OAuthButton";
-import styles from "./SignupAsUser.module.css";
-import { useRoleStore } from "../../stores/roleStore";
+import { Button } from "../../../../components/Button/Button";
+import { signInWithGooglePopup } from "../../../../lib/firebase";
+import { useUserStore } from "../../../../stores/userStore";
+import { UserType } from "../../../../types/types";
+import { OAuthButton } from "../OAuthButton/OAuthButton";
+import styles from "./OAuthButtonsList.module.css";
+import { useRoleStore } from "../../../../stores/roleStore";
 
 interface Props {
   toogleSignupForm: React.Dispatch<React.SetStateAction<boolean>>;
