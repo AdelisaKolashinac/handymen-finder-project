@@ -1,0 +1,155 @@
+.handymanPublicProfile {
+  padding-top: 40px;
+  padding-bottom: 75px;
+}
+
+.handymanPublicProfile__backButton,
+.handymanPublicProfile__nameBlock,
+.handymanPublicProfile__completedOrders,
+.handymanPublicProfile__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.handymanPublicProfile__backButton span {
+  font-size: 18px;
+}
+
+.handymanPublicProfile__img {
+  width: 100%;
+  border-radius: 10px;
+  margin: 30px 0;
+}
+
+.handymanPublicProfile__profileTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.handymanPublicProfile__nameBlock h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.handymanPublicProfile__availability span {
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 3px 7px;
+}
+
+.available {
+  color: var(--green-color-dark);
+  background-color: var(--green-color-light);
+}
+
+.notAvailable {
+  color: var(--red-color-dark);
+  background-color: var(--red-color-light);
+}
+
+.handymanPublicProfile__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.handymanPublicProfile__rating img {
+  width: 12px;
+}
+
+.handymanPublicProfile__ratingText {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgb(253, 253, 176);
+}
+
+.handymanPublicProfile__ratingText p {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.handymanPublicProfile__reviewsCount {
+  background-color: transparent;
+  color: var(--secondary-color);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.handymanPublicProfile__categories {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.handymanPublicProfile__categories span {
+  background-color: #e8effe;
+  color: #5584e5;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.handymanPublicProfile__location {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.handymanPublicProfile__actions {
+  margin-top: 30px;
+}
+
+.handymanPublicProfile__location p,
+.handymanPublicProfile__completedOrders p,
+.handymanPublicProfile__section p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.handymanPublicProfile__section,
+.handymanPublicProfile__subsection {
+  margin: 30px 0;
+}
+
+.handymanPublicProfile__section h3 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.handymanPublicProfile__subsection h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.handymanPublicProfile__subsection span {
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+.handymanPublicProfile__galleryImages {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.handymanPublicProfile__galleryImages  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+}

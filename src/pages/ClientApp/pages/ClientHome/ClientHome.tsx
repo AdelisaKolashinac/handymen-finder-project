@@ -1,15 +1,35 @@
+import { useEffect, useState } from "react";
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
-import { handymen } from "../../../../data/data";
 import { useSearchStore } from "../../../../stores/searchStore";
 import { useUserStore } from "../../../../stores/userStore";
 import { calculateAverageRating } from "../../../../utils/calculateAverageRating";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import { RecommendedCard } from "../../components/RecommendedCard/RecommendedCard";
 import styles from "./ClientHome.module.css";
+import { Handyman } from "../../../../types/types";
 
 export default function ClientHome() {
+  const [handymen, setHandymen] = useState<Handyman[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const user = useUserStore((state) => state.user);
   const { searchTerm, setSearchTerm } = useSearchStore();
+
+  useEffect(() => {
+    const fetchHandymen = async () => {
+      try {
+        const res = await fetch("http://localhost:3001/handymen");
+        if (!res.ok) throw new Error("Failed to fetch handymen");
+
+        const data: Handyman[] = await res.json();
+        setHandymen(data);
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError("Could not load craftsmen.");
+      }
+    };
+
+    fetchHandymen();
+  }, []);
 
   const nearbyHandymen = handymen.filter(
     (hm) => hm.location.toLowerCase() === user?.location?.toLowerCase()
@@ -27,6 +47,8 @@ export default function ClientHome() {
       hm.categories.some((cat) => cat.toLowerCase().includes(term))
     );
   });
+
+  if (error) return <p className="errorMessage">{error}</p>;
 
   return (
     <section className={`wrapper ${styles.home}`}>

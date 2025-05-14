@@ -1,11 +1,33 @@
+import { useEffect, useState } from "react";
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
 import { ClientAdCard } from "../../../components/ClientAdCard/ClientAdCard";
 import { useAppNavigation } from "../../../hooks/useAppNavigation";
-import { activeAds } from "../../ClientApp/pages/Profile/profileData";
 import styles from "./PublishAdBanner.module.css";
+import { Ad } from "../../../types/types";
 
 export default function PublishAdBanner() {
-  const { signup } = useAppNavigation();
+   const [activeAds, setActiveAds] = useState<Ad[]>([]);
+    const [error, setError] = useState("");
+    const { signup } = useAppNavigation();
+  
+    useEffect(() => {
+      const fetchBookings = async () => {
+        try {
+          const res = await fetch("http://localhost:3001/bookings");
+          if (!res.ok) throw new Error("Failed to fetch bookings");
+          const data = await res.json();
+          setActiveAds(data);
+        } catch (err) {
+          console.error(err);
+          setError("Could not load bookings.");
+        }
+      };
+  
+      fetchBookings();
+    }, []);
+  
+    if (error) return <p className="errorMessage">{error}</p>;
+
 
   return (
     <section className={styles.publishAdBanner}>

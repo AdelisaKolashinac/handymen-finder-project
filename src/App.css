@@ -31,3 +31,8 @@
 .activeRole {
   color: var(--primary-color);
 }
+
+.errorMessage {
+  font-size: 14px;
+  font-weight: 600;
+}

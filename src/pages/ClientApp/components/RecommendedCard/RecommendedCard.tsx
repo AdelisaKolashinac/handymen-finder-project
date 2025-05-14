@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import { ButtonSmall } from "../../../../components/ButtonSmall/ButtonSmall";
-import { HandymanType } from "../../../../types/types";
+import { Handyman } from "../../../../types/types";
 import styles from "./RecommendedCard.module.css";
 
 interface Props {
-  card: HandymanType;
+  card: Handyman;
   averageRating: number;
 }
 
@@ -62,7 +63,7 @@ export function RecommendedCard({ card, averageRating }: Props) {
         ))}
       </div>
       <div className={styles.recommendedCard__actions}>
-        <button className={styles.recommendedCard__button}>Show profile</button>
+        <Link to={`/handyman-public-profile/${card.id}`} className={styles.recommendedCard__showProfile}>Show profile</Link>
         <ButtonSmall>Contact</ButtonSmall>
       </div>
     </div>

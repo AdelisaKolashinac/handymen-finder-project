@@ -1,8 +1,8 @@
-import { CategoryType } from "../../types/types";
+import { Category } from "../../types/types";
 import styles from "./CategoryCard.module.css";
 
 interface Props {
-  category: CategoryType;
+  category: Category;
   onClick: (searchTerm: string) => void;
 }
 

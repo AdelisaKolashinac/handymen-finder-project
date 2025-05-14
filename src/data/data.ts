@@ -1,11 +1,11 @@
 import {
-  BookingType,
-  CategoryType,
-  HandymanType,
-  ReviewCardType,
+  Booking,
+  Category,
+  Handyman,
+  ReviewCard,
 } from "../types/types";
 
-export const handymen: HandymanType[] = [
+export const handymen: Handyman[] = [
   {
     id: crypto.randomUUID(),
     img: "/handymen/handyman.jpg",
@@ -291,7 +291,7 @@ export const handymen: HandymanType[] = [
   },
 ];
 
-export const categories: CategoryType[] = [
+export const categories: Category[] = [
   {
     id: crypto.randomUUID(),
     title: "Home Repair",
@@ -355,7 +355,7 @@ export const categories: CategoryType[] = [
   },
 ];
 
-export const customerReviews: ReviewCardType[] = [
+export const customerReviews: ReviewCard[] = [
   {
     id: crypto.randomUUID(),
     name: "John Carter",
@@ -436,7 +436,7 @@ export const customerReviews: ReviewCardType[] = [
   },
 ];
 
-export const bookings: BookingType[] = [
+export const bookings: Booking[] = [
   {
     id: crypto.randomUUID(),
     status: "new",

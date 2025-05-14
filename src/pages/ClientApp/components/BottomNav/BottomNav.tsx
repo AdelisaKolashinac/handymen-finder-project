@@ -32,7 +32,7 @@ export default function BottomNav() {
         <span>Homepage</span>
       </NavLink>
       <NavLink
-        to="/client-chat"
+        to="/client-chatList"
         className={({ isActive }) =>
           `${styles.navItem} ${isActive ? styles.active : ""}`
         }

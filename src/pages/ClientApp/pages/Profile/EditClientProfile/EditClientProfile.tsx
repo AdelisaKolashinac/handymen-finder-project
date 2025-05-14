@@ -239,7 +239,7 @@ export function EditClientProfile() {
               <p className={styles.editClientProfile__userInfo}>*******</p>
             )}
           </div>
-          {error && <p className={styles.error}>{error}</p>}
+          {error && <p className="errorMessage">{error}</p>}
           <button
             className={styles.editClientProfile__editButton}
             onClick={() => handleEditClick("password")}

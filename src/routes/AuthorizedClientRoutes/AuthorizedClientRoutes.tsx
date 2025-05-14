@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import BottomNav from "../../pages/ClientApp/components/BottomNav/BottomNav";
-import { Chat } from "@mui/icons-material";
 import Bookings from "../../pages/ClientApp/pages/Bookings/Bookings";
 import { LeaveAReview } from "../../pages/ClientApp/pages/Bookings/LeaveAReview/LeaveAReview";
 import Categories from "../../pages/ClientApp/pages/Categories/Categories";
@@ -8,6 +7,9 @@ import { EditClientProfile } from "../../pages/ClientApp/pages/Profile/EditClien
 import Profile from "../../pages/ClientApp/pages/Profile/Profile";
 import ClientHome from "../../pages/ClientApp/pages/ClientHome/ClientHome";
 import { PostAd } from "../../pages/ClientApp/pages/Profile/PostAd/PostAd";
+import ChatList from "../../pages/ClientApp/pages/Chat/ChatList/ChatList";
+import HandymanPublicProfile from "../../pages/HandymanPublicProfile-clientViews/HandymanPublicProfile";
+// import Chat from "../../pages/ClientApp/pages/Chat/Chat";
 
 export default function AuthorizedClientRoutes() {
   return (
@@ -18,11 +20,13 @@ export default function AuthorizedClientRoutes() {
         <Route path="/client-bookings" element={<Bookings />} />
         <Route path="/client-categories" element={<Categories />} />
         <Route path="/client-home" element={<ClientHome />} />
-        <Route path="/client-chat" element={<Chat />} />
+        <Route path="/client-chatList" element={<ChatList />} />
+        {/* <Route path="/client-chat/:id" element={<Chat />} /> */}
         <Route path="/client-profile" element={<Profile />} />
         <Route path="/leave-review/:id" element={<LeaveAReview />} />
         <Route path="/client-edit-profile" element={<EditClientProfile />} />
         <Route path="/client-post-ad" element={<PostAd />} />
+        <Route path="/handyman-public-profile/:id" element={<HandymanPublicProfile />} />
       </Routes>
       <BottomNav />
     </>

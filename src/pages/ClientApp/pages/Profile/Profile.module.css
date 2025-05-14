@@ -12,3 +12,10 @@
   font-size: 14px;
   margin-bottom: 30px;
 }
+
+.profile__noAdsMessage {
+  text-align: center;
+  font-style: italic;
+  color: var(--secondary-color);
+  margin-top: 40px;
+}

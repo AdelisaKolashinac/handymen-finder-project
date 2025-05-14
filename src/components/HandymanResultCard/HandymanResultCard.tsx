@@ -1,9 +1,9 @@
-import { HandymanType } from "../../types/types";
+import { Handyman } from "../../types/types";
 import { ButtonSmall } from "../ButtonSmall/ButtonSmall";
 import styles from "./HandymanResultCard.module.css";
 
 interface Props {
-  resultCard: HandymanType;
+  resultCard: Handyman;
   averageRating: number;
 }
 

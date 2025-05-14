@@ -43,7 +43,21 @@
   color: var(--primary-color);
 }
 
+.postAd__select {
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+}
+
 .postAd__input {
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.postAd__input_icon {
   border: 1px solid var(--secondary-color);
   border-radius: 5px;
   font-size: 14px;

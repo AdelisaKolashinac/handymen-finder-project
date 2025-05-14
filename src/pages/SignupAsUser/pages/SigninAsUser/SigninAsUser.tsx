@@ -51,7 +51,8 @@ export default function SigninAsUser() {
 
       setUser(user);
       localStorage.setItem("user", JSON.stringify(user));
-      navigate("/client-home");
+
+      navigate("/client-profile");
     } catch (err) {
       console.error("Signin error:", err);
       setError("Something went wrong. Please try again.");
@@ -96,7 +97,7 @@ export default function SigninAsUser() {
             onChange={handleChange}
             placeholder="password"
           />
-          {error && <p className={styles.errorMessage}>{error}</p>}
+          {error && <p className="errorMessage">{error}</p>}
 
           <div className={styles.signin__inputIcon__secondary}>
             <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useUserStore } from "../../../../stores/userStore";
 import styles from "./SignupForm.module.css";
 import { Button } from "../../../../components/Button/Button";
-import { UserType } from "../../../../types/types";
+import { User } from "../../../../types/types";
 import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 
 export default function SignupForm() {
@@ -16,6 +16,7 @@ export default function SignupForm() {
     type: "",
     location: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   const setUser = useUserStore((state) => state.setUser);
 
@@ -33,7 +34,7 @@ export default function SignupForm() {
 
     // password validation
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
 
@@ -45,17 +46,16 @@ export default function SignupForm() {
       const existingUsers = await res.json();
 
       if (existingUsers.length > 0) {
-        alert("User already exists with this email");
+        setError("User already exists with this email");
         return;
       }
 
       // Add new user
-      const newUser: UserType = {
+      const newUser: User = {
         id: crypto.randomUUID(),
         fullname: formData.name,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
         phone: formData.phone,
         type: "CLIENT",
         location: "Berlin",
@@ -75,11 +75,10 @@ export default function SignupForm() {
       setUser(createdUser);
       localStorage.setItem("user", JSON.stringify(createdUser));
 
-      alert("Signup successful!");
-
-      navigate("/client-home");
+      navigate("/client-profile");
     } catch (error) {
       console.error("An error occurred: ", error);
+      setError("Something went wrong. Please try again.");
     }
   };
 
@@ -97,6 +96,7 @@ export default function SignupForm() {
             className={styles.registerForm__inputField}
             value={formData.name}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -111,6 +111,7 @@ export default function SignupForm() {
             className={styles.registerForm__inputField}
             value={formData.email}
             onChange={handleChange}
+            required
           />
         </div>
 
@@ -125,6 +126,7 @@ export default function SignupForm() {
             className={styles.registerForm__inputField}
             value={formData.password}
             onChange={handleChange}
+            required
           />
 
           <div className={styles.registerForm__icon__secondary}>
@@ -143,6 +145,7 @@ export default function SignupForm() {
             className={styles.registerForm__inputField}
             value={formData.confirmPassword}
             onChange={handleChange}
+            required
           />
           <div className={styles.registerForm__icon__secondary}>
             <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />
@@ -160,8 +163,10 @@ export default function SignupForm() {
             className={styles.registerForm__inputField}
             value={formData.phone}
             onChange={handleChange}
+            required
           />
         </div>
+        {error && <p className="errorMessage">{error}</p>}
       </div>
 
       <Button type="submit">Register</Button>

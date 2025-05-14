@@ -1,8 +1,8 @@
-import { ReviewCardType } from "../../types/types";
+import { ReviewCard } from "../../types/types";
 import styles from "./HomepageReview.module.css";
 
 interface Props {
-  review: ReviewCardType;
+  review: ReviewCard;
 }
 
 export function HomepageReview({ review }: Props) {

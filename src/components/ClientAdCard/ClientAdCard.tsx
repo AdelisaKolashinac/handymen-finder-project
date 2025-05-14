@@ -1,9 +1,9 @@
-import { ActiveAdType } from "../../pages/ClientApp/pages/Profile/profileData";
+import { AdType } from "../../types/types";
 import { ButtonSmall } from "../ButtonSmall/ButtonSmall";
 import styles from "./ClientAdCard.module.css";
 
 interface Props {
-  card: ActiveAdType;
+  card: AdType;
 }
 
 export function ClientAdCard({ card }: Props) {
@@ -22,20 +22,26 @@ export function ClientAdCard({ card }: Props) {
           </div>
         </div>
         <div className={styles.clientAdCard__urgency}>
-          <span className={styles.clientAdCard__urgentTag}>{card.urgency}</span>
+          <span
+            className={`${
+              card.urgency === "immediate"
+                ? styles.immediateTag
+                : styles.flexibleTag
+            }`}
+          >
+            {card.urgency}
+          </span>
           <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
       <p className={`border-bottom ${styles.clientAdCard__title}`}>
-        {card.title}
+        {card.service}
       </p>
       <p className={styles.clientAdCard__description}>{card.description}</p>
 
       {/* Address + Map Link */}
       <img src="/arrows&location/location.png" alt="Location Icon" />
-      <span className={styles.clientAdCard__location}>
-        {card.city}, {card.country}
-      </span>
+      <span className={styles.clientAdCard__location}>{card.location}</span>
 
       <div className={`border-bottom ${styles.clientAdCard__address}`}>
         <span>address</span>

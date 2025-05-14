@@ -40,13 +40,24 @@
   margin-bottom: 0;
 }
 
-.clientAdCard__urgentTag {
+.immediateTag {
   background-color: var(--red-color-light);
   color: var(--red-color-dark);
   font-size: 12px;
   font-weight: 700;
   padding: 0 15px;
   border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.flexibleTag {
+  background-color: var(--green-color-light);
+  color: var(--green-color-dark);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 15px;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
 .clientAdCard__title {

@@ -1,11 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../../components/Button/Button";
 import { ButtonTransparent } from "../../../../../components/ButtonTransparent/ButtonTransparent";
-import { BookingType } from "../bookingData";
 import styles from "./BookingCard.module.css";
+import { Booking } from "../../../../../types/types";
 
 interface BookingCardProps {
-  booking: BookingType;
+  booking: Booking;
 }
 
 export default function BookingCard({ booking }: BookingCardProps) {
