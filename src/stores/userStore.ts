@@ -1,23 +1,29 @@
 import { create } from "zustand";
-import { UserType } from "../types/types";
+import { User } from "../types/types";
 
 const userToken = localStorage.getItem("user");
 
 interface UserStore {
-  user: UserType | undefined;
-  setUser: (userPayload: UserType) => void;
-  updateUser: (userPayload: UserType) => void;
+  user: User | undefined;
+  setUser: (userPayload: User) => void;
+  updateUser: (userPayload: User) => void;
   logout: () => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
   user: userToken ? JSON.parse(userToken) : undefined,
-  setUser: (userPayload) => set(() => ({ user: userPayload })),
-  updateUser : (userPayload) => set((state) => ({
-    user: {...state.user, ...userPayload}
-  })),
+  setUser: (userPayload) => {
+    localStorage.setItem("user", JSON.stringify(userPayload));
+    set({ user: userPayload });
+  },
+  updateUser: (userPayload) =>
+    set((state) => {
+      const updatedUser = { ...(state.user ?? {}), ...userPayload };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      return { user: updatedUser };
+    }),
   logout: () => {
-    set(() => ({ user: undefined }));
     localStorage.removeItem("user");
+    set({ user: undefined });
   },
 }));

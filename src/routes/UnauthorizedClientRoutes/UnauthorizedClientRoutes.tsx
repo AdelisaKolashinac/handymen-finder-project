@@ -10,7 +10,7 @@ export default function UnauthorizedClientRoutes() {
       <Route path="/" element={<Homepage />} />
       <Route path="/services" element={<Services />} />
       <Route path="/signup" element={<SignupAsUser />} />
-      <Route path="/sign-in" element={<SigninAsUser />} />
+      <Route path="/signin" element={<SigninAsUser />} />
     </Routes>
   );
 }

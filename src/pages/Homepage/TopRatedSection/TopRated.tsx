@@ -2,19 +2,20 @@ import styles from "./TopRated.module.css";
 import { Button } from "../../../components/Button/Button";
 import { TopRatedCard } from "../../../components/HomepageTopRatedCard/TopRatedCard";
 import { useAppNavigation } from "../../../hooks/useAppNavigation";
-import { handymen } from "../../../data/data";
 import { calculateAverageRating } from "../../../utils/calculateAverageRating";
+import { useFetchHandymen } from "../../../hooks/useFetchHandymen";
 
 export function TopRated() {
+  const { handymen } = useFetchHandymen();
   const { services } = useAppNavigation();
 
-  const topRatedHandymen = [...handymen]
+  const topRatedHandymen = handymen
     .filter((h) => h.reviews.length > 0)
     .sort(
       (a, b) =>
         calculateAverageRating(b.reviews) - calculateAverageRating(a.reviews)
     )
-    .slice(0, 3);
+    .slice(0, 4);
 
   return (
     <section className={`wrapper ${styles.topRatedSection}`}>

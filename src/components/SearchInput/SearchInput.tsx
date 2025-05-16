@@ -4,25 +4,32 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSearchStore } from "../../stores/searchStore";
 
 interface Props {
-  searchTerm: string;
-  setSearchTerm: (term: string) => void;
-  onOpenFilter?: () => void;
+  onOpenFilter: () => void;
+  onSearch?: () => void;
 }
 
-export function SearchInput({
-  searchTerm,
-  setSearchTerm,
-  onOpenFilter,
-}: Props) {
+export function SearchInput({ onOpenFilter, onSearch }: Props) {
+  const { searchTerm, setSearchTerm } = useSearchStore();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (onSearch) {
+      onSearch();
+    }
+  };
+
+  const handleClear = () => {
+    setSearchTerm("");
+  };
+
   return (
     <div className="wrapper">
       <Paper
         component="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
+        onSubmit={handleSubmit}
         sx={{
           p: "3px 4px",
           display: "flex",
@@ -42,7 +49,11 @@ export function SearchInput({
           inputProps={{ "aria-label": "search" }}
         />
         {searchTerm ? (
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="clear">
+          <IconButton
+            onClick={handleClear}
+            sx={{ p: "10px" }}
+            aria-label="clear"
+          >
             <CloseIcon />
           </IconButton>
         ) : (

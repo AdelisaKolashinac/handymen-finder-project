@@ -1,11 +1,11 @@
 import styles from "./Filter.module.css";
-import { filterCategories } from "./filterData";
 import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Button } from "../../components/Button/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchStore } from "../../stores/searchStore";
+import { useFetchCategories } from "../../hooks/useFetchCategories";
 
 interface Props {
   isOpen: boolean;
@@ -13,39 +13,46 @@ interface Props {
 }
 
 export default function Filter({ isOpen, onClose }: Props) {
-  const { setFilters, resetFilters } = useSearchStore();
-
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [selectedAvailability, setSelectedAvailability] = useState<string[]>(
     []
   );
 
+  const { categories } = useFetchCategories();
+
+  const { filters, setFilters, resetFilters } = useSearchStore();
+
+  useEffect(() => {
+    if (isOpen) {
+      setSelectedServices(filters.categories || []);
+      setSelectedAvailability(filters.availability || []);
+    }
+  }, [isOpen, filters.categories, filters.availability]);
+
   // Handle service filter selection
   const handleServiceChange = (service: string) => {
-    setSelectedServices(
-      (prev) =>
-        prev.includes(service)
-          ? prev.filter((item) => item !== service) // Deselect if already selected
-          : [...prev, service] // Add if not selected
+    setSelectedServices((prev) =>
+      prev.includes(service)
+        ? prev.filter((item) => item !== service)
+        : [...prev, service]
     );
   };
 
   // Handle availability filter selection
   const handleAvailabilityChange = (availability: string) => {
-    setSelectedAvailability(
-      (prev) =>
-        prev.includes(availability)
-          ? prev.filter((item) => item !== availability) // Deselect if already selected
-          : [...prev, availability] // Add if not selected
+    setSelectedAvailability((prev) =>
+      prev.includes(availability)
+        ? prev.filter((item) => item !== availability)
+        : [...prev, availability]
     );
   };
 
   const handleApplyFilters = () => {
     setFilters({
-      services: selectedServices,
+      categories: selectedServices,
       availability: selectedAvailability,
     });
-    onClose(); // Close the filter modal after applying the filters
+    onClose();
   };
 
   return (
@@ -89,15 +96,15 @@ export default function Filter({ isOpen, onClose }: Props) {
 
         {/* Render category checkboxes */}
         <div className={styles.filter__checkboxContainer}>
-          {filterCategories.map((category) => (
+          {categories.map((category) => (
             <Checkbox
               key={category.id}
               id={category.id}
-              name="service"
-              checked={selectedServices.includes(category.label)}
-              onChange={() => handleServiceChange(category.label)}
+              name="category"
+              checked={selectedServices.includes(category.title)}
+              onChange={() => handleServiceChange(category.title)}
             >
-              {category.label}
+              {category.title}
             </Checkbox>
           ))}
         </div>
@@ -114,9 +121,9 @@ export default function Filter({ isOpen, onClose }: Props) {
           </Checkbox>
           <Checkbox
             id="not-available"
-            name="availability"
-            checked={selectedAvailability.includes("not-available")}
-            onChange={() => handleAvailabilityChange("not-available")}
+            name="not-availability"
+            checked={selectedAvailability.includes("not available")}
+            onChange={() => handleAvailabilityChange("not available")}
           >
             Not Available
           </Checkbox>

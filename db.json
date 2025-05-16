@@ -247,7 +247,7 @@
   },
   {
     "id": "7",
-    "img": "/handymen/elena.png",
+    "img": "/handymen/elena.jpg",
     "name": "Elena Hoffmann",
     "location": "Munich",
     "available": "available",
@@ -271,7 +271,7 @@
   },
   {
     "id": "8",
-    "img": "/handymen/tarik.png",
+    "img": "/handymen/tarik.jpg",
     "name": "Tarik Özdemir",
     "location": "Hamburg",
     "available": "available",
@@ -289,28 +289,28 @@
       "Certified plumber offering sanitary installations, leak repairs, and complete bathroom tiling. Over 12 years of field experience."
   },
   {
-    "id": "9",
-    "img": "/handymen/greta.png",
-    "name": "Greta Lange",
-    "location": "Dresden",
-    "available": "not available",
-    "jobTitle": "Landscaping and Garden Design",
-    "postedAt": "2025-04-30",
-    "reviews": [
-      {
-        "rating": 5,
-        "reviewText": "Our garden looks amazing!",
-        "reviewer": "Emma Kurz"
-      },
-      {
-        "rating": 4.9,
-        "reviewText": "Transformed our outdoor space.",
-        "reviewer": "Leon Fischer"
-      }
-    ],
-    "categories": ["Garden and landscaping", "Waste disposal", "Construction"],
-    "description":
-      "Design and execution of gardens and landscapes. Also handles clearing, composting, and sustainable waste solutions."
+  "id": "9",
+  "img": "/handymen/greta.jpg",
+  "name": "Greta Lange",
+  "location": "Dresden",
+  "available": "available",
+  "jobTitle": "Waste Disposal and Cleaning",
+  "postedAt": "2025-04-30",
+  "reviews": [
+    {
+      "rating": 5,
+      "reviewText": "Excellent and efficient waste removal!",
+      "reviewer": "Emma Kurz"
+    },
+    {
+      "rating": 4.9,
+      "reviewText": "Very professional and thorough with the cleaning.",
+      "reviewer": "Leon Fischer"
+    }
+  ],
+  "categories": ["Waste disposal", "Cleaning", "Sustainability"],
+  "description":
+    "Professional waste removal and thorough cleaning services. Greta ensures sustainable disposal, composting, and cleanliness in homes, gardens, and construction sites."
   }
   ],
   "ads": [
@@ -398,7 +398,7 @@
   },
   { 
     "id": "5", 
-    "title": "A / C", 
+    "title": "A/C", 
     "image": "/categories/ac.png"
    },
   {

@@ -3,22 +3,34 @@ import { FilterValues } from "../types/types";
 
 interface SearchStore {
   searchTerm: string;
-  filters: FilterValues;
   setSearchTerm: (term: string) => void;
-  setFilters: (filters: FilterValues) => void;
+  filters: FilterValues;
+  setFilters: (filters: Partial<FilterValues>) => void;
   resetFilters: () => void;
 }
 
 export const useSearchStore = create<SearchStore>((set) => ({
   searchTerm: "",
+  setSearchTerm: (term) => set({ searchTerm: term }),
+
   filters: {
     services: [],
     availability: [],
   },
-  setSearchTerm: (term) => set({ searchTerm: term }),
-  setFilters: (filters) => set({ filters }),
+  setFilters: (newFilters) =>
+    set((state) => ({
+      filters: {
+        ...state.filters,
+        ...newFilters,
+      },
+    })),
+
   resetFilters: () =>
     set({
-      filters: { services: [], availability: [] },
+      searchTerm: "",
+      filters: {
+        categories: [],
+        availability: [],
+      },
     }),
 }));

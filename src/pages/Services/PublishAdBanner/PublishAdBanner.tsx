@@ -1,33 +1,15 @@
-import { useEffect, useState } from "react";
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
 import { ClientAdCard } from "../../../components/ClientAdCard/ClientAdCard";
 import { useAppNavigation } from "../../../hooks/useAppNavigation";
 import styles from "./PublishAdBanner.module.css";
-import { Ad } from "../../../types/types";
+import { useFetchAds } from "../../../hooks/useFetchAds";
 
 export default function PublishAdBanner() {
-   const [activeAds, setActiveAds] = useState<Ad[]>([]);
-    const [error, setError] = useState("");
-    const { signup } = useAppNavigation();
-  
-    useEffect(() => {
-      const fetchBookings = async () => {
-        try {
-          const res = await fetch("http://localhost:3001/bookings");
-          if (!res.ok) throw new Error("Failed to fetch bookings");
-          const data = await res.json();
-          setActiveAds(data);
-        } catch (err) {
-          console.error(err);
-          setError("Could not load bookings.");
-        }
-      };
-  
-      fetchBookings();
-    }, []);
-  
-    if (error) return <p className="errorMessage">{error}</p>;
+  const { signup } = useAppNavigation();
 
+  const { ads, error } = useFetchAds();
+
+  if (error) return <p className="errorMessage">{error}</p>;
 
   return (
     <section className={styles.publishAdBanner}>
@@ -49,7 +31,7 @@ export default function PublishAdBanner() {
 
         {/* Ad Card */}
         <div className={styles.publishAdBanner__card}>
-          {activeAds.slice(0, 1).map((ad) => (
+          {ads.slice(0, 1).map((ad) => (
             <ClientAdCard key={ad.id} card={ad} />
           ))}
         </div>

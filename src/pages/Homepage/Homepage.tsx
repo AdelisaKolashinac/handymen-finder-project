@@ -8,9 +8,9 @@ import { ChatInfo } from "./ChatInfoSection/ChatInfo";
 import { NewCarpenters } from "./NewCarpentersSection/NewCarpenters";
 import BookTradesmen from "./BookTradesmenSection/BookTradesmen";
 import { Footer } from "../../components/Footer/Footer";
-import { SearchInput } from "../../components/SearchInput/SearchInput";
 import { HomepageReviews } from "./HomepageReviews/HomepageReviews";
 import { useRoleStore } from "../../stores/roleStore";
+import SearchSection from "./SearchSection/SearchSection";
 
 export default function Homepage() {
   const { isClient } = useRoleStore();
@@ -31,7 +31,7 @@ export default function Homepage() {
       <RoleSwitcher />
       <HeroSection />
       <ButtonContainer />
-      <SearchInput />
+      <SearchSection />
       <InfoSection />
       <TopRated />
       <ChatInfo />

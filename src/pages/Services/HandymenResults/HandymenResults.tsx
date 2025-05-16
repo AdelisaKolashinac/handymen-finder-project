@@ -1,99 +1,144 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HandymanResultCard } from "../../../components/HandymanResultCard/HandymanResultCard";
 import { calculateAverageRating } from "../../../utils/calculateAverageRating";
 import styles from "./HandymenResults.module.css";
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
 import { SearchInput } from "../../../components/SearchInput/SearchInput";
-import { useHandymenSearch } from "../../../hooks/useHandymenSearch";
+import { useSearchStore } from "../../../stores/searchStore";
+import Filter from "../../Filter/Filter";
+import { useFetchHandymen } from "../../../hooks/useFetchHandymen";
+
+const INITIAL_VISIBLE_RESULTS = 5;
 
 export default function HandymenResults() {
-  const [visibleResults, setVisibleResults] = useState(5);
-  const [expanded, setExpanded] = useState(false);
+  const [visibleResults, setVisibleResults] = useState(INITIAL_VISIBLE_RESULTS);
   const [sortOption, setSortOption] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { filteredHandymen, handleSearchSubmit } = useHandymenSearch();
+  const { searchTerm, filters, resetFilters } = useSearchStore();
 
-  useEffect(() => {
-    if (searchTerm === "") {
-      setSortOption("");
-    }
-  }, [searchTerm]);
+  const { handymen, error } = useFetchHandymen();
 
-  if (!filteredHandymen.length) {
-    return <p>No handymen found. Try adjusting your search.</p>;
-  }
+  const filteredHandymen = handymen
+    .map((h) => ({
+      ...h,
+      averageRating: calculateAverageRating(h.reviews),
+    }))
+    .filter((h) => {
+      const search = searchTerm.toLowerCase();
 
-  const handymenAverageRating = filteredHandymen.map((h) => ({
-    ...h,
-    averageRating: calculateAverageRating(h.reviews),
-  }));
+      const matchesSearch = searchTerm
+        ? h.name.toLowerCase().includes(search) ||
+          h.description.toLowerCase().includes(search) ||
+          h.jobTitle.toLowerCase().includes(search) ||
+          h.categories.some((cat) => cat.toLowerCase().includes(search))
+        : true;
 
-  const sortedHandymen = [...handymenAverageRating].sort((a, b) => {
-    if (sortOption === "rating") {
-      return b.averageRating - a.averageRating;
-    } else if (sortOption === "name") {
-      return a.name.localeCompare(b.name);
-    } else if (sortOption === "location") {
-      return a.location.localeCompare(b.location);
-    }
+      const matchesService = filters.categories?.length
+        ? filters.categories.some(
+            (category) =>
+              h.categories.some(
+                (cat) => cat.toLowerCase() === category.toLowerCase()
+              ) ||
+              h.description.toLowerCase().includes(category.toLowerCase()) ||
+              h.jobTitle.toLowerCase().includes(category.toLowerCase())
+          )
+        : true;
+
+      const matchesAvailability = filters.availability?.length
+        ? filters.availability.includes(h.available)
+        : true;
+
+      return matchesSearch && matchesService && matchesAvailability;
+    });
+
+  const sortedHandymen = [...filteredHandymen].sort((a, b) => {
+    if (sortOption === "rating") return b.averageRating - a.averageRating;
+    if (sortOption === "name") return a.name.localeCompare(b.name);
+    if (sortOption === "location") return a.location.localeCompare(b.location);
     return 0;
   });
 
   const handleSeeMore = () => {
-    setVisibleResults((prev) => prev + 5);
-    setExpanded(true);
+    setVisibleResults((prev) => prev + INITIAL_VISIBLE_RESULTS);
   };
 
   const handleShowLess = () => {
-    setVisibleResults(5);
-    setExpanded(false);
+    setVisibleResults(INITIAL_VISIBLE_RESULTS);
   };
 
   return (
     <>
       <SearchInput
-        handleSearch={handleSearchSubmit}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
+        // onChange={(val) => useSearchStore.getState().setSearchTerm(val)}
+        onOpenFilter={() => setIsFilterOpen(true)}
       />
-      <section className="wrapper">
-        <div className={`border-bottom ${styles.handymanResults__header}`}>
-          <p className={styles.handymanResults__text}>
-            {filteredHandymen.length} result
-            {filteredHandymen.length !== 1 && "s"}
-          </p>
 
-          <select
-            name="view"
-            id="view"
-            value={sortOption}
-            onChange={(e) => setSortOption(e.target.value)}
-          >
-            <option value="">View</option>
-            <option value="rating">Highest rating</option>
-            <option value="name">Name A–Z</option>
-            <option value="location">Location A–Z</option>
-          </select>
-        </div>
-        {sortedHandymen.slice(0, visibleResults).map((result) => (
-          <HandymanResultCard
-            key={result.id}
-            resultCard={result}
-            averageRating={calculateAverageRating(result.reviews)}
-          />
-        ))}
-        <div className={styles.handymanResults__buttons}>
-          {!expanded ? (
-            <ButtonTransparent width="180px" onClick={handleSeeMore}>
-              See more
-            </ButtonTransparent>
-          ) : (
-            <ButtonTransparent width="180px" onClick={handleShowLess}>
-              Show less
-            </ButtonTransparent>
-          )}
-        </div>
+      {isFilterOpen && (
+        <Filter isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
+      )}
+
+      <section className="wrapper">
+        {error && <p className="errorMessage">{error}</p>}
+
+        {!error && (
+          <>
+            <div className={`border-bottom ${styles.handymanResults__header}`}>
+              <p className={styles.handymanResults__text}>
+                {filteredHandymen.length} result
+                {filteredHandymen.length !== 1 && "s"}
+              </p>
+
+              <select
+                value={sortOption}
+                onChange={(e) => setSortOption(e.target.value)}
+              >
+                <option value="">Sort by</option>
+                <option value="rating">Highest rating</option>
+                <option value="name">Name A–Z</option>
+                <option value="location">Location A–Z</option>
+              </select>
+            </div>
+
+            {sortedHandymen.length === 0 ? (
+              <>
+                <ButtonTransparent
+                  width="100px"
+                  onClick={() => {
+                    resetFilters();
+                  }}
+                >
+                  Reset Filters
+                </ButtonTransparent>
+                <p>No handymen found. Try adjusting your search.</p>
+              </>
+            ) : (
+              sortedHandymen
+                .slice(0, visibleResults)
+                .map((result) => (
+                  <HandymanResultCard
+                    key={result.id}
+                    resultCard={result}
+                    averageRating={result.averageRating}
+                  />
+                ))
+            )}
+
+            {sortedHandymen.length > INITIAL_VISIBLE_RESULTS && (
+              <div className={styles.handymanResults__buttons}>
+                {visibleResults < sortedHandymen.length ? (
+                  <ButtonTransparent width="180px" onClick={handleSeeMore}>
+                    See more
+                  </ButtonTransparent>
+                ) : (
+                  <ButtonTransparent width="180px" onClick={handleShowLess}>
+                    Show less
+                  </ButtonTransparent>
+                )}
+              </div>
+            )}
+          </>
+        )}
       </section>
     </>
   );

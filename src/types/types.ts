@@ -8,7 +8,7 @@ export interface User {
   type: "CLIENT" | "HANDYMAN";
   provider?: "GOOGLE";
   location?: string;
-  reviews?: Review[],
+  reviews?: Review[];
   notifyEmail?: boolean;
   notifySMS?: boolean;
 }
@@ -37,7 +37,7 @@ export interface Handyman {
   name: string;
   location: string;
   available: string;
-  jobTitle?: string;
+  jobTitle: string;
   postedAt?: string;
   performanceStats?: string;
   reviews: Review[];
@@ -71,9 +71,9 @@ export interface Booking {
 }
 
 export interface FilterValues {
-  services: string[];
+  categories?: string[];
   // ratings: string[];
-  availability: string[];
+  availability?: string[];
 }
 
 export interface Ad {
@@ -88,12 +88,6 @@ export interface Ad {
   imageGallery?: string[];
   termsAccepted: boolean;
   userId: string | undefined;
-}
-
-export interface Filters {
-  location: string;
-  jobTitle: string;
-  available: string;
 }
 
 export interface Message {

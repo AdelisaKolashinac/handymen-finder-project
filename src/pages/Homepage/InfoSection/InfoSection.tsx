@@ -4,10 +4,12 @@ import "slick-carousel/slick/slick-theme.css";
 import styles from "./InfoSection.module.css";
 import { useState } from "react";
 import { CategoryCard } from "../../../components/CategoryCard/CategoryCard";
-import { categories } from "../../../data/data";
+import { useFetchCategories } from "../../../hooks/useFetchCategories";
 
 export function InfoSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const { categories } = useFetchCategories();
 
   const handleSelect = (selectedIndex: number) => {
     setActiveIndex(selectedIndex);
