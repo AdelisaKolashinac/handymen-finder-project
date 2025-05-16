@@ -3,24 +3,26 @@ import { useUserStore } from "../../../../stores/userStore";
 import styles from "./SignupForm.module.css";
 import { Button } from "../../../../components/Button/Button";
 import { User } from "../../../../types/types";
-import { useAppNavigation } from "../../../../hooks/useAppNavigation";
+import { useNavigate } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../../../../lib/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function SignupForm() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
-    id: "",
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
     phone: "",
-    type: "",
-    location: "",
   });
   const [error, setError] = useState<string | null>(null);
 
   const setUser = useUserStore((state) => state.setUser);
 
-  const { navigate } = useAppNavigation();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -39,46 +41,41 @@ export default function SignupForm() {
     }
 
     try {
-      //  Check if user already exists by email
-      const res = await fetch(
-        `http://localhost:3001/users?email=${formData.email}`
+      // Create user in Firebase
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
       );
-      const existingUsers = await res.json();
 
-      if (existingUsers.length > 0) {
-        setError("User already exists with this email");
-        return;
-      }
+      const firebaseUser = userCredential.user;
+
+      await updateProfile(firebaseUser, { displayName: formData.name });
 
       // Add new user
       const newUser: User = {
-        id: crypto.randomUUID(),
+        id: firebaseUser.uid,
         fullname: formData.name,
         email: formData.email,
-        password: formData.password,
         phone: formData.phone,
         type: "CLIENT",
         location: "Berlin",
+        provider: "EMAIL",
       };
 
-      const createRes = await fetch("http://localhost:3001/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUser),
-      });
+      await setDoc(doc(db, "users", firebaseUser.uid), newUser);
 
-      if (!createRes.ok) throw new Error("Failed to register user");
+      setUser(newUser);
 
-      const createdUser = await createRes.json();
-      setUser(createdUser);
-      localStorage.setItem("user", JSON.stringify(createdUser));
-
-      navigate("/client-profile");
-    } catch (error) {
-      console.error("An error occurred: ", error);
-      setError("Something went wrong. Please try again.");
+      navigate("/client-home");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.code === "auth/email-already-in-use") {
+        setError("User already exists with this email");
+      } else {
+        console.error("Signup error: ", error);
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -120,7 +117,7 @@ export default function SignupForm() {
             <img src="/signupAsUser/input-lock-icon.png" alt="Password icon" />
           </div>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="password"
             name="password"
             className={styles.registerForm__inputField}
@@ -129,8 +126,16 @@ export default function SignupForm() {
             required
           />
 
-          <div className={styles.registerForm__icon__secondary}>
-            <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />
+          <div
+            className={styles.registerForm__icon__secondary}
+            onClick={() => setShowPassword((prev) => !prev)
+            }
+          >
+            {showPassword ? (
+              <i className="fa-regular fa-eye"></i>
+            ) : (
+              <i className="fa-regular fa-eye-slash"></i>
+            )}
           </div>
         </div>
 
@@ -139,7 +144,7 @@ export default function SignupForm() {
             <img src="/signupAsUser/input-lock-icon.png" alt="Password icon" />
           </div>
           <input
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm password"
             name="confirmPassword"
             className={styles.registerForm__inputField}
@@ -147,8 +152,15 @@ export default function SignupForm() {
             onChange={handleChange}
             required
           />
-          <div className={styles.registerForm__icon__secondary}>
-            <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />
+          <div
+            className={styles.registerForm__icon__secondary}
+            onClick={() => setShowConfirmPassword((prev) => !prev)}
+          >
+            {showConfirmPassword ? (
+              <i className="fa-regular fa-eye"></i>
+            ) : (
+              <i className="fa-regular fa-eye-slash"></i>
+            )}
           </div>
         </div>
 

@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SigninAsUser.module.css";
 import { Button } from "../../../../components/Button/Button";
 import { OAuthButton } from "../../components/OAuthButton/OAuthButton";
 import React, { useState } from "react";
 import { useUserStore } from "../../../../stores/userStore";
-import { useAppNavigation } from "../../../../hooks/useAppNavigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, signInWithGooglePopup } from "../../../../lib/firebase";
 
 export default function SigninAsUser() {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -14,7 +16,7 @@ export default function SigninAsUser() {
   const [error, setError] = useState<string | null>(null);
 
   const setUser = useUserStore((state) => state.setUser);
-  const { navigate } = useAppNavigation();
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({
@@ -32,30 +34,52 @@ export default function SigninAsUser() {
     }
 
     try {
-      const res = await fetch(
-        `http://localhost:3001/users?email=${formData.email}`
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
       );
-      const users = await res.json();
+      const firebaseUser = userCredential.user;
 
-      if (users.length === 0) {
-        setError("No user found with this email");
-        return;
+      setUser({
+        id: firebaseUser.uid,
+        fullname: firebaseUser.displayName || "",
+        email: firebaseUser.email || "",
+        phone: "",
+        type: "CLIENT",
+        location: "Berlin",
+      });
+
+      navigate("/client-home");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      if (error.code === "auth/invalid-credential") {
+        setError("Incorrect email or password");
+      } else {
+        setError("Something went wrong. Please try again.");
+        console.error("Signin error:", error);
       }
+    }
+  };
 
-      const user = users[0];
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGooglePopup();
+      const firebaseUser = result.user;
 
-      if (user.password !== formData.password) {
-        setError("Incorrect password");
-        return;
-      }
+      setUser({
+        id: firebaseUser.uid,
+        fullname: firebaseUser.displayName || "",
+        email: firebaseUser.email || "",
+        phone: "",
+        type: "CLIENT",
+        location: "Berlin",
+      });
 
-      setUser(user);
-      localStorage.setItem("user", JSON.stringify(user));
-
-      navigate("/client-profile");
-    } catch (err) {
-      console.error("Signin error:", err);
-      setError("Something went wrong. Please try again.");
+      navigate("/client-home");
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+      setError("Google sign-in failed. Please try again.");
     }
   };
 
@@ -90,7 +114,7 @@ export default function SigninAsUser() {
             <img src="/signupAsUser/input-lock-icon.png" alt="Password icon" />
           </div>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             className={styles.signin__input}
             name="password"
             value={formData.password}
@@ -99,8 +123,15 @@ export default function SigninAsUser() {
           />
           {error && <p className="errorMessage">{error}</p>}
 
-          <div className={styles.signin__inputIcon__secondary}>
-            <img src="/signupAsUser/not-visible-icon.png" alt="Password icon" />
+          <div
+            className={styles.signin__inputIcon__secondary}
+            onClick={() => setShowPassword((prev) => !prev)}
+          >
+            {showPassword ? (
+              <i className="fa-regular fa-eye"></i>
+            ) : (
+              <i className="fa-regular fa-eye-slash"></i>
+            )}
           </div>
         </div>
         <a href="#" className={styles.signin__forgotPassword}>
@@ -115,6 +146,7 @@ export default function SigninAsUser() {
         <OAuthButton
           iconSrc="/signupAsUser/google-icon.png"
           iconAlt="Google logo"
+          onClick={handleGoogleSignIn}
         >
           Go on with Google
         </OAuthButton>

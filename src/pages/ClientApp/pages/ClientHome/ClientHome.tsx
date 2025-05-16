@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
 import { useSearchStore } from "../../../../stores/searchStore";
 import { useUserStore } from "../../../../stores/userStore";
@@ -6,71 +5,85 @@ import { calculateAverageRating } from "../../../../utils/calculateAverageRating
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import { RecommendedCard } from "../../components/RecommendedCard/RecommendedCard";
 import styles from "./ClientHome.module.css";
-import { Handyman } from "../../../../types/types";
+import { useFetchHandymen } from "../../../../hooks/useFetchHandymen";
+import { useState } from "react";
+import Filter from "../../../Filter/Filter";
 
 export default function ClientHome() {
-  const [handymen, setHandymen] = useState<Handyman[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const user = useUserStore((state) => state.user);
-  const { searchTerm, setSearchTerm } = useSearchStore();
+  const { searchTerm, filters } = useSearchStore();
 
-  useEffect(() => {
-    const fetchHandymen = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/handymen");
-        if (!res.ok) throw new Error("Failed to fetch handymen");
-
-        const data: Handyman[] = await res.json();
-        setHandymen(data);
-      } catch (err) {
-        console.error("Fetch error:", err);
-        setError("Could not load craftsmen.");
-      }
-    };
-
-    fetchHandymen();
-  }, []);
+  const { handymen, error } = useFetchHandymen();
 
   const nearbyHandymen = handymen.filter(
     (hm) => hm.location.toLowerCase() === user?.location?.toLowerCase()
   );
 
-  const filteredHandymen = handymen.filter((hm) => {
-    const term = searchTerm.toLowerCase();
+  const filteredHandymen = handymen.filter((h) => {
+    const search = searchTerm.toLowerCase();
 
-    return (
-      hm.name.toLowerCase().includes(term) ||
-      hm.location.toLowerCase().includes(term) ||
-      hm.jobTitle?.toLowerCase().includes(term) ||
-      hm.description.toLowerCase().includes(term) ||
-      hm.available.toLowerCase().includes(term) ||
-      hm.categories.some((cat) => cat.toLowerCase().includes(term))
-    );
+    const matchesSearch = searchTerm
+      ? h.name.toLowerCase().includes(search) ||
+        h.description.toLowerCase().includes(search) ||
+        h.jobTitle.toLowerCase().includes(search) ||
+        h.categories.some((cat) => cat.toLowerCase().includes(search))
+      : true;
+
+    const matchesService = filters.categories?.length
+      ? filters.categories.some(
+          (category) =>
+            h.categories.some(
+              (cat) => cat.toLowerCase() === category.toLowerCase()
+            ) ||
+            h.description.toLowerCase().includes(category.toLowerCase()) ||
+            h.jobTitle.toLowerCase().includes(category.toLowerCase())
+        )
+      : true;
+
+    const matchesAvailability = filters.availability?.length
+      ? filters.availability.includes(h.available)
+      : true;
+
+    return matchesSearch && matchesService && matchesAvailability;
   });
 
   if (error) return <p className="errorMessage">{error}</p>;
 
   return (
-    <section className={`wrapper ${styles.home}`}>
-      <ClientAppHeader title={`Hello ${user?.fullname},`} />
-      <p className={styles.home__intro}>
-        Are you looking for help? . Find suitable craftsmen for your needs.
-        Below are the latest displays of craftsmen near you .
-      </p>
-      <div className={styles.home__search}>
-        <SearchInput searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        <div className={styles.home__searchIcon}>
-          <img src="/clientApp/home/pencil-icon.png" alt="Advanced filters" />
+    <>
+      <section className={`wrapper ${styles.home}`}>
+        <ClientAppHeader title={`Hello ${user?.fullname},`} />
+        <p className={styles.home__intro}>
+          Are you looking for help? . Find suitable craftsmen for your needs.
+          Below are the latest displays of craftsmen near you .
+        </p>
+        <div className={styles.home__search}>
+          <SearchInput onOpenFilter={() => setIsFilterOpen(true)} />
+          <div className={styles.home__searchIcon}>
+            <img src="/clientApp/home/pencil-icon.png" alt="Advanced filters" />
+          </div>
         </div>
-      </div>
-      <p className={`border-bottom ${styles.home__sectionTitle}`}>
-        Recommended listings
-      </p>
-      <div className={styles.home__recommendedList}>
-        {searchTerm ? (
-          filteredHandymen.length > 0 ? (
-            filteredHandymen
-              .slice(0, 4)
+        <p className={`border-bottom ${styles.home__sectionTitle}`}>
+          Recommended listings
+        </p>
+        <div className={styles.home__recommendedList}>
+          {searchTerm || filters ? (
+            filteredHandymen.length > 0 ? (
+              filteredHandymen
+                .map((hm) => (
+                  <RecommendedCard
+                    key={hm.id}
+                    card={hm}
+                    averageRating={calculateAverageRating(hm.reviews)}
+                  />
+                ))
+            ) : (
+              <p>No craftsmen found for your search.</p>
+            )
+          ) : nearbyHandymen.length > 0 ? (
+            nearbyHandymen
+              .slice(0, 3)
               .map((hm) => (
                 <RecommendedCard
                   key={hm.id}
@@ -79,22 +92,13 @@ export default function ClientHome() {
                 />
               ))
           ) : (
-            <p>No craftsmen found for your search.</p>
-          )
-        ) : nearbyHandymen.length > 0 ? (
-          nearbyHandymen
-            .slice(0, 3)
-            .map((hm) => (
-              <RecommendedCard
-                key={hm.id}
-                card={hm}
-                averageRating={calculateAverageRating(hm.reviews)}
-              />
-            ))
-        ) : (
-          <p>No nearby craftsmen found at your location.</p>
-        )}
-      </div>
-    </section>
+            <p>No nearby craftsmen found at your location.</p>
+          )}
+        </div>
+      </section>
+      {isFilterOpen && (
+        <Filter isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
+      )}
+    </>
   );
 }

@@ -1,34 +1,30 @@
 import React, { useState } from "react";
-import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import styles from "./PostAd.module.css";
 import { Button } from "../../../../../components/Button/Button";
 import { Checkbox } from "../../../../../components/Checkbox/Checkbox";
 import { Box, Modal, Typography } from "@mui/material";
 import { useUserStore } from "../../../../../stores/userStore";
 import { Ad } from "../../../../../types/types";
+import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../../../../config";
+import { v4 as uuidv4 } from "uuid";
 
 export function PostAd() {
-  const user = useUserStore((state) => state.user);
-
+  const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  const [formData, setFormData] = useState<Ad>({
-    id: crypto.randomUUID(),
-    img: "/anna.png",
-    name: user?.fullname,
-    tag: "trustworthy",
-    urgency: "",
+  const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
     service: "",
     description: "",
     location: "",
+    urgency: "",
     imageGallery: [],
     termsAccepted: false,
-    userId: user?.id,
   });
-  const [error, setError] = useState("");
-
-  const { navigate } = useAppNavigation();
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -50,14 +46,17 @@ export function PostAd() {
       return;
     }
 
-    const newAd = {
+    const newAd: Ad = {
       ...formData,
+      id: uuidv4(),
+      userId: user?.id,
+      tag: "Trustworthy",
       status: "new",
       createdAt: new Date().toISOString(),
     };
 
     try {
-      const res = await fetch("http://localhost:3001/ads", {
+      const res = await fetch(`${API_URL}/ads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,17 +68,12 @@ export function PostAd() {
         throw new Error("Failed to post an ad");
       }
       setFormData({
-        id: crypto.randomUUID(),
-        img: "/anna.png",
-        name: user?.fullname,
-        tag: "trustworthy",
-        urgency: "",
         service: "",
         description: "",
         location: "",
+        urgency: "",
         imageGallery: [],
         termsAccepted: false,
-        userId: user?.id,
       });
       setModalMessage("Your ad has been created successfully!");
       setShowModal(true);

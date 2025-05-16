@@ -1,37 +1,20 @@
-import { useEffect, useState } from "react";
 import { Button } from "../../../../components/Button/Button";
 import { ClientAdCard } from "../../../../components/ClientAdCard/ClientAdCard";
-import { useAppNavigation } from "../../../../hooks/useAppNavigation";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import { ClientProfile } from "./ClientProfile/ClientProfile";
 import styles from "./Profile.module.css";
-import { Ad } from "../../../../types/types";
 import { useUserStore } from "../../../../stores/userStore";
+import { useFetchAds } from "../../../../hooks/useFetchAds";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  const [activeAds, setActiveAds] = useState<Ad[]>([]);
-  const [error, setError] = useState("");
-  const { navigate } = useAppNavigation();
+  const navigate = useNavigate();
 
-  const user = useUserStore(state=>state.user)
+  const user = useUserStore((state) => state.user);
 
   const currentUser = user?.id;
 
-  useEffect(() => {
-    const fetchUserAds = async () => {
-      try {
-        const res = await fetch(`http://localhost:3001/ads?userId=${currentUser}`);
-        if (!res.ok) throw new Error("Failed to fetch ads");
-        const data = await res.json();
-        setActiveAds(data);
-      } catch (err) {
-        console.error(err);
-        setError("Could not load ads.");
-      }
-    };
-
-    fetchUserAds();
-  }, [currentUser]);
+  const { ads, error } = useFetchAds(currentUser);
 
   if (error) return <p className="errorMessage">{error}</p>;
 
@@ -57,8 +40,8 @@ export default function Profile() {
         Sehen, bearbeiten oder löschen Sie Ihre derzeit aktiven Anzeigen für
         Serviceanfragen.
       </p>
-      {activeAds.length > 0 ? (
-        activeAds.map((ad) => <ClientAdCard key={ad.id} card={ad} />)
+      {ads.length > 0 ? (
+        ads.map((ad) => <ClientAdCard key={ad.id} card={ad} />)
       ) : (
         <p className={styles.profile__noAdsMessage}>
           No active ads at the moment.

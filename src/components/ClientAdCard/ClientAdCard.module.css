@@ -8,9 +8,11 @@
   margin-bottom: 20px;
 }
 
-.clientAdCard__header {
+.clientAdCard__header,
+.clientAdCard__title_date {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .clientAdCard__user,
@@ -63,12 +65,21 @@
 .clientAdCard__title {
   font-weight: 700;
   font-size: 14px;
-  padding-bottom: 10px;
   margin-top: 30px;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+}
+
+.clientAdCard__date {
+  color: var(--secondary-color);
+  font-size: 10px;
+  margin-bottom: 0;
+  padding-bottom: 5px;
 }
 
 .clientAdCard__description {
   font-size: 14px;
+  margin-top: 10px;
 }
 
 .clientAdCard__location {

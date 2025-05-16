@@ -113,11 +113,11 @@ export default function Filter({ isOpen, onClose }: Props) {
         <div className={styles.filter__availabilityOptions}>
           <Checkbox
             id="available"
-            name="availability"
+            name="available"
             checked={selectedAvailability.includes("available")}
             onChange={() => handleAvailabilityChange("available")}
           >
-            Available
+            available
           </Checkbox>
           <Checkbox
             id="not-available"
@@ -125,7 +125,7 @@ export default function Filter({ isOpen, onClose }: Props) {
             checked={selectedAvailability.includes("not available")}
             onChange={() => handleAvailabilityChange("not available")}
           >
-            Not Available
+            not available
           </Checkbox>
         </div>
 

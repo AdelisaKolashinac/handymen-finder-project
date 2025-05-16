@@ -1,9 +1,9 @@
-import { AdType } from "../../types/types";
+import { Ad } from "../../types/types";
 import { ButtonSmall } from "../ButtonSmall/ButtonSmall";
 import styles from "./ClientAdCard.module.css";
 
 interface Props {
-  card: AdType;
+  card: Ad;
 }
 
 export function ClientAdCard({ card }: Props) {
@@ -12,12 +12,12 @@ export function ClientAdCard({ card }: Props) {
       <div className={styles.clientAdCard__header}>
         <div className={styles.clientAdCard__user}>
           <img
-            src={card.img}
-            alt={card.name}
+            // src={card.img}
+            // alt={card.name}
             className={styles.clientAdCard__userImage}
           />
           <div className={styles.clientAdCard__userInfo}>
-            <p className={styles.clientAdCard__userName}>{card.name}</p>
+            <p className={styles.clientAdCard__userName}>name</p>
             <p className={styles.clientAdCard__userTag}>{card.tag}</p>
           </div>
         </div>
@@ -34,9 +34,12 @@ export function ClientAdCard({ card }: Props) {
           <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
-      <p className={`border-bottom ${styles.clientAdCard__title}`}>
+    <div className={`border-bottom ${styles.clientAdCard__title_date}`}>
+      <p className={styles.clientAdCard__title}>
         {card.service}
       </p>
+      <p className={styles.clientAdCard__date}>{card.createdAt}</p>
+    </div>
       <p className={styles.clientAdCard__description}>{card.description}</p>
 
       {/* Address + Map Link */}

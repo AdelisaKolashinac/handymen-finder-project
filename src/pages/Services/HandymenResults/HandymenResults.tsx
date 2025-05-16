@@ -70,7 +70,6 @@ export default function HandymenResults() {
   return (
     <>
       <SearchInput
-        // onChange={(val) => useSearchStore.getState().setSearchTerm(val)}
         onOpenFilter={() => setIsFilterOpen(true)}
       />
 

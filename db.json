@@ -29,306 +29,331 @@
     }
   ],
   "handymen": [
-  {
-    "id": "1",
-    "img": "/handymen/handyman.jpg",
-    "name": "Klaus Schneider",
-    "location": "Berlin",
-    "available": "available",
-    "jobTitle": "Heating specialist available for work",
-    "postedAt": "2025-05-01",
-    "reviews": [
-      { "rating": 5, "reviewText": "Excellent work!", "reviewer": "John Doe" },
-      {
-        "rating": 4,
-        "reviewText": "Good service, but could be faster.",
-        "reviewer": "Jane Smith"
-      },
-      {
-        "rating": 4.8,
-        "reviewText": "Very professional and quick.",
-        "reviewer": "Mark Davis"
-      },
-      { "rating": 5, "reviewText": "Perfect job!", "reviewer": "Emily Lee" }
-    ],
-    "categories": ["Heating", "Sanitary", "A/C", "Solar systems"],
-    "imageGallery": [
-      {
-        "id": "1-1",
-        "src": "/reviews/apartment1/apartment1-1.jpg",
-        "alt": "Kleiderschrank im Schlafzimmer"
-      },
-      {
-        "id": "1-2",
-        "src": "/reviews/apartment1/apartment1-2.jpg",
-        "alt": "Badezimmerschrank Detailansicht"
-      },
-      {
-        "id": "1-3",
-        "src": "/reviews/apartment1/apartment1-3.jpg",
-        "alt": "Badezimmerschrank frontal"
-      },
-      {
-        "id": "1-4",
-        "src": "/reviews/apartment1/apartment1-4.png",
-        "alt": "Gesamter Raumansicht"
-      }
-    ],
-    "description":
-      "10+ years of experience in the industry. Available for urgent missions. Active in the entire region around Berlin."
-  },
-  {
-    "id": "2",
-    "img": "/handymen/marcus.png",
-    "name": "Marcus Shmidt",
-    "location": "Ingolstadt",
-    "available": "not available",
-    "jobTitle": "Plumber available for work",
-    "postedAt": "2025-04-25",
-    "performanceStats": "38 Abgeschlossene Aufträge",
-    "reviews": [
-      {
-        "rating": 4.5,
-        "reviewText": "Friendly and reliable.",
-        "reviewer": "Anna Kurz"
-      },
-      {
-        "rating": 4.9,
-        "reviewText": "Outstanding results!",
-        "reviewer": "Tim Berger"
-      }
-    ],
-    "categories": ["Plumbing", "Tiling", "Renovation"],
-    "description":
-      "Experienced plumber and tiling expert. Specialized in bathroom and kitchen renovation. Currently fully booked until next week."
-  },
-  {
-    "id": "3",
-    "img": "/handymen/johannes.png",
-    "name": "Johannes Fischer",
-    "location": "Berlin",
-    "available": "available",
-    "jobTitle": "Electrician available for smart home setup",
-    "postedAt": "2025-05-02",
-    "performanceStats": "5.0 Kundenbewertungen",
-    "reviews": [
-      {
-        "rating": 5,
-        "reviewText": "Super fast and clean work.",
-        "reviewer": "Lena Fischer"
-      },
-      {
-        "rating": 5,
-        "reviewText": "Excellent and reliable service.",
-        "reviewer": "Marius Weber"
-      },
-      {
-        "rating": 5,
-        "reviewText": "Very professional and punctual.",
-        "reviewer": "Anja Keller"
-      },
-      {
-        "rating": 5,
-        "reviewText": "Friendly and skilled electrician. Highly recommend!",
-        "reviewer": "Tim Schröder"
-      },
-      {
-        "rating": 5,
-        "reviewText": "Top-notch smart home installation. Works flawlessly.",
-        "reviewer": "Sophie Brandt"
-      }
-    ],
-    "categories": ["Electrical", "Smart Home", "Lighting"],
-    "description":
-      "Electrician with a focus on smart home systems. Offers installations and upgrades for lighting, security, and automation."
-  },
-  {
-    "id": "4",
-    "img": "/handymen/peter.jpg",
-    "name": "Peter Schmidt",
-    "location": "Herford",
-    "available": "available",
-    "jobTitle": "Electrician available for smart home setup",
-    "postedAt": "2025-05-02",
-    "reviews": [
-      {
-        "rating": 4.2,
-        "reviewText": "Solid work at a good price.",
-        "reviewer": "Nina Braun"
-      },
-      {
-        "rating": 4.7,
-        "reviewText": "Efficient and professional.",
-        "reviewer": "Kai Müller"
-      },
-      { "rating": 5, "reviewText": "Very reliable!", "reviewer": "Sara Wolf" }
-    ],
-    "categories": ["Painting", "Drywall", "Insulation"],
-    "description":
-      "Offers high-quality painting and interior finishing. Perfect for new builds or renovations. Free quotes available."
-  },
-  {
-    "id": "5",
-    "img": "/handymen/jan.jpg",
-    "name": "Jan Fischer",
-    "location": "Paderborn",
-    "available": "not available",
-    "jobTitle": "Roofer and carpenter available after vacation",
-    "postedAt": "2025-04-20",
-    "reviews": [
-      {
-        "rating": 5,
-        "reviewText": "Couldn not ask for better!",
-        "reviewer": "Olaf Richter"
-      },
-      {
-        "rating": 4.3,
-        "reviewText": "Some delays, but great job.",
-        "reviewer": "Julia Schmid"
-      }
-    ],
-    "categories": ["Roofing", "Carpentry", "Gutters"],
-    "imageGallery": [
-      {
-        "id": "5-1",
-        "src": "/reviews/apartment3/apartment3-1.png",
-        "alt": "Frisch gestrichene Wohnzimmerwand"
-      },
-      {
-        "id": "5-2",
-        "src": "/reviews/apartment3/apartment3-2.png",
-        "alt": "Detailansicht der Wandfarbe"
-      },
-      {
-        "id": "5-3",
-        "src": "/reviews/apartment3/apartment3-3.png",
-        "alt": "Fensterbereich gestrichen"
-      },
-      {
-        "id": "5-4",
-        "src": "/reviews/apartment3/apartment3-4.png",
-        "alt": "Gesamte Wohnzimmeransicht"
-      }
-    ],
-    "description":
-      "Roof repair and woodwork specialist. Available for seasonal check-ups and emergency leak repairs. Currently on vacation."
-  },
-  {
-    "id": "6",
-    "img": "/handymen/hans.jpg",
-    "name": "Hans Becker",
-    "location": "Berlin",
-    "available": "available",
-    "jobTitle": "Window and door expert available",
-    "postedAt": "2025-05-03",
-    "performanceStats": "25 erfolgreich abgeschlossene Projekte",
-    "reviews": [
-      {
-        "rating": 5,
-        "reviewText": "Sehr professionell und freundlich.",
-        "reviewer": "Tobias Klein"
-      },
-      {
-        "rating": 4.7,
-        "reviewText": "Tolle Arbeit mit kleinen Verbesserungsvorschlägen.",
-        "reviewer": "Laura Schulte"
-      }
-    ],
-    "categories": ["Windows", "Doors", "Woodwork"],
-    "imageGallery": [
-      {
-        "id": "6-1",
-        "src": "/reviews/apartment2/apartment2-1.jpg",
-        "alt": "Neue Fenster im Wohnzimmer"
-      }
-    ],
-    "description":
-      "Spezialist für Fenster und Türen. Maßanfertigungen und Reparaturen mit Fokus auf Energieeffizienz und Langlebigkeit."
-  },
-  {
-    "id": "7",
-    "img": "/handymen/elena.jpg",
-    "name": "Elena Hoffmann",
-    "location": "Munich",
-    "available": "available",
-    "jobTitle": "Certified Painter and Interior Designer",
-    "postedAt": "2025-05-04",
-    "reviews": [
-      {
-        "rating": 5,
-        "reviewText": "Beautiful results and very clean work!",
-        "reviewer": "Katharina Müller"
-      },
-      {
-        "rating": 4.6,
-        "reviewText": "Great eye for detail.",
-        "reviewer": "Daniel Vogel"
-      }
-    ],
-    "categories": ["Painting and painting work", "Drywall", "Home Repair"],
-    "description":
-      "Interior painting, wallpapering, and drywall services with over 8 years of experience. Specializes in modern design and smooth finishes."
-  },
-  {
-    "id": "8",
-    "img": "/handymen/tarik.jpg",
-    "name": "Tarik Özdemir",
-    "location": "Hamburg",
-    "available": "available",
-    "jobTitle": "Experienced Plumber and Tiler",
-    "postedAt": "2025-05-04",
-    "reviews": [
-      {
-        "rating": 4.8,
-        "reviewText": "Very efficient and knowledgeable.",
-        "reviewer": "Max Brenner"
-      }
-    ],
-    "categories": ["Plumber", "Tile work", "Sanitary installation"],
-    "description":
-      "Certified plumber offering sanitary installations, leak repairs, and complete bathroom tiling. Over 12 years of field experience."
-  },
-  {
-  "id": "9",
-  "img": "/handymen/greta.jpg",
-  "name": "Greta Lange",
-  "location": "Dresden",
-  "available": "available",
-  "jobTitle": "Waste Disposal and Cleaning",
-  "postedAt": "2025-04-30",
-  "reviews": [
     {
-      "rating": 5,
-      "reviewText": "Excellent and efficient waste removal!",
-      "reviewer": "Emma Kurz"
+      "id": "1",
+      "img": "/handymen/handyman.jpg",
+      "name": "Klaus Schneider",
+      "location": "Berlin",
+      "available": "available",
+      "jobTitle": "Heating specialist available for work",
+      "postedAt": "2025-05-01",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Excellent work!",
+          "reviewer": "John Doe"
+        },
+        {
+          "rating": 4,
+          "reviewText": "Good service, but could be faster.",
+          "reviewer": "Jane Smith"
+        },
+        {
+          "rating": 4.8,
+          "reviewText": "Very professional and quick.",
+          "reviewer": "Mark Davis"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Perfect job!",
+          "reviewer": "Emily Lee"
+        }
+      ],
+      "categories": [
+        "Heating",
+        "Sanitary",
+        "A/C",
+        "Solar systems"
+      ],
+      "imageGallery": [
+        {
+          "id": "1-1",
+          "src": "/reviews/apartment1/apartment1-1.jpg",
+          "alt": "Kleiderschrank im Schlafzimmer"
+        },
+        {
+          "id": "1-2",
+          "src": "/reviews/apartment1/apartment1-2.jpg",
+          "alt": "Badezimmerschrank Detailansicht"
+        },
+        {
+          "id": "1-3",
+          "src": "/reviews/apartment1/apartment1-3.jpg",
+          "alt": "Badezimmerschrank frontal"
+        },
+        {
+          "id": "1-4",
+          "src": "/reviews/apartment1/apartment1-4.png",
+          "alt": "Gesamter Raumansicht"
+        }
+      ],
+      "description": "10+ years of experience in the industry. Available for urgent missions. Active in the entire region around Berlin."
     },
     {
-      "rating": 4.9,
-      "reviewText": "Very professional and thorough with the cleaning.",
-      "reviewer": "Leon Fischer"
+      "id": "2",
+      "img": "/handymen/marcus.png",
+      "name": "Marcus Shmidt",
+      "location": "Ingolstadt",
+      "available": "not available",
+      "jobTitle": "Plumber available for work",
+      "postedAt": "2025-04-25",
+      "performanceStats": "38 Abgeschlossene Aufträge",
+      "reviews": [
+        {
+          "rating": 4.5,
+          "reviewText": "Friendly and reliable.",
+          "reviewer": "Anna Kurz"
+        },
+        {
+          "rating": 4.9,
+          "reviewText": "Outstanding results!",
+          "reviewer": "Tim Berger"
+        }
+      ],
+      "categories": [
+        "Plumbing",
+        "Tiling",
+        "Renovation"
+      ],
+      "description": "Experienced plumber and tiling expert. Specialized in bathroom and kitchen renovation. Currently fully booked until next week."
+    },
+    {
+      "id": "3",
+      "img": "/handymen/johannes.png",
+      "name": "Johannes Fischer",
+      "location": "Berlin",
+      "available": "available",
+      "jobTitle": "Electrician available for smart home setup",
+      "postedAt": "2025-05-02",
+      "performanceStats": "5.0 Kundenbewertungen",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Super fast and clean work.",
+          "reviewer": "Lena Fischer"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Excellent and reliable service.",
+          "reviewer": "Marius Weber"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Very professional and punctual.",
+          "reviewer": "Anja Keller"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Friendly and skilled electrician. Highly recommend!",
+          "reviewer": "Tim Schröder"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Top-notch smart home installation. Works flawlessly.",
+          "reviewer": "Sophie Brandt"
+        }
+      ],
+      "categories": [
+        "Electrical",
+        "Smart Home",
+        "Lighting"
+      ],
+      "description": "Electrician with a focus on smart home systems. Offers installations and upgrades for lighting, security, and automation."
+    },
+    {
+      "id": "4",
+      "img": "/handymen/peter.jpg",
+      "name": "Peter Schmidt",
+      "location": "Herford",
+      "available": "available",
+      "jobTitle": "Electrician available for smart home setup",
+      "postedAt": "2025-05-02",
+      "reviews": [
+        {
+          "rating": 4.2,
+          "reviewText": "Solid work at a good price.",
+          "reviewer": "Nina Braun"
+        },
+        {
+          "rating": 4.7,
+          "reviewText": "Efficient and professional.",
+          "reviewer": "Kai Müller"
+        },
+        {
+          "rating": 5,
+          "reviewText": "Very reliable!",
+          "reviewer": "Sara Wolf"
+        }
+      ],
+      "categories": [
+        "Painting",
+        "Drywall",
+        "Insulation"
+      ],
+      "description": "Offers high-quality painting and interior finishing. Perfect for new builds or renovations. Free quotes available."
+    },
+    {
+      "id": "5",
+      "img": "/handymen/jan.jpg",
+      "name": "Jan Fischer",
+      "location": "Paderborn",
+      "available": "not available",
+      "jobTitle": "Roofer and carpenter available after vacation",
+      "postedAt": "2025-04-20",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Couldn not ask for better!",
+          "reviewer": "Olaf Richter"
+        },
+        {
+          "rating": 4.3,
+          "reviewText": "Some delays, but great job.",
+          "reviewer": "Julia Schmid"
+        }
+      ],
+      "categories": [
+        "Roofing",
+        "Carpentry",
+        "Gutters"
+      ],
+      "imageGallery": [
+        {
+          "id": "5-1",
+          "src": "/reviews/apartment3/apartment3-1.png",
+          "alt": "Frisch gestrichene Wohnzimmerwand"
+        },
+        {
+          "id": "5-2",
+          "src": "/reviews/apartment3/apartment3-2.png",
+          "alt": "Detailansicht der Wandfarbe"
+        },
+        {
+          "id": "5-3",
+          "src": "/reviews/apartment3/apartment3-3.png",
+          "alt": "Fensterbereich gestrichen"
+        },
+        {
+          "id": "5-4",
+          "src": "/reviews/apartment3/apartment3-4.png",
+          "alt": "Gesamte Wohnzimmeransicht"
+        }
+      ],
+      "description": "Roof repair and woodwork specialist. Available for seasonal check-ups and emergency leak repairs. Currently on vacation."
+    },
+    {
+      "id": "6",
+      "img": "/handymen/hans.jpg",
+      "name": "Hans Becker",
+      "location": "Berlin",
+      "available": "available",
+      "jobTitle": "Window and door expert available",
+      "postedAt": "2025-05-03",
+      "performanceStats": "25 erfolgreich abgeschlossene Projekte",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Sehr professionell und freundlich.",
+          "reviewer": "Tobias Klein"
+        },
+        {
+          "rating": 4.7,
+          "reviewText": "Tolle Arbeit mit kleinen Verbesserungsvorschlägen.",
+          "reviewer": "Laura Schulte"
+        }
+      ],
+      "categories": [
+        "Windows",
+        "Doors",
+        "Woodwork"
+      ],
+      "imageGallery": [
+        {
+          "id": "6-1",
+          "src": "/reviews/apartment2/apartment2-1.jpg",
+          "alt": "Neue Fenster im Wohnzimmer"
+        }
+      ],
+      "description": "Spezialist für Fenster und Türen. Maßanfertigungen und Reparaturen mit Fokus auf Energieeffizienz und Langlebigkeit."
+    },
+    {
+      "id": "7",
+      "img": "/handymen/elena.jpg",
+      "name": "Elena Hoffmann",
+      "location": "Munich",
+      "available": "available",
+      "jobTitle": "Certified Painter and Interior Designer",
+      "postedAt": "2025-05-04",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Beautiful results and very clean work!",
+          "reviewer": "Katharina Müller"
+        },
+        {
+          "rating": 4.6,
+          "reviewText": "Great eye for detail.",
+          "reviewer": "Daniel Vogel"
+        }
+      ],
+      "categories": [
+        "Painting and painting work",
+        "Drywall",
+        "Home Repair"
+      ],
+      "description": "Interior painting, wallpapering, and drywall services with over 8 years of experience. Specializes in modern design and smooth finishes."
+    },
+    {
+      "id": "8",
+      "img": "/handymen/tarik.jpg",
+      "name": "Tarik Özdemir",
+      "location": "Hamburg",
+      "available": "available",
+      "jobTitle": "Experienced Plumber and Tiler",
+      "postedAt": "2025-05-04",
+      "reviews": [
+        {
+          "rating": 4.8,
+          "reviewText": "Very efficient and knowledgeable.",
+          "reviewer": "Max Brenner"
+        }
+      ],
+      "categories": [
+        "Plumber",
+        "Tile work",
+        "Sanitary installation"
+      ],
+      "description": "Certified plumber offering sanitary installations, leak repairs, and complete bathroom tiling. Over 12 years of field experience."
+    },
+    {
+      "id": "9",
+      "img": "/handymen/greta.jpg",
+      "name": "Greta Lange",
+      "location": "Dresden",
+      "available": "available",
+      "jobTitle": "Waste Disposal and Cleaning",
+      "postedAt": "2025-04-30",
+      "reviews": [
+        {
+          "rating": 5,
+          "reviewText": "Excellent and efficient waste removal!",
+          "reviewer": "Emma Kurz"
+        },
+        {
+          "rating": 4.9,
+          "reviewText": "Very professional and thorough with the cleaning.",
+          "reviewer": "Leon Fischer"
+        }
+      ],
+      "categories": [
+        "Waste disposal",
+        "Cleaning",
+        "Sustainability"
+      ],
+      "description": "Professional waste removal and thorough cleaning services. Greta ensures sustainable disposal, composting, and cleanliness in homes, gardens, and construction sites."
     }
   ],
-  "categories": ["Waste disposal", "Cleaning", "Sustainability"],
-  "description":
-    "Professional waste removal and thorough cleaning services. Greta ensures sustainable disposal, composting, and cleanliness in homes, gardens, and construction sites."
-  }
-  ],
   "ads": [
-    {
-      "id": "24ba7a22-b9a6-44ef-9545-19a5bc57d45a",
-      "img": "/anna.png",
-      "name": "John Doe",
-      "tag": "trustworthy",
-      "urgency": "immediate",
-      "service": "Electrician",
-      "description": "Need help installing ceiling lights in living room and hallway.",
-      "location": "Berlin, Germany",
-      "imageGallery": [],
-      "termsAccepted": true,
-      "userId": "d8e7e928-535f-4d5b-a5f4-645c8b50c2f5",
-      "status": "new",
-      "createdAt": "2025-05-13T21:30:15.634Z"
-    },
     {
       "id": "267ecec0-6d36-4ff6-93ce-c0e0f74354da",
       "img": "/anna.png",
@@ -373,73 +398,88 @@
       "userId": "fa6426e4-dfa9-43e0-981c-b7489dafa895",
       "status": "new",
       "createdAt": "2025-05-13T21:41:37.553Z"
+    },
+    {
+      "id": "0adaa6ac-f1f8-487b-aa58-26ec46ce018e",
+      "userId": "VSIoVobnHBXvzHwTNufGBuBZbcf1",
+      "img": "/anna.png",
+      "name": "John Doe",
+      "tag": "trustworthy",
+      "urgency": "immediate",
+      "service": "Electrician",
+      "description": "Need help installing ceiling lights in living room and hallway.",
+      "location": "Berlin, Germany",
+      "imageGallery": [],
+      "termsAccepted": true,
+      "status": "new",
+      "createdAt": "2025-05-16T18:34:52.664Z"
     }
   ],
   "categories": [
     {
-    "id": "1",
-    "title": "Home Repair",
-    "image": "/categories/home-repair.png"
-  },
-  {
-    "id": "2",
-    "title": "Windows",
-    "image": "/categories/windows.png"
-  },
-  {
-    "id": "3",
-    "title": "Painter",
-    "image": "/categories/painter.png"
-  },
-  {
-    "id": "4",
-    "title": "Electrician",
-    "image": "/categories/electrician.png"
-  },
-  { 
-    "id": "5", 
-    "title": "A/C", 
-    "image": "/categories/ac.png"
-   },
-  {
-    "id": "6",
-    "title": "Cleaning",
-    "image": "/categories/cleaning.png"
-  },
-  {
-    "id": "7",
-    "title": "Assembly",
-    "image": "/categories/assembly.png"
-  },
-  {
-    "id": "8",
-    "title": "Carpenter",
-    "image": "/categories/carpenter.png"
-  },
-  {
-    "id": "9",
-    "title": "Construction",
-    "image": "/categories/construction.png"
-  },
-  {
-    "id": "10",
-    "title": "Flooring",
-    "image": "/categories/flooring.png"
-  },
-  {
-    "id": "11",
-    "title": "Plumber",
-    "image": "/categories/plumber.png"
-  },
-  {
-    "id": "12",
-    "title": "Waste disposal",
-    "image": "/categories/waste-disposal.png"
-  },
-  {
-    "id": "13",
-    "title": "Locksmith",
-    "image": "/categories/locksmith.png"
-  }
+      "id": "1",
+      "title": "Home Repair",
+      "image": "/categories/home-repair.png"
+    },
+    {
+      "id": "2",
+      "title": "Windows",
+      "image": "/categories/windows.png"
+    },
+    {
+      "id": "3",
+      "title": "Painter",
+      "image": "/categories/painter.png"
+    },
+    {
+      "id": "4",
+      "title": "Electrician",
+      "image": "/categories/electrician.png"
+    },
+    {
+      "id": "5",
+      "title": "A/C",
+      "image": "/categories/ac.png"
+    },
+    {
+      "id": "6",
+      "title": "Cleaning",
+      "image": "/categories/cleaning.png"
+    },
+    {
+      "id": "7",
+      "title": "Assembly",
+      "image": "/categories/assembly.png"
+    },
+    {
+      "id": "8",
+      "title": "Carpenter",
+      "image": "/categories/carpenter.png"
+    },
+    {
+      "id": "9",
+      "title": "Construction",
+      "image": "/categories/construction.png"
+    },
+    {
+      "id": "10",
+      "title": "Flooring",
+      "image": "/categories/flooring.png"
+    },
+    {
+      "id": "11",
+      "title": "Plumber",
+      "image": "/categories/plumber.png"
+    },
+    {
+      "id": "12",
+      "title": "Waste disposal",
+      "image": "/categories/waste-disposal.png"
+    },
+    {
+      "id": "13",
+      "title": "Locksmith",
+      "image": "/categories/locksmith.png"
+    }
   ]
 }

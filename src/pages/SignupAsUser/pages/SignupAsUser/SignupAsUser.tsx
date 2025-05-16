@@ -1,7 +1,7 @@
 import { useRoleStore } from "../../../../stores/roleStore";
 import OAuthButtonsList from "../../components/OAuthButtonsList/OAuthButtonsList";
 import { LogoHeader } from "../../components/LogoHeader/LogoHeader";
-import styles from './SignupAsUser.module.css';
+import styles from "./SignupAsUser.module.css";
 import SignupForm from "../../components/SignupForm/SignupForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -39,14 +39,14 @@ export default function SignupAsUser() {
       {showSignupForm ? (
         <SignupForm />
       ) : (
-        <OAuthButtonsList toogleSignupForm={setShowSignupForm} />
+        <OAuthButtonsList toggleSignupForm={setShowSignupForm} />
       )}
 
       {/* Login Redirect Link */}
       <div className={styles.loginRedirect}>
-        <p className={styles.loginText}>Already an account?</p>
-        <Link to='/sign-in' className={styles.loginLink}>
-          Register
+        <p className={styles.loginText}>Already have an account?</p>
+        <Link to="/signin" className={styles.loginLink}>
+          Sign in
         </Link>
       </div>
     </section>

@@ -6,7 +6,7 @@ export interface User {
   confirmPassword?: string;
   phone: string;
   type: "CLIENT" | "HANDYMAN";
-  provider?: "GOOGLE";
+  provider?: "GOOGLE" | "EMAIL";
   location?: string;
   reviews?: Review[];
   notifyEmail?: boolean;
@@ -78,16 +78,15 @@ export interface FilterValues {
 
 export interface Ad {
   id: string;
-  img: string;
-  name: string | undefined;
-  tag: string;
-  urgency: "immediate" | "flexible" | string;
+  userId: string | undefined;
+  tag: "Trustworthy";
+  urgency: string;
   service: string;
   description: string;
+  createdAt: string;
+  status: string;
   location: string;
   imageGallery?: string[];
-  termsAccepted: boolean;
-  userId: string | undefined;
 }
 
 export interface Message {
