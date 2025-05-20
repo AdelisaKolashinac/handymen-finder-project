@@ -1,22 +1,22 @@
 import { useEffect } from "react";
-import { useAppNavigation } from "../../../../../hooks/useAppNavigation";
 import { useUserStore } from "../../../../../stores/userStore";
 import styles from "./ClientProfile.module.css";
+import { Link, useNavigate } from "react-router-dom";
 
 export function ClientProfile() {
   const user = useUserStore((state) => state.user);
-  const { navigate, homepage } = useAppNavigation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!user) {
-      homepage();
+      navigate("/");
     }
-  }, [user, homepage]);
+  }, [user, navigate]);
 
   if (!user) {
     return null;
   }
-  
+
   return (
     <div className={styles.clientProfile}>
       <div className={styles.clientProfile__content}>
@@ -38,9 +38,9 @@ export function ClientProfile() {
           </div>
         </div>
       </div>
-      <div onClick={() => navigate("/client-edit-profile")}>
+      <Link to={"/client-edit-profile"}>
         <img src="/icons/edit-icon.png" alt="Edit profile info" />
-      </div>
+      </Link>
     </div>
   );
 }

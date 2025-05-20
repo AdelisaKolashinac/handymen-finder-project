@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import styles from "./PostAd.module.css";
 import { Button } from "../../../../../components/Button/Button";
 import { Checkbox } from "../../../../../components/Checkbox/Checkbox";
-import { Box, Modal, Typography } from "@mui/material";
 import { useUserStore } from "../../../../../stores/userStore";
-import { Ad } from "../../../../../types/types";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../../../config";
 import { v4 as uuidv4 } from "uuid";
+import { Modal } from "../../../../../components/Modal/Modal";
 
 export function PostAd() {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState<"success" | "error">("success");
 
   const user = useUserStore((state) => state.user);
   const navigate = useNavigate();
@@ -22,20 +22,73 @@ export function PostAd() {
     description: "",
     location: "",
     urgency: "",
-    imageGallery: [],
+    imageGallery: [] as { id: string; name: string; base64: string }[],
     termsAccepted: false,
   });
 
   const handleChange = (
     e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, termsAccepted: e.target.checked });
+    setError("");
+    setFormData((prevData) => ({
+      ...prevData,
+      termsAccepted: e.target.checked,
+    }));
+  };
+
+  const triggerModal = (message: string, type: "success" | "error") => {
+    setModalMessage(message);
+    setModalType(type);
+    setShowModal(true);
+
+    setTimeout(() => {
+      setShowModal(false);
+    }, 3000);
+  };
+
+  const toBase64 = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    const newFiles = Array.from(e.target.files);
+    const base64Files = await Promise.all(
+      newFiles.map(async (file) => ({
+        id: uuidv4(),
+        name: file.name,
+        base64: await toBase64(file),
+      }))
+    );
+
+    setFormData((prevData) => ({
+      ...prevData,
+      imageGallery: [...(prevData.imageGallery || []), ...base64Files],
+    }));
+  };
+
+  const handleRemoveImage = (idToRemove: string) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      imageGallery: prevData.imageGallery?.filter(
+        (img) => img.id !== idToRemove
+      ),
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,13 +99,18 @@ export function PostAd() {
       return;
     }
 
-    const newAd: Ad = {
-      ...formData,
+    const newAd = {
       id: uuidv4(),
-      userId: user?.id,
+      userId: user?.id || "",
       tag: "Trustworthy",
       status: "new",
       createdAt: new Date().toISOString(),
+      service: formData.service,
+      description: formData.description,
+      location: formData.location,
+      urgency: formData.urgency,
+      termsAccepted: formData.termsAccepted,
+      imageGallery: formData.imageGallery,
     };
 
     try {
@@ -67,6 +125,7 @@ export function PostAd() {
       if (!res.ok) {
         throw new Error("Failed to post an ad");
       }
+
       setFormData({
         service: "",
         description: "",
@@ -75,14 +134,12 @@ export function PostAd() {
         imageGallery: [],
         termsAccepted: false,
       });
-      setModalMessage("Your ad has been created successfully!");
-      setShowModal(true);
-
-      setTimeout(() => navigate("/client-profile"), 2000);
+      setError("");
+      triggerModal("Your ad has been created successfully!", "success");
+      setTimeout(() => navigate("/client-profile"), 3000);
     } catch (error) {
       console.error(error);
-      setModalMessage("Failed to post a job. Please try again");
-      setShowModal(true);
+      triggerModal("Failed to post a job. Please try again", "error");
     }
   };
 
@@ -177,20 +234,44 @@ export function PostAd() {
             </select>
           </div>
           <div className={styles.postAd__formGroup}>
-            <label htmlFor="photos" className={styles.postAd__label}>
+            <label htmlFor="imageGallery" className={styles.postAd__label}>
               Fotos hochladen:
             </label>
-            <textarea
-              name="photos"
-              id="photos"
-              rows={4}
-              className={styles.postAd__input}
-              value={formData.imageGallery}
-              onChange={handleChange}
-            ></textarea>
-            <div className={styles.postAd__iconPhoto}>
-              <img src="/icons/cloud-icon.png" alt="Upload a photo" />
-            </div>
+            <label htmlFor="photos" className={styles.uploadBox}>
+              <img src="/icons/cloud-icon.png" alt="Upload" />
+              <span>Fotos auswählen</span>
+              <input
+                id="photos"
+                type="file"
+                name="imageGallery"
+                accept="image/*"
+                multiple
+                onChange={handleImageUpload}
+                className={styles.hiddenInput}
+              />
+            </label>
+
+            {/* Thumbnail preview grid */}
+            {formData.imageGallery && (
+              <div className={styles.previewGrid}>
+                {formData.imageGallery.map((img) => (
+                  <div key={img.id} className={styles.thumbnail}>
+                    <img
+                      src={img.base64}
+                      alt={`Preview ${img.id}`}
+                      className={styles.previewImage}
+                    />
+                    <button
+                      onClick={() => handleRemoveImage(img.id)}
+                      className={styles.removeBtn}
+                      aria-label="Remove image"
+                    >
+                      X
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
           <Checkbox
             name="termsAccepted"
@@ -208,27 +289,12 @@ export function PostAd() {
       </div>
 
       {showModal && (
-        <Modal open={showModal} onClose={() => setShowModal(false)}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              bgcolor: "white",
-              p: 3,
-              borderRadius: 2,
-              boxShadow: 24,
-              textAlign: "center",
-            }}
-          >
-            <Typography
-              sx={{ fontSize: "14px", fontStyle: "italic", color: "#666" }}
-            >
-              {modalMessage}
-            </Typography>
-          </Box>
-        </Modal>
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalMessage={modalMessage}
+          modalType={modalType}
+        />
       )}
     </>
   );

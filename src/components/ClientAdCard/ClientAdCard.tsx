@@ -1,23 +1,29 @@
+import { useUserStore } from "../../stores/userStore";
 import { Ad } from "../../types/types";
 import { ButtonSmall } from "../ButtonSmall/ButtonSmall";
 import styles from "./ClientAdCard.module.css";
+import { formatDistanceToNow } from "date-fns";
 
 interface Props {
   card: Ad;
 }
 
 export function ClientAdCard({ card }: Props) {
+  const user = useUserStore((state) => state.user);
+
+  if (!user) return null;
+
   return (
     <div className={styles.clientAdCard}>
       <div className={styles.clientAdCard__header}>
         <div className={styles.clientAdCard__user}>
           <img
-            // src={card.img}
-            // alt={card.name}
+            src="/anna.png"
+            alt="user image"
             className={styles.clientAdCard__userImage}
           />
           <div className={styles.clientAdCard__userInfo}>
-            <p className={styles.clientAdCard__userName}>name</p>
+            <p className={styles.clientAdCard__userName}>{user.fullname}</p>
             <p className={styles.clientAdCard__userTag}>{card.tag}</p>
           </div>
         </div>
@@ -34,12 +40,12 @@ export function ClientAdCard({ card }: Props) {
           <img src="/icons/bookmark.png" alt="Bookmark icon" />
         </div>
       </div>
-    <div className={`border-bottom ${styles.clientAdCard__title_date}`}>
-      <p className={styles.clientAdCard__title}>
-        {card.service}
-      </p>
-      <p className={styles.clientAdCard__date}>{card.createdAt}</p>
-    </div>
+      <div className={`border-bottom ${styles.clientAdCard__title_date}`}>
+        <p className={styles.clientAdCard__title}>{card.service}</p>
+        <p className={styles.clientAdCard__date}>
+          {formatDistanceToNow(new Date(card.createdAt), { addSuffix: true })}
+        </p>
+      </div>
       <p className={styles.clientAdCard__description}>{card.description}</p>
 
       {/* Address + Map Link */}
@@ -50,6 +56,14 @@ export function ClientAdCard({ card }: Props) {
         <span>address</span>
         <a href="#">Show on the map</a>
       </div>
+
+      {card.imageGallery && (
+        <div className={`border-bottom ${styles.clientAdCard__imageGallery}`}>
+          {card.imageGallery.map((img) => (
+            <img key={img.id} src={img.base64} alt="Image of reparation" />
+          ))}
+        </div>
+      )}
 
       {/* Contact Button */}
       <div className={styles.clientAdCard__buttonContainer}>

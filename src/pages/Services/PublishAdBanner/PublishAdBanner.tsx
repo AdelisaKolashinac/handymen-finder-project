@@ -1,11 +1,11 @@
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
 import { ClientAdCard } from "../../../components/ClientAdCard/ClientAdCard";
-import { useAppNavigation } from "../../../hooks/useAppNavigation";
 import styles from "./PublishAdBanner.module.css";
 import { useFetchAds } from "../../../hooks/useFetchAds";
+import { useNavigate } from "react-router-dom";
 
 export default function PublishAdBanner() {
-  const { signup } = useAppNavigation();
+  const navigate = useNavigate();
 
   const { ads, error } = useFetchAds();
 
@@ -36,7 +36,7 @@ export default function PublishAdBanner() {
           ))}
         </div>
 
-        <ButtonTransparent onClick={signup} width="100%">
+        <ButtonTransparent onClick={() => navigate('/signup')} width="100%">
           Post request
         </ButtonTransparent>
       </div>

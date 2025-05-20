@@ -1,11 +1,11 @@
 import { Button } from "../../../components/Button/Button";
 import styles from "./NewCarpenters.module.css";
 import { CarpenterCard } from "../../../components/HomepageCarpenterCard/CarpenterCard";
-import { useAppNavigation } from "../../../hooks/useAppNavigation";
 import { handymen } from "../../../data/data";
+import { useNavigate } from "react-router-dom";
 
 export function NewCarpenters() {
-  const { services } = useAppNavigation();
+  const navigate= useNavigate();
 
   return (
     <section className={`wrapper ${styles.newCarpentersSection}`}>
@@ -20,7 +20,7 @@ export function NewCarpenters() {
           ))}
         </div>
       </div>
-      <Button onClick={services}>Hausmeister Finden</Button>
+      <Button onClick={() => navigate('/services')}>Hausmeister Finden</Button>
     </section>
   );
 }

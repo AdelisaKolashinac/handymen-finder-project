@@ -29,7 +29,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
     set({
       searchTerm: "",
       filters: {
-        categories: [],
+        services: [],
         availability: [],
       },
     }),

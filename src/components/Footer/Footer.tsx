@@ -1,19 +1,17 @@
 import styles from "./Footer.module.css";
-import { useAppNavigation } from "../../hooks/useAppNavigation";
+import { Link } from "react-router-dom";
 
 export function Footer() {
-  const { signup } = useAppNavigation();
-
   return (
     <footer className={`wrapper ${styles.footer}`}>
-      <div className={styles.footer__logo} onClick={signup}>
+      <Link to="/signup" className={styles.footer__logo}>
         <img
           src="/homepage/company-logo.png"
           alt="Mein Handwerker Company Logo"
           className={styles.footerLogoImg}
         />
         <h5 className={styles.footer__logoText}>Mein Handwerker</h5>
-      </div>
+      </Link>
       <div className={styles.footer__info}>
         <p>Lorem</p>
         <p>Lorem</p>

@@ -5,7 +5,8 @@ import {
   signOut,
   User as FirebaseUser,
 } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { auth, db } from "../lib/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
 interface UserStore {
   user: User | undefined;
@@ -35,18 +36,31 @@ export const useUserStore = create<UserStore>((set) => ({
   listenToAuthChanges: () => {
     onAuthStateChanged(auth, (firebaseUser: FirebaseUser | null) => {
       if (firebaseUser) {
-        const appUser: User = {
-          id: firebaseUser.uid,
-          fullname: firebaseUser.displayName || "",
-          email: firebaseUser.email || "",
-          phone: firebaseUser.phoneNumber || "",
-          type: "CLIENT",
-          provider:
-            firebaseUser.providerData[0]?.providerId === "google.com"
-              ? "GOOGLE"
-              : "EMAIL",
-        };
-        set({ user: appUser, loading: false });
+        const userDocRef = doc(db, "users", firebaseUser.uid);
+
+        // Listen for changes in Firestore user document
+        onSnapshot(userDocRef, (docSnap) => {
+          const firestoreUser = docSnap.data() || {};
+
+          set({
+            user: {
+              id: firebaseUser.uid,
+              email: firebaseUser.email || "",
+              fullname:
+                firestoreUser.fullname || firebaseUser.displayName || "",
+              phone: firestoreUser.phone || firebaseUser.phoneNumber || "",
+              location: firestoreUser.location || "",
+              notifyEmail: firestoreUser.notifyEmail ?? false,
+              notifySMS: firestoreUser.notifySMS ?? false,
+              type: "CLIENT",
+              provider:
+                firebaseUser.providerData[0]?.providerId === "google.com"
+                  ? "GOOGLE"
+                  : "EMAIL",
+            },
+            loading: false,
+          });
+        });
       } else {
         set({ user: undefined, loading: false });
       }

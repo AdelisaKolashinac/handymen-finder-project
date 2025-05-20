@@ -1,9 +1,9 @@
 import { Button } from "../../../components/Button/Button";
 import styles from "./BookTradesmen.module.css";
-import { useAppNavigation } from "../../../hooks/useAppNavigation";
+import { useNavigate } from "react-router-dom";
 
 export default function BookTradesmen() {
-  const { signup } = useAppNavigation();
+  const navigate = useNavigate();
 
   return (
     <section className={`wrapper ${styles.bookTradesmenSection}`}>
@@ -22,7 +22,7 @@ export default function BookTradesmen() {
         uns vertrauen, um erfahrene Profis zu finden. Chatten, planen und
         erledigen – alles an einem Ort.
       </p>
-      <Button onClick={signup}>Jetzt anmelden</Button>
+      <Button onClick={() => navigate('/signup')}>Jetzt anmelden</Button>
     </section>
   );
 }

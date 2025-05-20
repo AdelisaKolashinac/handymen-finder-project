@@ -3,11 +3,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import MainClientRouter from "./routes/MainClientRouter";
-import { useFirebaseAuthListener } from "./hooks/useFirebaseAuthListener";
+import { useEffect } from "react";
+import { useUserStore } from "./stores/userStore";
 
 function App() {
-  useFirebaseAuthListener();
-  
+  const listenToAuthChanges = useUserStore(
+    (state) => state.listenToAuthChanges
+  );
+  useEffect(() => {
+    listenToAuthChanges();
+  }, [listenToAuthChanges]);
+
   return (
     <BrowserRouter>
       <ScrollToTop />

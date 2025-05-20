@@ -1,9 +1,9 @@
 import { create } from "zustand";
 import { bookings } from "../data/data";
-import { BookingType } from "../types/types";
+import { Booking } from "../types/types";
 
 interface BookingsStore {
-  bookings: BookingType[];
+  bookings: Booking[];
 }
 
 export const useBookingsStore = create<BookingsStore>(() => ({

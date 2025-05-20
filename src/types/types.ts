@@ -20,9 +20,12 @@ export interface Category {
 }
 
 export interface Review {
+  id: string;
+  handymanId: string;
   rating: number;
   reviewText: string;
   reviewer: string;
+  createdAt?: string;
 }
 
 export interface ImageGallery {
@@ -38,10 +41,11 @@ export interface Handyman {
   location: string;
   available: string;
   jobTitle: string;
-  postedAt?: string;
+  createdAt?: string;
   performanceStats?: string;
   reviews: Review[];
   categories: string[];
+  services?: string[];
   imageGallery?: ImageGallery[];
   description: string;
 }
@@ -71,22 +75,30 @@ export interface Booking {
 }
 
 export interface FilterValues {
-  categories?: string[];
+  services: string[];
   // ratings: string[];
-  availability?: string[];
+  availability: string[];
 }
 
 export interface Ad {
   id: string;
-  userId: string | undefined;
-  tag: "Trustworthy";
+  userId?: string;
+  tag: string;
   urgency: string;
   service: string;
   description: string;
   createdAt: string;
   status: string;
   location: string;
-  imageGallery?: string[];
+  imageGallery?: UploadedImage[];
+  termsAccepted?: boolean;
+}
+
+interface UploadedImage {
+  id: string;
+  name: string;
+  base64: string;
+  file?: File;
 }
 
 export interface Message {

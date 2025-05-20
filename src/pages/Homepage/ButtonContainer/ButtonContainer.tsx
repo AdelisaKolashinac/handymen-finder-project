@@ -1,18 +1,18 @@
 import { Button } from "../../../components/Button/Button";
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
 import styles from "./ButtonContainer.module.css";
-import { useAppNavigation } from "../../../hooks/useAppNavigation";
+import { useNavigate } from "react-router-dom";
 
 export function ButtonContainer() {
-  const { services, signup } = useAppNavigation();
+  const navigate = useNavigate();
 
   return (
     <div className="wrapper">
       <div className={styles.buttonContainer}>
-        <ButtonTransparent width="100%" onClick={signup}>
+        <ButtonTransparent width="100%" onClick={() => navigate('/signup')}>
           Anfrage Posten
         </ButtonTransparent>
-        <Button onClick={services}>Hausmeister Finden</Button>
+        <Button onClick={() => navigate('/services')}>Hausmeister Finden</Button>
       </div>
     </div>
   );

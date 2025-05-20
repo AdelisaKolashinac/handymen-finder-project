@@ -3,9 +3,9 @@ import { Checkbox } from "../../components/Checkbox/Checkbox";
 import { Button } from "../../components/Button/Button";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSearchStore } from "../../stores/searchStore";
-import { useFetchCategories } from "../../hooks/useFetchCategories";
+import { useFetchHandymen } from "../../hooks/useFetchHandymen";
 
 interface Props {
   isOpen: boolean;
@@ -18,16 +18,27 @@ export default function Filter({ isOpen, onClose }: Props) {
     []
   );
 
-  const { categories } = useFetchCategories();
-
+  const { handymen } = useFetchHandymen();
   const { filters, setFilters, resetFilters } = useSearchStore();
+
+  const allServices = useMemo(() => {
+    const serviceSet = new Set<string>();
+
+    handymen.forEach((hm) => {
+      hm.services?.forEach((service) => {
+        serviceSet.add(service);
+      });
+    });
+
+    return Array.from(serviceSet).sort();
+  }, [handymen]);
 
   useEffect(() => {
     if (isOpen) {
-      setSelectedServices(filters.categories || []);
+      setSelectedServices(filters.services || []);
       setSelectedAvailability(filters.availability || []);
     }
-  }, [isOpen, filters.categories, filters.availability]);
+  }, [isOpen, filters.services, filters.availability]);
 
   // Handle service filter selection
   const handleServiceChange = (service: string) => {
@@ -49,7 +60,7 @@ export default function Filter({ isOpen, onClose }: Props) {
 
   const handleApplyFilters = () => {
     setFilters({
-      categories: selectedServices,
+      services: selectedServices,
       availability: selectedAvailability,
     });
     onClose();
@@ -96,15 +107,15 @@ export default function Filter({ isOpen, onClose }: Props) {
 
         {/* Render category checkboxes */}
         <div className={styles.filter__checkboxContainer}>
-          {categories.map((category) => (
+          {allServices.map((service) => (
             <Checkbox
-              key={category.id}
-              id={category.id}
-              name="category"
-              checked={selectedServices.includes(category.title)}
-              onChange={() => handleServiceChange(category.title)}
+              key={service}
+              id={service}
+              name="service"
+              checked={selectedServices.includes(service)}
+              onChange={() => handleServiceChange(service)}
             >
-              {category.title}
+              {service}
             </Checkbox>
           ))}
         </div>

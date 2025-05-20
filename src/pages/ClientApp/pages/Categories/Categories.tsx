@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { CategoryCard } from "../../../../components/CategoryCard/CategoryCard";
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
-import { categories, handymen } from "../../../../data/data";
 import { calculateAverageRating } from "../../../../utils/calculateAverageRating";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import styles from "./Categories.module.css";
@@ -9,14 +8,17 @@ import { ButtonTransparent } from "../../../../components/ButtonTransparent/Butt
 import { HandymanResultCard } from "../../../../components/HandymanResultCard/HandymanResultCard";
 import Filter from "../../../Filter/Filter";
 import { useSearchStore } from "../../../../stores/searchStore";
+import { useFetchCategories } from "../../../../hooks/useFetchCategories";
+import { useFetchHandymen } from "../../../../hooks/useFetchHandymen";
 
 export default function Categories() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  const { searchTerm, setSearchTerm, filters } = useSearchStore();
+  const { categories } = useFetchCategories();
+  const { handymen } = useFetchHandymen();
+  const { searchTerm, setSearchTerm, filters, resetFilters } = useSearchStore();
 
-  // Check if any filter has been applied (search term, selected category, or filter arrays)
   const hasFilters =
     searchTerm.trim() !== "" ||
     selectedCategory !== null ||
@@ -43,8 +45,10 @@ export default function Categories() {
       // Filter by services and availability based on the filters
       const matchesServices =
         filters.services.length === 0 ||
-        hm.categories?.some((category) =>
-          filters.services.includes(category.toLowerCase())
+        hm.services?.some((serv) =>
+          filters.services
+            .map((service) => service.toLowerCase())
+            .includes(serv.toLowerCase())
         );
 
       const matchesAvailability =
@@ -58,7 +62,13 @@ export default function Categories() {
         matchesAvailability
       );
     });
-  }, [searchTerm, selectedCategory, filters]);
+  }, [
+    handymen,
+    filters.availability,
+    filters.services,
+    searchTerm,
+    selectedCategory,
+  ]);
 
   const handleCategoryClick = (categoryName: string) => {
     setSelectedCategory(categoryName);
@@ -68,6 +78,7 @@ export default function Categories() {
   const handleReset = () => {
     setSelectedCategory(null);
     setSearchTerm("");
+    resetFilters()
   };
 
   return (
@@ -78,11 +89,7 @@ export default function Categories() {
         below
       </p>
 
-      <SearchInput
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        onOpenFilter={() => setIsFilterModalOpen(true)}
-      />
+      <SearchInput onOpenFilter={() => setIsFilterModalOpen(true)} />
       {hasFilters && (
         <ButtonTransparent width="150px" onClick={handleReset}>
           go back on categories
