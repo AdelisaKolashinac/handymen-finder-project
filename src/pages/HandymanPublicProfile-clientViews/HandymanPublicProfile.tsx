@@ -1,74 +1,69 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./HandymanPublicProfile.module.css";
-import { useEffect, useState } from "react";
-import { Handyman } from "../../types/types";
 import { calculateAverageRating } from "../../utils/calculateAverageRating";
 import { Button } from "../../components/Button/Button";
 import { HomepageReview } from "../../components/HomepageReview/HomepageReview";
 import { customerReviews } from "../../data/data";
+import { useFetchHandymen } from "../../hooks/useFetchHandymen";
+import { HandymanResultCard } from "../../components/HandymanResultCard/HandymanResultCard";
 
 export default function HandymanPublicProfile() {
   const { id } = useParams<{ id: string }>();
-  const [handyman, setHandyman] = useState<Handyman | null>(null);
-  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchHandyman = async () => {
-      try {
-        const res = await fetch("http://localhost:3001/handymen");
-        if (!res.ok) throw new Error("Failed to fetch handymen");
+  const { handymen, error } = useFetchHandymen();
 
-        const data: Handyman[] = await res.json();
-        const foundHandyman = data.find((h) => h.id.toString() === id);
-
-        if (!foundHandyman) {
-          setError("Handyman not found.");
-        } else {
-          setHandyman(foundHandyman);
-        }
-      } catch (err) {
-        console.error("Failed fetching data", err);
-        setError("Error loading handyman.");
-      }
-    };
-
-    fetchHandyman();
-  }, [id]);
+  const findHandymen = handymen.find((hm) => hm.id === id);
 
   if (error) return <p className="errorMessage">{error}</p>;
-  if (!handyman) return <p>Loading...</p>;
+  if (!findHandymen) return <p>Loading...</p>;
 
-  const averageRating = calculateAverageRating(handyman.reviews);
+  const averageRating = calculateAverageRating(findHandymen.reviews);
+
+  const similarHandymen = handymen.filter((hm) => {
+    if (hm.id === findHandymen.id) return false;
+
+    const sharedCategories = hm.categories.some((cat) =>
+      findHandymen.categories.includes(cat)
+    );
+
+    const sharedServices = hm.services?.some((serv) =>
+      findHandymen.services?.includes(serv)
+    );
+
+    return sharedCategories || sharedServices;
+  });
 
   return (
     <section className={`wrapper ${styles.handymanPublicProfile}`}>
       <header className={styles.handymanPublicProfile__header}>
+        <Link
+          to="/client-home"
+          className={styles.handymanPublicProfile__backButton}
+        >
+          <img src="/arrows&location/arrow-left.png" alt="Go back" />
+          <span>Back</span>
+        </Link>
 
-          <Link to="/client-home" className={styles.handymanPublicProfile__backButton}>
-            <img src="/arrows&location/arrow-left.png" alt="Go back" />
-            <span>Back</span>
-          </Link>
-      
         <img
-          src={handyman.img}
+          src={findHandymen.img}
           alt="Picture of handyman"
           className={styles.handymanPublicProfile__img}
         />
       </header>
       <div className={styles.handymanPublicProfile__profileTop}>
         <div className={styles.handymanPublicProfile__nameBlock}>
-          <h3>{handyman.name}</h3>
+          <h3>{findHandymen.name}</h3>
           <img src="/icons/check-profile-icon.svg" alt="Check profile icon" />
         </div>
         <div className={styles.handymanPublicProfile__availability}>
           <span
             className={
-              handyman.available === "available"
+              findHandymen.available === "available"
                 ? styles.available
                 : styles.notAvailable
             }
           >
-            {handyman.available}
+            {findHandymen.available}
           </span>
         </div>
       </div>
@@ -78,21 +73,21 @@ export default function HandymanPublicProfile() {
           <p>{averageRating.toFixed(1)}</p>
         </div>
         <span className={styles.handymanPublicProfile__reviewsCount}>
-          {handyman.reviews.length} reviews
+          {findHandymen.reviews.length} reviews
         </span>
       </div>
       <div className={styles.handymanPublicProfile__categories}>
-        {handyman.categories.map((category) => (
+        {findHandymen.categories.map((category) => (
           <span key={category}>{category}</span>
         ))}
       </div>
       <div className={styles.handymanPublicProfile__location}>
         <img src="/icons/location-icon-orange.png" alt="Location Icon" />
-        <p>{handyman.location}</p>
+        <p>{findHandymen.location}</p>
       </div>
       <div className={styles.handymanPublicProfile__completedOrders}>
         <img src="/icons/completed-order-icon.png" alt="Completed icon" />
-        <p>56 Completed orders</p>
+        <p>{findHandymen.performanceStats}</p>
       </div>
       <div className={styles.handymanPublicProfile__actions}>
         <Button>Chat now</Button>
@@ -100,22 +95,18 @@ export default function HandymanPublicProfile() {
       </div>
       <div className={styles.handymanPublicProfile__section}>
         <h3>About me</h3>
-        <p>
-          Lorem Ipsum Dolor Sit Amet Consectetur. Elit Eget Donec Ipsum a
-          Bibendum Fermentum Velit. Vitae Tincidunt Curabitur Dolor Ipsum Ipsum
-          Accumsan Commodo. Amet Vestibulum Aliquam Quisque Mauris Amet Mauris
-          Ultrices. Consectetur eGet at elit amet non tellus sit .
-        </p>
+        <p>{findHandymen.description}</p>
       </div>
-      <div className={styles.handymanPublicProfile__section}>
-        <h3>Service description</h3>
-        <p>
-          Lorem Ipsum Dolor Sit Amet Consectetur. Elit Eget Donec Ipsum a
-          Bibendum Fermentum Velit. Vitae Tincidunt Curabitur Dolor Ipsum Ipsum
-          Accumsan Commodo. Amet Vestibulum Aliquam Quisque Mauris Amet Mauris
-          Ultrices. Consectetur eGet at elit amet non tellus sit .
-        </p>
-      </div>
+      {findHandymen.services && (
+        <div className={styles.handymanPublicProfile__section}>
+          <h3>Service description</h3>
+          <ul>
+            {findHandymen.services.map((serv) => (
+              <li key={serv}>{serv}</li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div className={styles.handymanPublicProfile__subsection}>
         <h4>Listings</h4>
         <span>Lorem Ipsum Sit Amet</span>
@@ -124,13 +115,24 @@ export default function HandymanPublicProfile() {
       <div className={styles.handymanPublicProfile__subsection}>
         <h4>Similar profile</h4>
         <span>Lorem ipsum sit amet lorem ipsum sit . .</span>
-        {/* display similar profile of handymen */}
+        {similarHandymen.length > 0 ? (
+          <div className={styles.handymanPublicProfile__similarHandymen}>
+            {similarHandymen.map((hm) => (
+              <HandymanResultCard
+                resultCard={hm}
+                averageRating={calculateAverageRating(hm.reviews)}
+              />
+            ))}
+          </div>
+        ) : (
+          <p>No similar handymen found.</p>
+        )}
       </div>
       <div className={styles.handymanPublicProfile__subsection}>
         <h4>Current work</h4>
-        {handyman.imageGallery?.length ? (
+        {findHandymen.imageGallery?.length ? (
           <div className={styles.handymanPublicProfile__galleryImages}>
-            {handyman.imageGallery.map((img) => (
+            {findHandymen.imageGallery.map((img) => (
               <img key={img.id} src={img.src} alt={img.alt} />
             ))}
           </div>
@@ -140,14 +142,14 @@ export default function HandymanPublicProfile() {
       </div>
       <div className={styles.handymanPublicProfile__subsection}>
         <h4>Customer feedback</h4>
-        {handyman.reviews.length ? (
+        {findHandymen.reviews.length ? (
           <div className={styles.handymanPublicProfile__reviews}>
             {customerReviews.map((review) => (
               <HomepageReview key={review.id} review={review} />
             ))}
           </div>
         ) : (
-          <p>No current work images available.</p>
+          <p>No current reviews.</p>
         )}
       </div>
     </section>
