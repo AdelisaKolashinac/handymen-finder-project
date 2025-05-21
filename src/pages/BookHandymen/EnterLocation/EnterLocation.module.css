@@ -1,0 +1,45 @@
+.EnterLocation {
+  padding-top: 40px;
+  padding-bottom: 75px;
+}
+
+.EnterLocation__backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.EnterLocation__backButton span {
+  font-size: 18px;
+}
+
+.EnterLocation__input {
+  width: 100%;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+  padding: 10px;
+  margin: 30px 0;
+}
+
+.EnterLocation__useCurrent,
+.EnterLocation__resultItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.EnterLocation__useCurrent p,
+.EnterLocation__resultItem p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.EnterLocation__resultLabel {
+  font-size: 14px;
+  color: var(--secondary-color);
+  margin: 15px 0;
+}

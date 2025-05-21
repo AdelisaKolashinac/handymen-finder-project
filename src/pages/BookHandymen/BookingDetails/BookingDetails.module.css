@@ -1,0 +1,91 @@
+.BookingDetails {
+  padding-top: 40px;
+  padding-bottom: 75px;
+}
+
+.BookingDetails__backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.BookingDetails__backButton span {
+  font-size: 18px;
+}
+
+.BookingDetails__formGroup {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.BookingDetails__time_date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.BookingDetails__time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.BookingDetails__time_date p {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.BookingDetails__label {
+  width: 100%;
+  padding-bottom: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+}
+
+.BookingDetails__label span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--blue-color);
+}
+
+.BookingDetails__formGroup textarea {
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.BookingDetails__input_icon {
+  width: 100%;
+  border: 1px solid var(--secondary-color);
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px 30px;
+  position: relative;
+}
+
+.BookingDetails__iconOne,
+.BookingDetails__iconTwo {
+  position: absolute;
+  top: 75%;
+  transform: translateY(-75%);
+  z-index: 10;
+}
+
+.BookingDetails__iconOne {
+  left: 10px;
+}
+
+.BookingDetails__iconTwo {
+  right: 10px;
+}
+
+.BookingDetails__button {
+  padding: 30px 0;
+}

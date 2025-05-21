@@ -114,6 +114,16 @@
   margin-top: 30px;
 }
 
+.handymanPublicProfile__select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0 10px 5px;
+  height: 50px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+}
+
 .handymanPublicProfile__location p,
 .handymanPublicProfile__completedOrders p,
 .handymanPublicProfile__section p {

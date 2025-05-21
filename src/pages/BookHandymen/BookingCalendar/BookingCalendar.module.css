@@ -1,0 +1,70 @@
+.BookingCalendar {
+  padding-top: 40px;
+  padding-bottom: 75px;
+}
+
+.BookingCalendar__backButton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.BookingCalendar__backButton span {
+  font-size: 18px;
+}
+
+.BookingCalendar__calendarSection,
+.BookingCalendar__timeSection {
+  margin-top: 30px;
+}
+
+.BookingCalendar__calendarSection p,
+.BookingCalendar__timeSection p {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.BookingCalendar__calendar {
+  margin: 0 auto;
+}
+
+.BookingCalendar__availableTimes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.BookingCalendar__time {
+  width: 95px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--background-color);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.BookingCalendar__time img {
+  width: 35px;
+  height: 35px;
+}
+
+.BookingCalendar__active {
+  border: 2px solid var(--primary-color);
+}
+
+.BookingCalendar__disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.BookingCalendar__button {
+  padding: 30px 0;
+}

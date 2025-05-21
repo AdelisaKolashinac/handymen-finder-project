@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./HandymanPublicProfile.module.css";
 import { calculateAverageRating } from "../../utils/calculateAverageRating";
 import { Button } from "../../components/Button/Button";
@@ -6,9 +6,12 @@ import { HomepageReview } from "../../components/HomepageReview/HomepageReview";
 import { customerReviews } from "../../data/data";
 import { useFetchHandymen } from "../../hooks/useFetchHandymen";
 import { HandymanResultCard } from "../../components/HandymanResultCard/HandymanResultCard";
+import React from "react";
 
 export default function HandymanPublicProfile() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const { handymen, error } = useFetchHandymen();
 
@@ -18,6 +21,12 @@ export default function HandymanPublicProfile() {
   if (!findHandymen) return <p>Loading...</p>;
 
   const averageRating = calculateAverageRating(findHandymen.reviews);
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (e.target.value === "book") {
+      navigate(`/book-handyman/${id}`);
+    }
+  };
 
   const similarHandymen = handymen.filter((hm) => {
     if (hm.id === findHandymen.id) return false;
@@ -91,7 +100,14 @@ export default function HandymanPublicProfile() {
       </div>
       <div className={styles.handymanPublicProfile__actions}>
         <Button>Chat now</Button>
-        <img src="/alt-menu.png" alt="Menu" />
+        <select
+          name="booking"
+          className={styles.handymanPublicProfile__select}
+          onChange={handleChange}
+        >
+          <option value="">...</option>
+          <option value="book">Book now</option>
+        </select>
       </div>
       <div className={styles.handymanPublicProfile__section}>
         <h3>About me</h3>

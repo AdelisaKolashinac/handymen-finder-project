@@ -48,6 +48,9 @@ export interface Handyman {
   services?: string[];
   imageGallery?: ImageGallery[];
   description: string;
+  availability?: {
+    [key: string]: string[];
+  };
 }
 
 export interface ReviewCard {
@@ -76,7 +79,6 @@ export interface Booking {
 
 export interface FilterValues {
   services: string[];
-  // ratings: string[];
   availability: string[];
 }
 
