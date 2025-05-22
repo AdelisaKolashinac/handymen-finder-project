@@ -4,7 +4,6 @@ import { Checkbox } from "../../../../../components/Checkbox/Checkbox";
 import styles from "./LeaveAReview.module.css";
 // import { useBookingsContext } from "../bookingsContext/BookingsContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { useBookingsStore } from "../../../../../stores/bookingsStore";
 
 export function LeaveAReview() {
   const [selectedRating, setSelectedRating] = useState<number>(0);
@@ -13,7 +12,6 @@ export function LeaveAReview() {
 
   const { id: bookingId } = useParams<{ id: string }>();
 
-  const bookings = useBookingsStore(state=>state.bookings);
 
   if (!bookingId) {
     return <p>Booking not found. Please go back and try again.</p>;

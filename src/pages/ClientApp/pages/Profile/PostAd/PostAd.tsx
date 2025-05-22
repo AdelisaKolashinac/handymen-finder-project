@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../../../../config";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "../../../../../components/Modal/Modal";
+import { Ad } from "../../../../../types/types";
 
 export function PostAd() {
   const [error, setError] = useState("");
@@ -99,7 +100,7 @@ export function PostAd() {
       return;
     }
 
-    const newAd = {
+    const newAd: Ad = {
       id: uuidv4(),
       userId: user?.id || "",
       tag: "Trustworthy",

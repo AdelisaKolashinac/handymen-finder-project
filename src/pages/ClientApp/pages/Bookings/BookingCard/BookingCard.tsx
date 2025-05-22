@@ -2,13 +2,21 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../../../../components/Button/Button";
 import { ButtonTransparent } from "../../../../../components/ButtonTransparent/ButtonTransparent";
 import styles from "./BookingCard.module.css";
-import { Booking } from "../../../../../types/types";
+import { Booking, Handyman } from "../../../../../types/types";
 
 interface BookingCardProps {
+  handyman: Handyman;
   booking: Booking;
+  onAccept: () => Promise<void>;
+  onRefuse: () => Promise<void>;
 }
 
-export default function BookingCard({ booking }: BookingCardProps) {
+export default function BookingCard({
+  booking,
+  handyman,
+  onAccept,
+  onRefuse,
+}: BookingCardProps) {
   const navigate = useNavigate();
 
   return (
@@ -40,10 +48,7 @@ export default function BookingCard({ booking }: BookingCardProps) {
               src="/clientApp/bookings/location-icon.png"
               alt="Location icon"
             />
-            <a
-              href={booking.locationLink}
-              className={styles.bookingCard__mapLink}
-            >
+            <a href={booking.location} className={styles.bookingCard__mapLink}>
               View on map
             </a>
           </div>
@@ -72,7 +77,7 @@ export default function BookingCard({ booking }: BookingCardProps) {
             src="/clientApp/bookings/arrows-clockwise-icon.png"
             alt="Arrows clockwise icon"
           />
-          <p className={styles.bookingCard__taskText}>{booking.task}</p>
+          <p className={styles.bookingCard__taskText}>{booking.message}</p>
         </div>
 
         {/* Craftsman info */}
@@ -81,14 +86,16 @@ export default function BookingCard({ booking }: BookingCardProps) {
             src="/clientApp/bookings/user-gear-icon.png"
             alt="User gear icon"
           />
-          <p className={styles.bookingCard__workerName}>{booking.worker}</p>
+          <p className={styles.bookingCard__workerName}>{handyman.name}</p>
         </div>
       </div>
       <div className={styles.bookingCard__actions}>
         {booking.status === "new" && (
           <>
-            <ButtonTransparent width="100%">Refuse</ButtonTransparent>
-            <Button>Accept</Button>
+            <ButtonTransparent width="100%" onClick={onRefuse}>
+              Refuse
+            </ButtonTransparent>
+            <Button onClick={onAccept}>Accept</Button>
           </>
         )}
         {booking.status === "ongoing" && (

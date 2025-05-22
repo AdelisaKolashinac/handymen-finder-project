@@ -65,15 +65,18 @@ export interface ReviewCard {
 
 export interface Booking {
   id: string;
-  clientId?: string;
-  handymanId?: string;
-  status: "new" | "ongoing" | "completed";
-  service: string;
+  userId: string;
+  handymanId: string;
+  senderRole: "user" | "handyman";
+  status: "new" | "ongoing" | "completed" | "refused";
   date: string;
   time: string;
-  task: string;
-  worker: string;
-  locationLink: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  location: any;
+  message?: string;
+  createdAt: string;
+  service?: string;
+  task?: string;
   rating?: number;
 }
 
