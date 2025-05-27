@@ -1,12 +1,12 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./HandymanPublicProfile.module.css";
-import { calculateAverageRating } from "../../utils/calculateAverageRating";
 import { Button } from "../../components/Button/Button";
-import { HomepageReview } from "../../components/HomepageReview/HomepageReview";
-import { customerReviews } from "../../data/data";
 import { useFetchHandymen } from "../../hooks/useFetchHandymen";
 import { HandymanResultCard } from "../../components/HandymanResultCard/HandymanResultCard";
 import React from "react";
+import { enrichHandymenWithReviews } from "../../utils/enrichHandymen";
+import { useFetchReviews } from "../../hooks/useFetchReviews";
+import { CustomerFeedback } from "./CustomerFeedback/CustomerFeedback";
 
 export default function HandymanPublicProfile() {
   const { id } = useParams();
@@ -14,13 +14,13 @@ export default function HandymanPublicProfile() {
   const navigate = useNavigate();
 
   const { handymen, error } = useFetchHandymen();
+  const { reviews } = useFetchReviews();
 
-  const findHandymen = handymen.find((hm) => hm.id === id);
+  const handymenWithRatings = enrichHandymenWithReviews(handymen, reviews);
+  const findHandymen = handymenWithRatings.find((hm) => hm.id === id);
 
   if (error) return <p className="errorMessage">{error}</p>;
   if (!findHandymen) return <p>Loading...</p>;
-
-  const averageRating = calculateAverageRating(findHandymen.reviews);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (e.target.value === "book") {
@@ -28,7 +28,11 @@ export default function HandymanPublicProfile() {
     }
   };
 
-  const similarHandymen = handymen.filter((hm) => {
+  const handymanReviews = reviews.filter(
+    (review) => review.handymanId === findHandymen.id
+  );
+
+  const similarHandymen = handymenWithRatings.filter((hm) => {
     if (hm.id === findHandymen.id) return false;
 
     const sharedCategories = hm.categories.some((cat) =>
@@ -79,10 +83,10 @@ export default function HandymanPublicProfile() {
       <div className={styles.handymanPublicProfile__rating}>
         <div className={styles.handymanPublicProfile__ratingText}>
           <img src="/star.svg" alt="Star Icon" />
-          <p>{averageRating.toFixed(1)}</p>
+          <p>{findHandymen.averageRating.toFixed(1)}</p>
         </div>
         <span className={styles.handymanPublicProfile__reviewsCount}>
-          {findHandymen.reviews.length} reviews
+          {findHandymen.reviewsCount} reviews
         </span>
       </div>
       <div className={styles.handymanPublicProfile__categories}>
@@ -136,7 +140,8 @@ export default function HandymanPublicProfile() {
             {similarHandymen.map((hm) => (
               <HandymanResultCard
                 resultCard={hm}
-                averageRating={calculateAverageRating(hm.reviews)}
+                averageRating={hm.averageRating}
+                reviewsCount={hm.reviewsCount}
               />
             ))}
           </div>
@@ -158,10 +163,10 @@ export default function HandymanPublicProfile() {
       </div>
       <div className={styles.handymanPublicProfile__subsection}>
         <h4>Customer feedback</h4>
-        {findHandymen.reviews.length ? (
+        {findHandymen.reviewsCount ? (
           <div className={styles.handymanPublicProfile__reviews}>
-            {customerReviews.map((review) => (
-              <HomepageReview key={review.id} review={review} />
+            {handymanReviews.map((review) => (
+              <CustomerFeedback key={review.id} review={review} />
             ))}
           </div>
         ) : (

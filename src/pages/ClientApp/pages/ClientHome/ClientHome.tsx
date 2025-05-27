@@ -1,13 +1,14 @@
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
 import { useSearchStore } from "../../../../stores/searchStore";
 import { useUserStore } from "../../../../stores/userStore";
-import { calculateAverageRating } from "../../../../utils/calculateAverageRating";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import { RecommendedCard } from "../../components/RecommendedCard/RecommendedCard";
 import styles from "./ClientHome.module.css";
 import { useFetchHandymen } from "../../../../hooks/useFetchHandymen";
 import { useState } from "react";
 import Filter from "../../../Filter/Filter";
+import { useFetchReviews } from "../../../../hooks/useFetchReviews";
+import { enrichHandymenWithReviews } from "../../../../utils/enrichHandymen";
 
 export default function ClientHome() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,12 +16,14 @@ export default function ClientHome() {
   const { searchTerm, filters } = useSearchStore();
 
   const { handymen, error } = useFetchHandymen();
+  const { reviews } = useFetchReviews();
+  const handymenWithRatings = enrichHandymenWithReviews(handymen, reviews);
 
-  const nearbyHandymen = handymen.filter(
+  const nearbyHandymen = handymenWithRatings.filter(
     (hm) => hm.location.toLowerCase() === user?.location?.toLowerCase()
   );
 
-  const filteredHandymen = handymen.filter((h) => {
+  const filteredHandymen = handymenWithRatings.filter((h) => {
     const search = searchTerm.toLowerCase();
 
     const matchesSearch = searchTerm
@@ -30,14 +33,14 @@ export default function ClientHome() {
         h.categories.some((cat) => cat.toLowerCase().includes(search))
       : true;
 
-    const matchesService = filters.categories?.length
-      ? filters.categories.some(
-          (category) =>
+    const matchesService = filters.services?.length
+      ? filters.services.some(
+          (service) =>
             h.categories.some(
-              (cat) => cat.toLowerCase() === category.toLowerCase()
+              (cat) => cat.toLowerCase() === service.toLowerCase()
             ) ||
-            h.description.toLowerCase().includes(category.toLowerCase()) ||
-            h.jobTitle.toLowerCase().includes(category.toLowerCase())
+            h.description.toLowerCase().includes(service.toLowerCase()) ||
+            h.jobTitle.toLowerCase().includes(service.toLowerCase())
         )
       : true;
 
@@ -47,8 +50,6 @@ export default function ClientHome() {
 
     return matchesSearch && matchesService && matchesAvailability;
   });
-
-  if (error) return <p className="errorMessage">{error}</p>;
 
   return (
     <>
@@ -67,17 +68,18 @@ export default function ClientHome() {
         <p className={`border-bottom ${styles.home__sectionTitle}`}>
           Recommended listings
         </p>
+        {error && <p className="errorMessage">{error}</p>}
         <div className={styles.home__recommendedList}>
           {searchTerm || filters ? (
             filteredHandymen.length > 0 ? (
-              filteredHandymen
-                .map((hm) => (
-                  <RecommendedCard
-                    key={hm.id}
-                    card={hm}
-                    averageRating={calculateAverageRating(hm.reviews)}
-                  />
-                ))
+              filteredHandymen.map((hm) => (
+                <RecommendedCard
+                  key={hm.id}
+                  card={hm}
+                  averageRating={hm.averageRating}
+                  reviewsCount={hm.reviewsCount}
+                />
+              ))
             ) : (
               <p>No craftsmen found for your search.</p>
             )
@@ -88,7 +90,8 @@ export default function ClientHome() {
                 <RecommendedCard
                   key={hm.id}
                   card={hm}
-                  averageRating={calculateAverageRating(hm.reviews)}
+                  averageRating={hm.averageRating}
+                  reviewsCount={hm.reviewsCount}
                 />
               ))
           ) : (

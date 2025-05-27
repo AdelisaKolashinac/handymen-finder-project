@@ -9,7 +9,7 @@ import { useFetchCategories } from "../../../hooks/useFetchCategories";
 export function InfoSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const { categories } = useFetchCategories();
+  const { categories, error } = useFetchCategories();
 
   const handleSelect = (selectedIndex: number) => {
     setActiveIndex(selectedIndex);
@@ -54,7 +54,7 @@ export function InfoSection() {
           </div>
         </div>
         <h2 className="title-h2">Wir decken alles ab</h2>
-
+        {error && <p>{error}</p>}
         <Carousel
           activeIndex={activeIndex}
           onSelect={handleSelect}

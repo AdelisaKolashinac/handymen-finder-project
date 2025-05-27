@@ -16,8 +16,6 @@ export default function Profile() {
 
   const { ads, error } = useFetchAds(currentUser);
 
-  if (error) return <p className="errorMessage">{error}</p>;
-
   return (
     <section className={`wrapper ${styles.profile}`}>
       <ClientAppHeader title="Konto" />
@@ -40,6 +38,7 @@ export default function Profile() {
         Sehen, bearbeiten oder löschen Sie Ihre derzeit aktiven Anzeigen für
         Serviceanfragen.
       </p>
+      {error && <p className="errorMessage">{error}</p>}
       {ads.length > 0 ? (
         ads.map((ad) => <ClientAdCard key={ad.id} card={ad} />)
       ) : (

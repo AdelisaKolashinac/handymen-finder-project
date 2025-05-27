@@ -7,6 +7,7 @@ import { SearchInput } from "../../../components/SearchInput/SearchInput";
 import { useSearchStore } from "../../../stores/searchStore";
 import Filter from "../../Filter/Filter";
 import { useFetchHandymen } from "../../../hooks/useFetchHandymen";
+import { useFetchReviews } from "../../../hooks/useFetchReviews";
 
 const INITIAL_VISIBLE_RESULTS = 5;
 
@@ -18,35 +19,40 @@ export default function HandymenResults() {
   const { searchTerm, filters, resetFilters } = useSearchStore();
 
   const { handymen, error } = useFetchHandymen();
+  const { reviews } = useFetchReviews();
 
   const filteredHandymen = handymen
-    .map((h) => ({
-      ...h,
-      averageRating: calculateAverageRating(h.reviews),
-    }))
-    .filter((h) => {
+    .map((hm) => {
+      const handymanReviews = reviews.filter((rev) => rev.handymanId === hm.id);
+      return {
+        ...hm,
+        averageRating: calculateAverageRating(handymanReviews),
+        reviewsCount: handymanReviews.length,
+      };
+    })
+    .filter((hm) => {
       const search = searchTerm.toLowerCase();
 
       const matchesSearch = searchTerm
-        ? h.name.toLowerCase().includes(search) ||
-          h.description.toLowerCase().includes(search) ||
-          h.jobTitle.toLowerCase().includes(search) ||
-          h.categories.some((cat) => cat.toLowerCase().includes(search))
+        ? hm.name.toLowerCase().includes(search) ||
+          hm.description.toLowerCase().includes(search) ||
+          hm.jobTitle.toLowerCase().includes(search) ||
+          hm.categories.some((cat) => cat.toLowerCase().includes(search))
         : true;
 
-      const matchesService = filters.categories?.length
-        ? filters.categories.some(
-            (category) =>
-              h.categories.some(
-                (cat) => cat.toLowerCase() === category.toLowerCase()
+      const matchesService = filters.services?.length
+        ? filters.services.some(
+            (service) =>
+              hm.categories.some(
+                (cat) => cat.toLowerCase() === service.toLowerCase()
               ) ||
-              h.description.toLowerCase().includes(category.toLowerCase()) ||
-              h.jobTitle.toLowerCase().includes(category.toLowerCase())
+              hm.description.toLowerCase().includes(service.toLowerCase()) ||
+              hm.jobTitle.toLowerCase().includes(service.toLowerCase())
           )
         : true;
 
       const matchesAvailability = filters.availability?.length
-        ? filters.availability.includes(h.available)
+        ? filters.availability.includes(hm.available)
         : true;
 
       return matchesSearch && matchesService && matchesAvailability;
@@ -69,9 +75,7 @@ export default function HandymenResults() {
 
   return (
     <>
-      <SearchInput
-        onOpenFilter={() => setIsFilterOpen(true)}
-      />
+      <SearchInput onOpenFilter={() => setIsFilterOpen(true)} />
 
       {isFilterOpen && (
         <Filter isOpen={isFilterOpen} onClose={() => setIsFilterOpen(false)} />
@@ -119,6 +123,7 @@ export default function HandymenResults() {
                     key={result.id}
                     resultCard={result}
                     averageRating={result.averageRating}
+                    reviewsCount={result.reviewsCount}
                   />
                 ))
             )}

@@ -1,0 +1,43 @@
+.CustomerFeedback {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.CustomerFeedback__header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.CustomerFeedback__avatar {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.CustomerFeedback__name {
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.CustomerFeedback__city {
+  color: #5584e5;
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+.CustomerFeedback__rating {
+  margin: 5px 0 10px;
+}
+
+.CustomerFeedback__rating img {
+  width: 16px;
+}
+
+.CustomerFeedback__description {
+  font-size: 12px;
+}

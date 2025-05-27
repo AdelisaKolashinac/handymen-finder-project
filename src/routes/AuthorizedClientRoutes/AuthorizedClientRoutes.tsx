@@ -12,6 +12,7 @@ import HandymanPublicProfile from "../../pages/HandymanPublicProfile-clientViews
 import BookingCalendar from "../../pages/BookHandymen/BookingCalendar/BookingCalendar";
 import BookingDetails from "../../pages/BookHandymen/BookingDetails/BookingDetails";
 import EnterLocation from "../../pages/BookHandymen/EnterLocation/EnterLocation";
+import ChatPage from "../../pages/ClientApp/pages/Chat/ChatPage/ChatPage";
 
 export default function AuthorizedClientRoutes() {
   return (
@@ -22,9 +23,10 @@ export default function AuthorizedClientRoutes() {
         <Route path="/client-bookings" element={<Bookings />} />
         <Route path="/client-categories" element={<Categories />} />
         <Route path="/client-home" element={<ClientHome />} />
-        <Route path="/client-chatList" element={<ChatList />} />
+        <Route path="/chat" element={<ChatList />} />
+        <Route path="/chat/:chatId" element={<ChatPage />} />
         <Route path="/client-profile" element={<Profile />} />
-        <Route path="/leave-review/:id" element={<LeaveAReview />} />
+        <Route path="/leave-review" element={<LeaveAReview />} />
         <Route path="/client-edit-profile" element={<EditClientProfile />} />
         <Route path="/client-post-ad" element={<PostAd />} />
         <Route

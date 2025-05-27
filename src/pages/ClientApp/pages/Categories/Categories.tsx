@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { CategoryCard } from "../../../../components/CategoryCard/CategoryCard";
 import { SearchInput } from "../../../../components/SearchInput/SearchInput";
-import { calculateAverageRating } from "../../../../utils/calculateAverageRating";
 import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeader";
 import styles from "./Categories.module.css";
 import { ButtonTransparent } from "../../../../components/ButtonTransparent/ButtonTransparent";
@@ -10,14 +9,18 @@ import Filter from "../../../Filter/Filter";
 import { useSearchStore } from "../../../../stores/searchStore";
 import { useFetchCategories } from "../../../../hooks/useFetchCategories";
 import { useFetchHandymen } from "../../../../hooks/useFetchHandymen";
+import { enrichHandymenWithReviews } from "../../../../utils/enrichHandymen";
+import { useFetchReviews } from "../../../../hooks/useFetchReviews";
 
 export default function Categories() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
 
-  const { categories } = useFetchCategories();
+  const { categories, error } = useFetchCategories();
   const { handymen } = useFetchHandymen();
+  const { reviews } = useFetchReviews();
   const { searchTerm, setSearchTerm, filters, resetFilters } = useSearchStore();
+  const handymenWithRatings = enrichHandymenWithReviews(handymen, reviews);
 
   const hasFilters =
     searchTerm.trim() !== "" ||
@@ -26,7 +29,7 @@ export default function Categories() {
     filters.availability.length > 0;
 
   const filteredHandymen = useMemo(() => {
-    return handymen.filter((hm) => {
+    return handymenWithRatings.filter((hm) => {
       const matchesSearch =
         hm.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         hm.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,7 +66,7 @@ export default function Categories() {
       );
     });
   }, [
-    handymen,
+    handymenWithRatings,
     filters.availability,
     filters.services,
     searchTerm,
@@ -78,7 +81,7 @@ export default function Categories() {
   const handleReset = () => {
     setSelectedCategory(null);
     setSearchTerm("");
-    resetFilters()
+    resetFilters();
   };
 
   return (
@@ -90,6 +93,9 @@ export default function Categories() {
       </p>
 
       <SearchInput onOpenFilter={() => setIsFilterModalOpen(true)} />
+
+      {error && <p className="errorMessage">{error}</p>}
+
       {hasFilters && (
         <ButtonTransparent width="150px" onClick={handleReset}>
           go back on categories
@@ -103,7 +109,8 @@ export default function Categories() {
               <HandymanResultCard
                 key={hm.id}
                 resultCard={hm}
-                averageRating={calculateAverageRating(hm.reviews)}
+                averageRating={hm.averageRating}
+                reviewsCount={hm.reviewsCount}
               />
             ))
           ) : (

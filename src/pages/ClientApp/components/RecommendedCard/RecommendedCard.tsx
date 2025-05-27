@@ -1,14 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonSmall } from "../../../../components/ButtonSmall/ButtonSmall";
 import { Handyman } from "../../../../types/types";
 import styles from "./RecommendedCard.module.css";
+import { useUserStore } from "../../../../stores/userStore";
+import { createOrGetChat } from "../../../../utils/chatUtils";
 
 interface Props {
   card: Handyman;
   averageRating: number;
+  reviewsCount: number;
 }
 
-export function RecommendedCard({ card, averageRating }: Props) {
+export function RecommendedCard({ card, averageRating, reviewsCount }: Props) {
+  const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
+
+  const handleContactClick = async () => {
+    if (!user) {
+      return;
+    }
+    try {
+      const chatId = await createOrGetChat(user, card);
+      navigate(`/chat/${chatId}`);
+    } catch (error) {
+      console.error("Error creating/getting chat:", error);
+    }
+  };
   return (
     <div className={`border-bottom ${styles.recommendedCard}`}>
       <div className={styles.recommendedCard__header}>
@@ -29,7 +46,7 @@ export function RecommendedCard({ card, averageRating }: Props) {
                 <p>{averageRating.toFixed(1)}</p>{" "}
               </div>
               <span className={styles.recommendedCard__reviewsCount}>
-                {card.reviews.length} reviews
+                {reviewsCount} reviews
               </span>
             </div>
           </div>
@@ -50,7 +67,7 @@ export function RecommendedCard({ card, averageRating }: Props) {
 
       <div className={`border-bottom ${styles.recommendedCard__jobInfo}`}>
         <p className={styles.recommendedCard__jobText}>{card.jobTitle}</p>
-        <p className={styles.recommendedCard__posted}>{card.postedAt}</p>
+        <p className={styles.recommendedCard__posted}>{card.createdAt}</p>
       </div>
       <p className={styles.recommendedCard__description}>{card.description}</p>
       <div className={styles.recommendedCard__location}>
@@ -63,8 +80,13 @@ export function RecommendedCard({ card, averageRating }: Props) {
         ))}
       </div>
       <div className={styles.recommendedCard__actions}>
-        <Link to={`/handyman-public-profile/${card.id}`} className={styles.recommendedCard__showProfile}>Show profile</Link>
-        <ButtonSmall>Contact</ButtonSmall>
+        <Link
+          to={`/handyman-public-profile/${card.id}`}
+          className={styles.recommendedCard__showProfile}
+        >
+          Show profile
+        </Link>
+        <ButtonSmall onClick={handleContactClick}>Contact</ButtonSmall>
       </div>
     </div>
   );

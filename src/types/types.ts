@@ -13,6 +13,24 @@ export interface User {
   notifySMS?: boolean;
 }
 
+export interface Handyman {
+  id: string;
+  img: string;
+  name: string;
+  location: string;
+  available: string;
+  jobTitle: string;
+  createdAt: string;
+  performanceStats?: string;
+  categories: string[];
+  services?: string[];
+  imageGallery?: ImageGallery[];
+  description: string;
+  availability?: {
+    [key: string]: string[];
+  };
+}
+
 export interface Category {
   id: string;
   title: string;
@@ -22,35 +40,18 @@ export interface Category {
 export interface Review {
   id: string;
   handymanId: string;
-  rating: number;
-  reviewText: string;
+  reviewerId: string;
   reviewer: string;
-  createdAt?: string;
+  rating: number;
+  comment?: string;
+  imageGallery?: UploadedImage[];
+  createdAt: string;
 }
 
 export interface ImageGallery {
   id: string;
   src: string;
   alt: string;
-}
-
-export interface Handyman {
-  id: string;
-  img: string;
-  name: string;
-  location: string;
-  available: string;
-  jobTitle: string;
-  createdAt?: string;
-  performanceStats?: string;
-  reviews: Review[];
-  categories: string[];
-  services?: string[];
-  imageGallery?: ImageGallery[];
-  description: string;
-  availability?: {
-    [key: string]: string[];
-  };
 }
 
 export interface ReviewCard {

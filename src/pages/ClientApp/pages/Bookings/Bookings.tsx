@@ -101,7 +101,8 @@ export default function Bookings() {
         </button>
       </div>
       {error && <p className="errorMessage">{error}</p>}
-      {filteredBookings.map((booking) => {
+      <div>
+        {filteredBookings.map((booking) => {
         const handyman = handymen.find((hm) => hm.id === booking.handymanId);
 
         if (!handyman) {
@@ -119,6 +120,7 @@ export default function Bookings() {
           />
         );
       })}
+      </div>
     </section>
   );
 }

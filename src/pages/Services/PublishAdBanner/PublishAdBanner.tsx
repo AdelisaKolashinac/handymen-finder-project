@@ -1,15 +1,9 @@
 import { ButtonTransparent } from "../../../components/ButtonTransparent/ButtonTransparent";
-import { ClientAdCard } from "../../../components/ClientAdCard/ClientAdCard";
 import styles from "./PublishAdBanner.module.css";
-import { useFetchAds } from "../../../hooks/useFetchAds";
 import { useNavigate } from "react-router-dom";
 
 export default function PublishAdBanner() {
   const navigate = useNavigate();
-
-  const { ads, error } = useFetchAds();
-
-  if (error) return <p className="errorMessage">{error}</p>;
 
   return (
     <section className={styles.publishAdBanner}>
@@ -29,16 +23,15 @@ export default function PublishAdBanner() {
           Let me know how to help you - publish a free advertisement now!
         </p>
 
-        {/* Ad Card */}
         <div className={styles.publishAdBanner__card}>
-          {ads.slice(0, 1).map((ad) => (
-            <ClientAdCard key={ad.id} card={ad} />
-          ))}
+          <img src="/client-posting-default.png" alt="Client posted ad" />
         </div>
 
-        <ButtonTransparent onClick={() => navigate('/signup')} width="100%">
-          Post request
-        </ButtonTransparent>
+        <div className={styles.publishAdBanner__button}>
+          <ButtonTransparent onClick={() => navigate("/signup")} width="100%">
+            Post request
+          </ButtonTransparent>
+        </div>
       </div>
     </section>
   );

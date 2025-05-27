@@ -5,9 +5,11 @@ import styles from "./HandymanResultCard.module.css";
 interface Props {
   resultCard: Handyman;
   averageRating: number;
+  reviewsCount: number;    
 }
 
-export function HandymanResultCard({ resultCard, averageRating }: Props) {
+export function HandymanResultCard({ resultCard, averageRating, reviewsCount }: Props) {
+  
   return (
     <div className={`border-bottom ${styles.handymanResultCard}`}>
       <div className={styles.handymanResultCard__header}>
@@ -45,7 +47,7 @@ export function HandymanResultCard({ resultCard, averageRating }: Props) {
           <p>{averageRating.toFixed(1)}</p>{" "}
         </div>
         <span className={styles.handymanResultCard__reviewsCount}>
-          {resultCard.reviews.length} reviews
+          {reviewsCount} reviews
         </span>
       </div>
       <div className={styles.handymanResultCard__categories}>
