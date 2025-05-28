@@ -14,15 +14,21 @@
 .menuToggle {
   border: none;
   background-color: transparent;
+  position: absolute;
+  top: 15px;       
+  right: 15px;     
+  z-index: 100;    
 }
 
 /* Hamburger Menu */
 .menuOverlay {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed;       
+  top: 0;            
+  left: 0;             
+  width: 100vw;        
+  height: 100vh;     
+  max-height: 100vh;
+  overflow-y: auto;
   background-color: #fff;
   display: flex;
   flex-direction: column;

@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface User {
   id: string;
   fullname: string;
@@ -77,8 +79,6 @@ export interface Booking {
   message?: string;
   createdAt: string;
   service?: string;
-  task?: string;
-  rating?: number;
 }
 
 export interface FilterValues {
@@ -107,9 +107,18 @@ interface UploadedImage {
   file?: File;
 }
 
-export interface Message {
+export interface ChatPreview {
+  id: string;
+  participants: string[];
+  lastMessage: string;
+  lastUpdated: Timestamp; 
+  otherUserName: string;
+  otherUserImg: string;
+}
+
+export interface MessageType {
+  id: string;
   senderId: string;
-  receiverId: string;
-  content: string;
-  timestamp: string;
+  text: string;
+  createdAt: Timestamp | null;
 }

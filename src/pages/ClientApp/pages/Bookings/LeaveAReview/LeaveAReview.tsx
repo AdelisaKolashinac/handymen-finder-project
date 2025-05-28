@@ -110,6 +110,7 @@ export function LeaveAReview() {
       id: uuidv4(),
       handymanId: handyman.id,
       reviewerId: user?.id || "",
+      reviewer: user?.fullname || "",
       rating: formData.rating,
       comment: formData.message,
       imageGallery: formData.imageGallery,
@@ -176,7 +177,7 @@ export function LeaveAReview() {
       <div className={`wrapper ${styles.leaveReview}`}>
         {/* Header with back arrow and title */}
         <div className={styles.leaveAReview__header}>
-          <Link to={"/bookings"}>
+          <Link to={"/client-bookings"}>
             <img
               src="/arrows&location/arrow-left.png"
               alt="Back arrow to previous page"

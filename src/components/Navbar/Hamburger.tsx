@@ -29,7 +29,7 @@ export function Hamburger({ setIsMenuOpen }: Props) {
     e.preventDefault();
     setSearchTerm(inputValue);
     setFilters({
-      categories: selectedCategory ? [selectedCategory] : [],
+      services: selectedCategory ? [selectedCategory] : [],
       availability: [], 
     });
     navigate("/services");

@@ -4,16 +4,19 @@ import { Button } from "../../../components/Button/Button";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { useFetchHandymen } from "../../../hooks/useFetchHandymen";
-import { calculateAverageRating } from "../../../utils/calculateAverageRating";
 import { BookHandymanCard } from "../BookHandymanCard/BookHandymanCard";
 import { useUserStore } from "../../../stores/userStore";
 import { Modal } from "../../../components/Modal/Modal";
 import { Booking } from "../../../types/types";
 import { v4 as uuidv4 } from "uuid";
+import { API_URL } from "../../../config";
+import { useFetchReviews } from "../../../hooks/useFetchReviews";
+import { enrichHandymenWithReviews } from "../../../utils/enrichHandymen";
 
 export default function BookingDetails() {
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState("");
+  const [selectedService, setSelectedService] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState<"success" | "error">("success");
@@ -23,10 +26,12 @@ export default function BookingDetails() {
   const location = useLocation();
   const { date, time, location: selectedLocation } = location.state || {};
   const { handymen } = useFetchHandymen();
+  const { reviews } = useFetchReviews();
+  const handymenWithRatings = enrichHandymenWithReviews(handymen, reviews);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const foundHandyman = handymen.find((hm) => hm.id === id);
+  const foundHandyman = handymenWithRatings.find((hm) => hm.id === id);
 
   useEffect(() => {
     if (!date || !time) {
@@ -62,6 +67,7 @@ export default function BookingDetails() {
       handymanId: foundHandyman.id,
       senderRole: "user",
       status: "ongoing",
+      service: selectedService,
       message,
       date,
       time,
@@ -70,7 +76,7 @@ export default function BookingDetails() {
     };
 
     try {
-      const res = await fetch("http://localhost:3002/bookings", {
+      const res = await fetch(`${API_URL}/bookings`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,8 +139,26 @@ export default function BookingDetails() {
             </div>
             <BookHandymanCard
               resultCard={foundHandyman}
-              averageRating={calculateAverageRating(foundHandyman.reviews)}
+              averageRating={foundHandyman.averageRating}
+              reviewsCount={foundHandyman.reviewsCount}
             />
+          </div>
+          <p className={styles.BookingDetails__label}>Choose services:</p>
+          <div className={styles.BookingDetails__services}>
+            {foundHandyman.services?.map((service) => (
+              <button
+                key={service}
+                type="button"
+                onClick={() => {
+                  setSelectedService(service);
+                }}
+                className={`${styles.BookingDetails__services_button} ${
+                  selectedService === service ? styles.selectedService : ""
+                }`}
+              >
+                {service}
+              </button>
+            ))}
           </div>
           <div className={`border-bottom ${styles.BookingDetails__formGroup}`}>
             <label htmlFor="message" className={styles.BookingDetails__label}>

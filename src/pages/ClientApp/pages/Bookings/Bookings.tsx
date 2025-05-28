@@ -34,13 +34,15 @@ export default function Bookings() {
     fetchBookings();
   }, []);
 
-  const filteredBookings = bookings.filter((booking) => {
-    if (filter === "new") {
-      return booking.status === "new" && booking.senderRole === "handyman";
-    }
+  const filteredBookings = bookings
+    .filter((bk) => bk.senderRole === "handyman")
+    .filter((booking) => {
+      if (filter === "new") {
+        return booking.status === "new" && booking.senderRole === "handyman";
+      }
 
-    return booking.status === filter;
-  });
+      return booking.status === filter;
+    });
 
   const handleAccept = async (bookingId: string) => {
     const res = await fetch(`${API_URL}/bookings/${bookingId}`, {
@@ -103,23 +105,23 @@ export default function Bookings() {
       {error && <p className="errorMessage">{error}</p>}
       <div>
         {filteredBookings.map((booking) => {
-        const handyman = handymen.find((hm) => hm.id === booking.handymanId);
+          const handyman = handymen.find((hm) => hm.id === booking.handymanId);
 
-        if (!handyman) {
-          <p>Loading...</p>;
-          return;
-        }
+          if (!handyman) {
+            <p>Loading...</p>;
+            return;
+          }
 
-        return (
-          <BookingCard
-            key={booking.id}
-            booking={booking}
-            handyman={handyman}
-            onAccept={() => handleAccept(booking.id)}
-            onRefuse={() => handleRefuse(booking.id)}
-          />
-        );
-      })}
+          return (
+            <BookingCard
+              key={booking.id}
+              booking={booking}
+              handyman={handyman}
+              onAccept={() => handleAccept(booking.id)}
+              onRefuse={() => handleRefuse(booking.id)}
+            />
+          );
+        })}
       </div>
     </section>
   );

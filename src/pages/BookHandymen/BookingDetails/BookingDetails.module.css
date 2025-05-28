@@ -48,6 +48,28 @@
   margin: 20px 0 10px;
 }
 
+.BookingDetails__services {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.BookingDetails__services_button {
+  color: var(--primary-color);
+  background: transparent;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px;
+}
+
+.selectedService {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
 .BookingDetails__label span {
   font-size: 12px;
   font-weight: 400;
@@ -73,8 +95,8 @@
 .BookingDetails__iconOne,
 .BookingDetails__iconTwo {
   position: absolute;
-  top: 75%;
-  transform: translateY(-75%);
+  top: 85%;
+  transform: translateY(-85%);
   z-index: 10;
 }
 

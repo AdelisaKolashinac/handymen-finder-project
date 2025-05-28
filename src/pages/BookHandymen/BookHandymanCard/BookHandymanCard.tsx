@@ -4,11 +4,16 @@ import { Handyman } from "../../../types/types";
 interface Props {
   resultCard: Handyman;
   averageRating: number;
+  reviewsCount: number;
 }
 
-export function BookHandymanCard({ resultCard, averageRating }: Props) {
+export function BookHandymanCard({
+  resultCard,
+  averageRating,
+  reviewsCount,
+}: Props) {
   return (
-    <div className={`border-bottom ${styles.BookHandymanCard}`}>
+    <div className={styles.BookHandymanCard}>
       <div className={styles.BookHandymanCard__header}>
         <div className={styles.BookHandymanCard__details}>
           <img
@@ -44,13 +49,8 @@ export function BookHandymanCard({ resultCard, averageRating }: Props) {
           <p>{averageRating.toFixed(1)}</p>{" "}
         </div>
         <span className={styles.BookHandymanCard__reviewsCount}>
-          {resultCard.reviews.length} reviews
+          {reviewsCount} reviews
         </span>
-      </div>
-      <div className={styles.BookHandymanCard__categories}>
-        {resultCard.categories.map((category) => (
-          <span key={category}>{category}</span>
-        ))}
       </div>
     </div>
   );
