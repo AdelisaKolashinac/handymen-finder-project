@@ -1,7 +1,4 @@
-import {
-  ReviewCard,
-} from "../types/types";
-
+import { ReviewCard } from "../types/types";
 
 export const customerReviews: ReviewCard[] = [
   {
@@ -15,23 +12,18 @@ export const customerReviews: ReviewCard[] = [
     images: [
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment1/apartment1-1.jpg",
+        src: "/handymenWork/apartment1/apartment1-1.jpg",
         alt: "Kleiderschrank im Schlafzimmer",
       },
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment1/apartment1-2.jpg",
+        src: "/handymenWork/apartment1/apartment1-2.jpg",
         alt: "Badezimmerschrank Detailansicht",
       },
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment1/apartment1-3.jpg",
+        src: "/handymenWork/apartment1/apartment1-3.jpg",
         alt: "Badezimmerschrank frontal",
-      },
-      {
-        id: crypto.randomUUID(),
-        src: "/reviews/apartment1/apartment1-4.png",
-        alt: "Gesamter Raumansicht",
       },
     ],
   },
@@ -46,7 +38,7 @@ export const customerReviews: ReviewCard[] = [
     images: [
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment2/apartment2-1.jpg",
+        src: "/handymenWork/apartment2/apartment2-1.jpg",
         alt: "Neue Fenster im Wohnzimmer",
       },
     ],
@@ -62,25 +54,19 @@ export const customerReviews: ReviewCard[] = [
     images: [
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment3/apartment3-1.png",
+        src: "/handymenWork/apartment3/apartment3-1.png",
         alt: "Frisch gestrichene Wohnzimmerwand",
       },
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment3/apartment3-2.png",
+        src: "/handymenWork/apartment3/apartment3-2.png",
         alt: "Detailansicht der Wandfarbe",
       },
       {
         id: crypto.randomUUID(),
-        src: "/reviews/apartment3/apartment3-3.png",
+        src: "/handymenWork/apartment3/apartment3-3.png",
         alt: "Fensterbereich gestrichen",
-      },
-      {
-        id: crypto.randomUUID(),
-        src: "/reviews/apartment3/apartment3-4.png",
-        alt: "Gesamte Wohnzimmeransicht",
       },
     ],
   },
 ];
-
