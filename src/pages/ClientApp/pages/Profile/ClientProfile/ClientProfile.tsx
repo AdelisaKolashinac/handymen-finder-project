@@ -21,7 +21,7 @@ export function ClientProfile() {
     <div className={styles.clientProfile}>
       <div className={styles.clientProfile__content}>
         <div className={styles.clientProfile__imageContainer}>
-          <img src="/anna.png" alt="Picture of user" />
+          <img src={user.img} alt="Picture of user" />
           <span className={styles.clientProfile__userRole}>client</span>
         </div>
 

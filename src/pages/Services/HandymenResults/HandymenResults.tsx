@@ -40,14 +40,21 @@ export default function HandymenResults() {
           hm.categories.some((cat) => cat.toLowerCase().includes(search))
         : true;
 
+      const matchesCategory = filters.categories?.length
+        ? filters.categories.some((filterCategory) =>
+            hm.categories?.some(
+              (hmCategory) =>
+                hmCategory.toLowerCase() === filterCategory.toLowerCase()
+            )
+          )
+        : true;
+
       const matchesService = filters.services?.length
-        ? filters.services.some(
-            (service) =>
-              hm.categories.some(
-                (cat) => cat.toLowerCase() === service.toLowerCase()
-              ) ||
-              hm.description.toLowerCase().includes(service.toLowerCase()) ||
-              hm.jobTitle.toLowerCase().includes(service.toLowerCase())
+        ? filters.services.some((filterService) =>
+            hm.services?.some(
+              (hmService) =>
+                hmService.toLowerCase() === filterService.toLowerCase()
+            )
           )
         : true;
 
@@ -55,7 +62,12 @@ export default function HandymenResults() {
         ? filters.availability.includes(hm.available)
         : true;
 
-      return matchesSearch && matchesService && matchesAvailability;
+      return (
+        matchesSearch &&
+        matchesService &&
+        matchesAvailability &&
+        matchesCategory
+      );
     });
 
   const sortedHandymen = [...filteredHandymen].sort((a, b) => {

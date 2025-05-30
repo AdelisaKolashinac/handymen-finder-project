@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../../../lib/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { API_URL } from "../../../../config";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +57,9 @@ export default function SignupForm() {
       const newUser: User = {
         id: firebaseUser.uid,
         fullname: formData.name,
+        img: `https://ui-avatars.com/api/?name=${encodeURIComponent(
+          formData.name
+        )}`,
         email: formData.email,
         phone: formData.phone,
         type: "CLIENT",
@@ -64,6 +68,14 @@ export default function SignupForm() {
       };
 
       await setDoc(doc(db, "users", firebaseUser.uid), newUser);
+
+      await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUser),
+      });
 
       setUser(newUser);
 
@@ -128,8 +140,7 @@ export default function SignupForm() {
 
           <div
             className={styles.registerForm__icon__secondary}
-            onClick={() => setShowPassword((prev) => !prev)
-            }
+            onClick={() => setShowPassword((prev) => !prev)}
           >
             {showPassword ? (
               <i className="fa-regular fa-eye"></i>

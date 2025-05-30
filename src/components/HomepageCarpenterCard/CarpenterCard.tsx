@@ -1,8 +1,8 @@
-import { HandymanType } from "../../types/types";
+import { Handyman } from "../../types/types";
 import styles from "./CarpenterCard.module.css";
 
 interface Props {
-  card: HandymanType;
+  card: Handyman;
 }
 
 export function CarpenterCard({ card }: Props) {

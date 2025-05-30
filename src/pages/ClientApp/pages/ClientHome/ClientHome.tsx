@@ -33,14 +33,21 @@ export default function ClientHome() {
         h.categories.some((cat) => cat.toLowerCase().includes(search))
       : true;
 
+    const matchesCategory = filters.categories?.length
+      ? filters.categories.some((filterCategory) =>
+          h.categories?.some(
+            (hmCategory) =>
+              hmCategory.toLowerCase() === filterCategory.toLowerCase()
+          )
+        )
+      : true;
+
     const matchesService = filters.services?.length
-      ? filters.services.some(
-          (service) =>
-            h.categories.some(
-              (cat) => cat.toLowerCase() === service.toLowerCase()
-            ) ||
-            h.description.toLowerCase().includes(service.toLowerCase()) ||
-            h.jobTitle.toLowerCase().includes(service.toLowerCase())
+      ? filters.services.some((filterService) =>
+          h.services?.some(
+            (hmService) =>
+              hmService.toLowerCase() === filterService.toLowerCase()
+          )
         )
       : true;
 
@@ -48,7 +55,9 @@ export default function ClientHome() {
       ? filters.availability.includes(h.available)
       : true;
 
-    return matchesSearch && matchesService && matchesAvailability;
+    return (
+      matchesSearch && matchesService && matchesAvailability && matchesCategory
+    );
   });
 
   return (

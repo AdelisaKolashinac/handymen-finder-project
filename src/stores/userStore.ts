@@ -48,6 +48,11 @@ export const useUserStore = create<UserStore>((set) => ({
               email: firebaseUser.email || "",
               fullname:
                 firestoreUser.fullname || firebaseUser.displayName || "",
+              img:
+                firestoreUser.img ||
+                `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                  firestoreUser.fullname || firebaseUser.displayName || ""
+                )}`,
               phone: firestoreUser.phone || firebaseUser.phoneNumber || "",
               location: firestoreUser.location || "",
               notifyEmail: firestoreUser.notifyEmail ?? false,

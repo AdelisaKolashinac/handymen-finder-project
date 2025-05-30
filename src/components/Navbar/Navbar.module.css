@@ -15,29 +15,30 @@
   border: none;
   background-color: transparent;
   position: absolute;
-  top: 15px;       
-  right: 15px;     
-  z-index: 100;    
+  top: 15px;
+  right: 15px;
+  z-index: 100;
 }
 
 /* Hamburger Menu */
 .menuOverlay {
-  position: fixed;       
-  top: 0;            
-  left: 0;             
-  width: 100vw;        
-  height: 100vh;     
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   max-height: 100vh;
   overflow-y: auto;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 99;
+  z-index: 90;
   padding: 25px;
 }
 
 .hamburgerMenuList {
+  padding-top: 75px;
   list-style: none;
   text-align: center;
   color: var(--secondary-color);

@@ -5,6 +5,7 @@ import { ClientAppHeader } from "../../components/ClientAppHeader/ClientAppHeade
 import { Booking } from "../../../../types/types";
 import { API_URL } from "../../../../config";
 import { useFetchHandymen } from "../../../../hooks/useFetchHandymen";
+import { useUserStore } from "../../../../stores/userStore";
 
 export type BookingStatus = "new" | "ongoing" | "completed";
 
@@ -13,6 +14,7 @@ export default function Bookings() {
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<BookingStatus>("new");
 
+  const user = useUserStore((state) => state.user);
   const { handymen } = useFetchHandymen();
 
   useEffect(() => {
@@ -35,13 +37,14 @@ export default function Bookings() {
   }, []);
 
   const filteredBookings = bookings
-    .filter((bk) => bk.senderRole === "handyman")
-    .filter((booking) => {
+    .filter((b) => b.senderRole === "handyman")
+    .filter((b) => b.userId === user?.id)
+    .filter((b) => {
       if (filter === "new") {
-        return booking.status === "new" && booking.senderRole === "handyman";
+        return b.status === "new" && b.senderRole === "handyman";
       }
 
-      return booking.status === filter;
+      return b.status === filter;
     });
 
   const handleAccept = async (bookingId: string) => {
@@ -73,6 +76,24 @@ export default function Bookings() {
     setBookings((prev) => prev.filter((b) => b.id !== bookingId));
   };
 
+  const handleReopen = async (bookingId: string) => {
+    const res = await fetch(`${API_URL}/bookings/${bookingId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        status: "ongoing",
+      }),
+    });
+
+    if (!res.ok) throw new Error("Failed to reopen booking.");
+
+    setBookings((prev) =>
+      prev.map((b) => (b.id === bookingId ? { ...b, status: "ongoing" } : b))
+    );
+  };
+
   return (
     <section className={`wrapper ${styles.bookings}`}>
       <ClientAppHeader title="My bookings" />
@@ -83,7 +104,16 @@ export default function Bookings() {
           }`}
           onClick={() => setFilter("new")}
         >
-          New proposals ({bookings.filter((b) => b.status === "new").length})
+          New proposals (
+          {
+            bookings.filter(
+              (b) =>
+                b.status === "new" &&
+                b.senderRole === "handyman" &&
+                b.userId === user?.id
+            ).length
+          }
+          )
         </button>
         <button
           className={`${styles.bookings__button} ${
@@ -119,6 +149,7 @@ export default function Bookings() {
               handyman={handyman}
               onAccept={() => handleAccept(booking.id)}
               onRefuse={() => handleRefuse(booking.id)}
+              onReopen={() => handleReopen(booking.id)}
             />
           );
         })}

@@ -5,11 +5,14 @@ import styles from "./HandymanResultCard.module.css";
 interface Props {
   resultCard: Handyman;
   averageRating: number;
-  reviewsCount: number;    
+  reviewsCount: number;
 }
 
-export function HandymanResultCard({ resultCard, averageRating, reviewsCount }: Props) {
-  
+export function HandymanResultCard({
+  resultCard,
+  averageRating,
+  reviewsCount,
+}: Props) {
   return (
     <div className={`border-bottom ${styles.handymanResultCard}`}>
       <div className={styles.handymanResultCard__header}>

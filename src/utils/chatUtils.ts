@@ -15,7 +15,6 @@ export async function createOrGetChat(
 ): Promise<string> {
   const chatsRef = collection(db, "chats");
 
-  // Check if chat already exists between these two users
   const q = query(
     chatsRef,
     where("participants", "array-contains", currentUser.id)

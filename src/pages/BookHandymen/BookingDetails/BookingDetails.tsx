@@ -51,7 +51,7 @@ export default function BookingDetails() {
   ) => {
     e.preventDefault();
 
-    if (!date || !time || !selectedLocation) {
+    if (!date || !time || !selectedLocation || !selectedService) {
       setError("Please fill all the details.");
       return;
     }
@@ -89,14 +89,14 @@ export default function BookingDetails() {
       }
 
       triggerModal("Booking confirmed!", "success");
-      setTimeout(() => navigate("/client-profile"), 3000);
+      setTimeout(() => navigate("/client-home"), 3000);
     } catch (error) {
       console.error(error);
       triggerModal(
         "There was a problem saving your booking. Please try again.",
         "error"
       );
-      setTimeout(() => navigate("/client-profile"), 3000);
+      setTimeout(() => navigate("/client-home"), 3000);
     }
   };
 

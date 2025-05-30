@@ -18,8 +18,8 @@ export function ClientAdCard({ card }: Props) {
       <div className={styles.clientAdCard__header}>
         <div className={styles.clientAdCard__user}>
           <img
-            src="/anna.png"
-            alt="user image"
+            src={user.img}
+            alt={user.fullname}
             className={styles.clientAdCard__userImage}
           />
           <div className={styles.clientAdCard__userInfo}>

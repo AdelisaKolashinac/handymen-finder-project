@@ -14,7 +14,7 @@ export function Hamburger({ setIsMenuOpen }: Props) {
   const [inputValue, setInputValue] = useState("");
 
   const { setSearchTerm, setFilters } = useSearchStore();
-  const {categories} = useFetchCategories();
+  const { categories } = useFetchCategories();
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,8 +29,8 @@ export function Hamburger({ setIsMenuOpen }: Props) {
     e.preventDefault();
     setSearchTerm(inputValue);
     setFilters({
-      services: selectedCategory ? [selectedCategory] : [],
-      availability: [], 
+      categories: selectedCategory ? [selectedCategory] : [],
+      availability: [],
     });
     navigate("/services");
     setIsMenuOpen(false);

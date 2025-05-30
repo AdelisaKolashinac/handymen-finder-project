@@ -1,8 +1,8 @@
-import { HandymanType } from "../../types/types";
+import { Handyman } from "../../types/types";
 import styles from "./TopRatedCard.module.css";
 
 interface Props {
-  card: HandymanType;
+  card: Handyman;
   index: number;
 }
 
@@ -27,7 +27,10 @@ export function TopRatedCard({ card, index }: Props) {
           {card.performanceStats}
         </span>
         <div className={styles.topRatedCard__location}>
-          <img src="/arrows&location/grey-location-icon.svg" alt="Location Icon" />
+          <img
+            src="/arrows&location/grey-location-icon.svg"
+            alt="Location Icon"
+          />
           <p>{card.location}</p>
         </div>
       </div>

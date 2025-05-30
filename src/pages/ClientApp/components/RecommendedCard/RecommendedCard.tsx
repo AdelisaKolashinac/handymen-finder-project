@@ -26,6 +26,7 @@ export function RecommendedCard({ card, averageRating, reviewsCount }: Props) {
       console.error("Error creating/getting chat:", error);
     }
   };
+  
   return (
     <div className={`border-bottom ${styles.recommendedCard}`}>
       <div className={styles.recommendedCard__header}>

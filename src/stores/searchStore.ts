@@ -14,6 +14,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
   setSearchTerm: (term) => set({ searchTerm: term }),
 
   filters: {
+    categories: [],
     services: [],
     availability: [],
   },
@@ -29,6 +30,7 @@ export const useSearchStore = create<SearchStore>((set) => ({
     set({
       searchTerm: "",
       filters: {
+        categories: [],
         services: [],
         availability: [],
       },

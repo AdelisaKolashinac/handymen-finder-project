@@ -1,19 +1,28 @@
 import styles from "./CustomerFeedback.module.css";
 import { Review } from "../../../types/types";
+import { useFetchUsers } from "../../../hooks/useFetchUsers";
 
 interface Props {
   review: Review;
 }
 
 export function CustomerFeedback({ review }: Props) {
+  const { users } = useFetchUsers();
+
+  const findUser = users.find((user) => user.id === review.reviewerId);
+
   return (
     <div className={styles.CustomerFeedback}>
       <div className={styles.CustomerFeedback__header}>
         <div className={styles.CustomerFeedback__userInfo}>
-          {/* <img className={styles.CustomerFeedback__avatar} src={} alt={} /> */}
+          <img
+            className={styles.CustomerFeedback__avatar}
+            src={findUser?.img}
+            alt={findUser?.fullname}
+          />
           <p className={styles.CustomerFeedback__name}>{review.reviewer}</p>
         </div>
-        <p className={styles.CustomerFeedback__city}>{}</p>
+        <p className={styles.CustomerFeedback__city}>{findUser?.location}</p>
       </div>
 
       <div className={styles.CustomerFeedback__rating}>

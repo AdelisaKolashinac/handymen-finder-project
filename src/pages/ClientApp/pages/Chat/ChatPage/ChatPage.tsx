@@ -101,7 +101,7 @@ export default function ChatPage() {
     <div className={`wrapper ${styles.chatPage}`}>
       <div
         style={{
-          height: "350px",
+          height: "80vh",
           overflowY: "scroll",
         }}
       >

@@ -5,6 +5,7 @@ import { useUserStore } from "../../../../stores/userStore";
 import { User } from "../../../../types/types";
 import { OAuthButton } from "../OAuthButton/OAuthButton";
 import styles from "./OAuthButtonsList.module.css";
+import { API_URL } from "../../../../config";
 
 interface Props {
   toggleSignupForm: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,6 +34,14 @@ export default function OAuthButtonsList({ toggleSignupForm }: Props) {
         type: "CLIENT",
         provider: "GOOGLE",
       };
+
+      await fetch(`${API_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(appUser),
+      });
 
       setUser(appUser);
       navigate("/client-home");

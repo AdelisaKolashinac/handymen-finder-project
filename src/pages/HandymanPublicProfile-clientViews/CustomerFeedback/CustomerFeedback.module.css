@@ -1,19 +1,24 @@
 .CustomerFeedback {
-  padding: 15px;
   background-color: #fff;
   border-radius: 10px;
-  margin-bottom: 30px;
+  margin: 20px 0;
 }
 
 .CustomerFeedback__header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+}
+
+.CustomerFeedback__userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .CustomerFeedback__avatar {
-  width: 65px;
-  height: 65px;
+  width: 36;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
 }

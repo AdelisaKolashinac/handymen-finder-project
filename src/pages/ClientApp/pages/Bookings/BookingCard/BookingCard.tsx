@@ -3,12 +3,15 @@ import { Button } from "../../../../../components/Button/Button";
 import { ButtonTransparent } from "../../../../../components/ButtonTransparent/ButtonTransparent";
 import styles from "./BookingCard.module.css";
 import { Booking, Handyman } from "../../../../../types/types";
+import { useUserStore } from "../../../../../stores/userStore";
+import { createOrGetChat } from "../../../../../utils/chatUtils";
 
 interface BookingCardProps {
   handyman: Handyman;
   booking: Booking;
   onAccept: () => Promise<void>;
   onRefuse: () => Promise<void>;
+  onReopen: () => Promise<void>;
 }
 
 export default function BookingCard({
@@ -16,7 +19,9 @@ export default function BookingCard({
   handyman,
   onAccept,
   onRefuse,
+  onReopen,
 }: BookingCardProps) {
+  const user = useUserStore((state) => state.user);
   const navigate = useNavigate();
   const location = useLocation();
   const justCompleted = location.state?.justCompleted;
@@ -26,6 +31,18 @@ export default function BookingCard({
     justCompleted && justCompleted.id === booking.id
       ? { ...booking, status: "completed" }
       : booking;
+
+  const handleContactClick = async () => {
+    if (!user) {
+      return;
+    }
+    try {
+      const chatId = await createOrGetChat(user, handyman);
+      navigate(`/chat/${chatId}`);
+    } catch (error) {
+      console.error("Error creating/getting chat:", error);
+    }
+  };
 
   return (
     <div
@@ -108,7 +125,9 @@ export default function BookingCard({
         )}
         {actualBooking.status === "ongoing" && (
           <>
-            <ButtonTransparent width="100%">Chat now</ButtonTransparent>
+            <ButtonTransparent width="100%" onClick={handleContactClick}>
+              Chat now
+            </ButtonTransparent>
             <Button
               onClick={() =>
                 navigate("/leave-review", {
@@ -125,8 +144,10 @@ export default function BookingCard({
 
         {actualBooking.status === "completed" && (
           <>
-            <ButtonTransparent width="100%">Chat now</ButtonTransparent>
-            <Button>Reopen</Button>
+            <ButtonTransparent width="100%" onClick={handleContactClick}>
+              Chat now
+            </ButtonTransparent>
+            <Button onClick={onReopen}>Reopen</Button>
           </>
         )}
       </div>

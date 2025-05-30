@@ -3,6 +3,7 @@ import { Timestamp } from "firebase/firestore";
 export interface User {
   id: string;
   fullname: string;
+  img?: string;
   email: string;
   password?: string;
   confirmPassword?: string;
@@ -82,8 +83,9 @@ export interface Booking {
 }
 
 export interface FilterValues {
-  services: string[];
-  availability: string[];
+  categories?: string[];
+  services?: string[];
+  availability?: string[];
 }
 
 export interface Ad {

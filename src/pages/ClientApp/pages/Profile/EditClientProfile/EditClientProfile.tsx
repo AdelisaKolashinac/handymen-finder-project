@@ -180,7 +180,7 @@ export function EditClientProfile() {
         <div
           className={`border-bottom ${styles.editClientProfile__imgContainer}`}
         >
-          <img src="/anna.png" alt="Users's profile" />
+          <img src={user?.img} alt="Users's profile" />
           <span className={styles.editClientProfile__editText}>EDIT</span>
         </div>
 
