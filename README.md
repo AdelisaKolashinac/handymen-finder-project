@@ -43,4 +43,7 @@
 
 🤝 Contributing
 Pull requests are welcome! For major changes, please open an issue first to discuss improvements or suggestions.
-You can also find me on **GitHub** under the username **AdelisaKolashinac**, or **GitLab** under the username **Adelisa Kolashinac**
+
+You can also find me on:
+GitHub: AdelisaKolashinac
+GitLab: Adelisa Kolashinac
