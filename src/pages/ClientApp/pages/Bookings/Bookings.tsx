@@ -43,7 +43,6 @@ export default function Bookings() {
       if (filter === "new") {
         return b.status === "new" && b.senderRole === "handyman";
       }
-
       return b.status === filter;
     });
 
